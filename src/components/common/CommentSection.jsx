@@ -1,7 +1,15 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { MessageSquare, Send, ThumbsUp, Trash2, User, Loader2 } from "lucide-react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import {
+  MessageSquare,
+  Send,
+  ThumbsUp,
+  Trash2,
+  User,
+  Loader2,
+  Sigma,
+} from "lucide-react";
 import {
   collection,
   addDoc,
@@ -9,16 +17,45 @@ import {
   where,
   onSnapshot,
   doc,
+  setDoc,
   updateDoc,
   deleteDoc,
   increment,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/components/auth/AuthContext";
+import MathText from "@/components/common/MathText";
+
+const LATEX_SNIPPETS = [
+  { label: "$x^2$", insert: "$x^2$" },
+  { label: "\\frac{a}{b}", insert: "$\\frac{a}{b}$" },
+  { label: "\\lim", insert: "$\\lim_{x \\to a} f(x)$" },
+  { label: "\\int", insert: "$\\int_{a}^{b} f(x)\\,dx$" },
+  { label: "\\sum", insert: "$\\sum_{n=1}^{\\infty} a_n$" },
+  { label: "\\sqrt{x}", insert: "$\\sqrt{x}$" },
+];
+
+const TYPING_TTL_MS = 8000;
+const TYPING_HEARTBEAT_MS = 2500;
+
+function getSessionId() {
+  if (typeof window === "undefined") return "ssr";
+  try {
+    let id = sessionStorage.getItem("math_studio_session_id");
+    if (!id) {
+      id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+      sessionStorage.setItem("math_studio_session_id", id);
+    }
+    return id;
+  } catch {
+    return `mem-${Math.random().toString(36).slice(2, 8)}`;
+  }
+}
 
 export default function CommentSection({ contextId = "general", contextTitle = "" }) {
   const { user, isLoggedIn, openLoginModal } = useAuth();
   const [comments, setComments] = useState([]);
+  const [typingUsers, setTypingUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [guestName, setGuestName] = useState("");
@@ -26,6 +63,51 @@ export default function CommentSection({ contextId = "general", contextTitle = "
   const [likedIds, setLikedIds] = useState({});
   const [errorMsg, setErrorMsg] = useState("");
 
+  const sessionIdRef = useRef("");
+  const lastTypingPingRef = useRef(0);
+  const typingStopTimerRef = useRef(null);
+  const textareaRef = useRef(null);
+
+  if (!sessionIdRef.current && typeof window !== "undefined") {
+    sessionIdRef.current = getSessionId();
+  }
+
+  const clearMyTyping = useCallback(async () => {
+    if (!sessionIdRef.current) return;
+    lastTypingPingRef.current = 0;
+    try {
+      await deleteDoc(
+        doc(db, "comment_typing", `${contextId}__${sessionIdRef.current}`)
+      );
+    } catch {
+      // Ignore if rules/offline
+    }
+  }, [contextId]);
+
+  const pingTyping = useCallback(
+    async (authorDisplayName) => {
+      if (!sessionIdRef.current) return;
+      const now = Date.now();
+      if (now - lastTypingPingRef.current < TYPING_HEARTBEAT_MS) return;
+      lastTypingPingRef.current = now;
+      try {
+        await setDoc(
+          doc(db, "comment_typing", `${contextId}__${sessionIdRef.current}`),
+          {
+            contextId,
+            sessionId: sessionIdRef.current,
+            authorName: authorDisplayName,
+            updatedAtMs: now,
+          }
+        );
+      } catch {
+        // Ignore if rules/offline
+      }
+    },
+    [contextId]
+  );
+
+  // Listen to real-time comments & real-time typing indicators
   useEffect(() => {
     try {
       const savedLikes = localStorage.getItem(`math_studio_likes_${contextId}`);
@@ -36,13 +118,13 @@ export default function CommentSection({ contextId = "general", contextTitle = "
 
     setLoading(true);
     setErrorMsg("");
-    const q = query(
+
+    const commentsQuery = query(
       collection(db, "comments"),
       where("contextId", "==", contextId)
     );
-
-    const unsubscribe = onSnapshot(
-      q,
+    const unsubComments = onSnapshot(
+      commentsQuery,
       (snapshot) => {
         const items = snapshot.docs.map((d) => ({
           id: d.id,
@@ -58,8 +140,81 @@ export default function CommentSection({ contextId = "general", contextTitle = "
       }
     );
 
-    return () => unsubscribe();
-  }, [contextId]);
+    const typingQuery = query(
+      collection(db, "comment_typing"),
+      where("contextId", "==", contextId)
+    );
+    const unsubTyping = onSnapshot(
+      typingQuery,
+      (snapshot) => {
+        const now = Date.now();
+        const active = snapshot.docs
+          .map((d) => d.data())
+          .filter(
+            (t) =>
+              t.sessionId !== sessionIdRef.current &&
+              now - (t.updatedAtMs || 0) < TYPING_TTL_MS
+          );
+        setTypingUsers(active);
+      },
+      () => {
+        setTypingUsers([]);
+      }
+    );
+
+    // Prune stale typing entries locally every 3s
+    const pruneInterval = setInterval(() => {
+      const now = Date.now();
+      setTypingUsers((prev) =>
+        prev.filter((t) => now - (t.updatedAtMs || 0) < TYPING_TTL_MS)
+      );
+    }, 3000);
+
+    return () => {
+      unsubComments();
+      unsubTyping();
+      clearInterval(pruneInterval);
+      clearMyTyping();
+    };
+  }, [contextId, clearMyTyping]);
+
+  const handleTextChange = (e) => {
+    const val = e.target.value;
+    setText(val);
+
+    if (typingStopTimerRef.current) {
+      clearTimeout(typingStopTimerRef.current);
+    }
+
+    if (val.trim().length > 0) {
+      const authorLabel = isLoggedIn
+        ? user.name
+        : guestName.trim() || "អ្នកសិក្សាម្នាក់";
+      pingTyping(authorLabel);
+      typingStopTimerRef.current = setTimeout(() => {
+        clearMyTyping();
+      }, 4500);
+    } else {
+      clearMyTyping();
+    }
+  };
+
+  const handleInsertLatex = (snippet) => {
+    const el = textareaRef.current;
+    if (!el) {
+      setText((prev) => (prev ? `${prev} ${snippet}` : snippet));
+      return;
+    }
+    const start = el.selectionStart ?? text.length;
+    const end = el.selectionEnd ?? text.length;
+    const next = text.slice(0, start) + snippet + text.slice(end);
+    setText(next);
+    requestAnimationFrame(() => {
+      el.focus();
+      const cursor = start + snippet.length;
+      el.setSelectionRange(cursor, cursor);
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,6 +223,9 @@ export default function CommentSection({ contextId = "general", contextTitle = "
 
     setSubmitting(true);
     setErrorMsg("");
+    if (typingStopTimerRef.current) clearTimeout(typingStopTimerRef.current);
+    await clearMyTyping();
+
     try {
       const now = Date.now();
       await addDoc(collection(db, "comments"), {
@@ -117,6 +275,8 @@ export default function CommentSection({ contextId = "general", contextTitle = "
     }
   };
 
+  const hasMathSyntax = /(\$|\\\(|\\\[)/.test(text);
+
   return (
     <section className="mt-8 rounded-2xl border border-[#ffd3d2] bg-white p-5 sm:p-6 shadow-xs">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#ffe9e8] pb-3.5">
@@ -159,13 +319,32 @@ export default function CommentSection({ contextId = "general", contextTitle = "
           />
         )}
 
+        {/* Quick LaTeX Toolbar */}
+        <div className="flex flex-wrap items-center gap-1.5">
+          <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#7e021f] mr-1">
+            <Sigma className="h-3.5 w-3.5 text-[#db073d]" />
+            រូបមន្ត LaTeX:
+          </span>
+          {LATEX_SNIPPETS.map((item) => (
+            <button
+              key={item.label}
+              type="button"
+              onClick={() => handleInsertLatex(item.insert)}
+              className="rounded-lg border border-[#ffd3d2] bg-[#fffafa] px-2 py-1 font-mono text-[11px] font-semibold text-[#620116] transition-all duration-150 hover:border-[#fdbcbc] hover:bg-[#ffe9e8] hover:text-[#db073d] active:scale-95"
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+
         <div className="flex flex-col sm:flex-row gap-2.5">
           <textarea
+            ref={textareaRef}
             rows={2}
             value={text}
-            onChange={(e) => setText(e.target.value)}
-            placeholder="សរសេរមតិយោបល់ សំណួរ ឬសំណូមពរកែលម្អ..."
-            className="flex-1 rounded-xl border border-[#ffd3d2] bg-[#fffafa] px-3.5 py-2.5 text-sm text-[#160002] outline-none focus:border-[#db073d] resize-none"
+            onChange={handleTextChange}
+            placeholder="សរសេរមតិយោបល់ ឬរូបមន្តគណិតវិទ្យាដោយប្រើ $...$ ឬ $$...$$..."
+            className="flex-1 rounded-xl border border-[#ffd3d2] bg-[#fffafa] px-3.5 py-2.5 text-sm text-[#160002] outline-none focus:border-[#db073d] resize-y"
           />
           <button
             type="submit"
@@ -181,10 +360,42 @@ export default function CommentSection({ contextId = "general", contextTitle = "
           </button>
         </div>
 
+        {/* Live LaTeX Preview */}
+        {hasMathSyntax && text.trim() && (
+          <div className="rounded-xl border border-[#b2e4ea] bg-[#f4fbfc] px-3.5 py-2.5 text-xs sm:text-sm text-[#160002] animate-fade-fast">
+            <div className="text-[10px] font-bold uppercase tracking-wider text-[#006b78] mb-1">
+              មើលជាមុន (LaTeX Preview)
+            </div>
+            <div className="space-y-1">
+              {text.split("\n").map((line, i) => (
+                <div key={i}>
+                  <MathText text={line} />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {errorMsg && (
           <p className="text-xs font-medium text-[#db073d]">{errorMsg}</p>
         )}
       </form>
+
+      {/* Real-time Typing Indicator */}
+      {typingUsers.length > 0 && (
+        <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-[#fdbcbc] bg-[#ffe9e8]/80 px-3.5 py-1.5 text-xs font-bold text-[#9c0329] animate-fade-fast">
+          <span className="flex items-center gap-1" aria-hidden="true">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#db073d] animate-bounce [animation-delay:0ms]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#db073d] animate-bounce [animation-delay:150ms]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#db073d] animate-bounce [animation-delay:300ms]" />
+          </span>
+          <span>
+            {typingUsers.length === 1
+              ? `${typingUsers[0].authorName} កំពុងសរសេរ...`
+              : `មាន ${typingUsers.length} នាក់កំពុងសរសេរ...`}
+          </span>
+        </div>
+      )}
 
       {/* Comments List */}
       <div className="mt-5 space-y-3">
@@ -258,9 +469,13 @@ export default function CommentSection({ contextId = "general", contextTitle = "
                   </div>
                 </div>
 
-                <p className="mt-2.5 text-xs sm:text-sm text-[#2d0006] leading-relaxed whitespace-pre-line">
-                  {c.text}
-                </p>
+                <div className="mt-2.5 text-xs sm:text-sm text-[#2d0006] leading-relaxed space-y-1">
+                  {(c.text || "").split("\n").map((line, i) => (
+                    <div key={i}>
+                      <MathText text={line} />
+                    </div>
+                  ))}
+                </div>
               </div>
             );
           })
