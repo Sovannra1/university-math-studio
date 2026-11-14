@@ -1,74 +1,120 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { MessageSquare, Send, ThumbsUp, Trash2, User } from "lucide-react";
+import { MessageSquare, Send, ThumbsUp, Trash2, User, Loader2 } from "lucide-react";
+import {
+  collection,
+  addDoc,
+  query,
+  where,
+  onSnapshot,
+  doc,
+  updateDoc,
+  deleteDoc,
+  increment,
+} from "firebase/firestore";
+import { db } from "@/lib/firebase";
 import { useAuth } from "@/components/auth/AuthContext";
 
 export default function CommentSection({ contextId = "general", contextTitle = "" }) {
   const { user, isLoggedIn, openLoginModal } = useAuth();
-  const storageKey = `math_studio_comments_${contextId}`;
-
   const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
   const [guestName, setGuestName] = useState("");
   const [text, setText] = useState("");
+  const [likedIds, setLikedIds] = useState({});
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     try {
-      const saved = localStorage.getItem(storageKey);
-      setComments(saved ? JSON.parse(saved) : []);
+      const savedLikes = localStorage.getItem(`math_studio_likes_${contextId}`);
+      if (savedLikes) setLikedIds(JSON.parse(savedLikes));
     } catch {
-      setComments([]);
+      // Ignore
     }
-  }, [storageKey]);
 
-  const saveComments = (next) => {
-    setComments(next);
-    try {
-      localStorage.setItem(storageKey, JSON.stringify(next));
-    } catch {
-      // Ignore storage errors
-    }
-  };
+    setLoading(true);
+    setErrorMsg("");
+    const q = query(
+      collection(db, "comments"),
+      where("contextId", "==", contextId)
+    );
 
-  const handleSubmit = (e) => {
+    const unsubscribe = onSnapshot(
+      q,
+      (snapshot) => {
+        const items = snapshot.docs.map((d) => ({
+          id: d.id,
+          ...d.data(),
+        }));
+        items.sort((a, b) => (b.createdAtMs || 0) - (a.createdAtMs || 0));
+        setComments(items);
+        setLoading(false);
+      },
+      () => {
+        setErrorMsg("មិនអាចផ្ទុកមតិយោបល់ពី Firebase Firestore បានទេ។");
+        setLoading(false);
+      }
+    );
+
+    return () => unsubscribe();
+  }, [contextId]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const trimmed = text.trim();
-    if (!trimmed) return;
+    if (!trimmed || submitting) return;
 
-    const newComment = {
-      id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-      author: isLoggedIn ? user.name : guestName.trim() || "អ្នកសិក្សា",
-      authorEmail: isLoggedIn ? user.email : "",
-      authorPicture: isLoggedIn ? user.picture : "",
-      authorId: isLoggedIn ? user.id : "guest",
-      text: trimmed,
-      likes: 0,
-      liked: false,
-      createdAt: new Date().toLocaleString("km-KH", {
-        dateStyle: "medium",
-        timeStyle: "short",
-      }),
-    };
-
-    saveComments([newComment, ...comments]);
-    setText("");
+    setSubmitting(true);
+    setErrorMsg("");
+    try {
+      const now = Date.now();
+      await addDoc(collection(db, "comments"), {
+        contextId,
+        author: isLoggedIn ? user.name : guestName.trim() || "អ្នកសិក្សា",
+        authorEmail: isLoggedIn ? user.email : "",
+        authorPicture: isLoggedIn ? user.picture : "",
+        authorId: isLoggedIn ? user.id : "guest",
+        text: trimmed,
+        likes: 0,
+        createdAtMs: now,
+        createdAtLabel: new Date(now).toLocaleString("km-KH", {
+          dateStyle: "medium",
+          timeStyle: "short",
+        }),
+      });
+      setText("");
+    } catch {
+      setErrorMsg("មិនអាចផ្ញើមតិយោបល់បានទេ។ សូមពិនិត្យ Firestore Rules ឬអ៊ីនធឺណិត។");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  const handleToggleLike = (id) => {
-    const next = comments.map((c) => {
-      if (c.id !== id) return c;
-      const liked = !c.liked;
-      return {
-        ...c,
-        liked,
-        likes: Math.max(0, (c.likes || 0) + (liked ? 1 : -1)),
-      };
-    });
-    saveComments(next);
+  const handleToggleLike = async (commentId) => {
+    const alreadyLiked = !!likedIds[commentId];
+    const nextLiked = { ...likedIds, [commentId]: !alreadyLiked };
+    setLikedIds(nextLiked);
+    try {
+      localStorage.setItem(
+        `math_studio_likes_${contextId}`,
+        JSON.stringify(nextLiked)
+      );
+      await updateDoc(doc(db, "comments", commentId), {
+        likes: increment(alreadyLiked ? -1 : 1),
+      });
+    } catch {
+      // Ignore transient errors
+    }
   };
 
-  const handleDelete = (id) => {
-    saveComments(comments.filter((c) => c.id !== id));
+  const handleDelete = async (commentId) => {
+    try {
+      await deleteDoc(doc(db, "comments", commentId));
+    } catch {
+      setErrorMsg("មិនអាចលុបមតិនេះបានទេ។");
+    }
   };
 
   return (
@@ -123,83 +169,101 @@ export default function CommentSection({ contextId = "general", contextTitle = "
           />
           <button
             type="submit"
-            disabled={!text.trim()}
+            disabled={!text.trim() || submitting}
             className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-[#db073d] px-4 py-2.5 text-xs sm:text-sm font-bold text-white shadow-xs transition-all duration-150 hover:bg-[#bb0533] active:scale-95 disabled:opacity-45 disabled:cursor-not-allowed sm:self-end"
           >
-            <Send className="h-4 w-4" />
-            <span>បញ្ចេញមតិ</span>
+            {submitting ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <Send className="h-4 w-4" />
+            )}
+            <span>{submitting ? "កំពុងផ្ញើ..." : "បញ្ចេញមតិ"}</span>
           </button>
         </div>
+
+        {errorMsg && (
+          <p className="text-xs font-medium text-[#db073d]">{errorMsg}</p>
+        )}
       </form>
 
       {/* Comments List */}
       <div className="mt-5 space-y-3">
-        {comments.length === 0 ? (
+        {loading ? (
+          <div className="flex items-center justify-center gap-2 rounded-xl bg-[#fffafa] border border-[#ffe9e8] px-4 py-4 text-xs text-[#620116]">
+            <Loader2 className="h-4 w-4 animate-spin text-[#db073d]" />
+            <span>កំពុងផ្ទុកមតិយោបល់...</span>
+          </div>
+        ) : comments.length === 0 ? (
           <p className="rounded-xl bg-[#fffafa] border border-[#ffe9e8] px-4 py-3 text-xs text-[#620116] text-center">
             មិនទាន់មានមតិយោបល់នៅឡើយទេ។ សូមជាអ្នកដំបូងដែលចែករំលែកមតិ!
           </p>
         ) : (
-          comments.map((c) => (
-            <div
-              key={c.id}
-              className="rounded-xl border border-[#ffe9e8] bg-[#fffafa] p-3.5 transition-all duration-150 hover:border-[#ffd3d2] animate-panel-enter"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex items-center gap-2.5 min-w-0">
-                  {c.authorPicture ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={c.authorPicture}
-                      alt={c.author}
-                      className="h-8 w-8 rounded-full object-cover shrink-0"
-                    />
-                  ) : (
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#ffe9e8] text-[#9c0329]">
-                      <User className="h-4 w-4" />
-                    </span>
-                  )}
-                  <div className="min-w-0">
-                    <div className="text-xs font-bold text-[#160002] truncate">
-                      {c.author}
+          comments.map((c) => {
+            const isLiked = !!likedIds[c.id];
+            const canDelete = user && c.authorId === user.id;
+
+            return (
+              <div
+                key={c.id}
+                className="rounded-xl border border-[#ffe9e8] bg-[#fffafa] p-3.5 transition-all duration-150 hover:border-[#ffd3d2] animate-panel-enter"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    {c.authorPicture ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={c.authorPicture}
+                        alt={c.author}
+                        className="h-8 w-8 rounded-full object-cover shrink-0"
+                      />
+                    ) : (
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#ffe9e8] text-[#9c0329]">
+                        <User className="h-4 w-4" />
+                      </span>
+                    )}
+                    <div className="min-w-0">
+                      <div className="text-xs font-bold text-[#160002] truncate">
+                        {c.author}
+                      </div>
+                      <div className="text-[10px] text-[#620116]">
+                        {c.createdAtLabel || ""}
+                      </div>
                     </div>
-                    <div className="text-[10px] text-[#620116]">
-                      {c.createdAt}
-                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => handleToggleLike(c.id)}
+                      className={`inline-flex items-center gap-1 rounded-lg px-2 py-1 text-[11px] font-bold transition-all duration-150 active:scale-90 ${
+                        isLiked
+                          ? "bg-[#ffe9e8] text-[#db073d]"
+                          : "text-[#620116] hover:bg-[#ffe9e8]/70"
+                      }`}
+                    >
+                      <ThumbsUp className="h-3.5 w-3.5" />
+                      <span>{Math.max(0, c.likes || 0)}</span>
+                    </button>
+
+                    {canDelete && (
+                      <button
+                        type="button"
+                        onClick={() => handleDelete(c.id)}
+                        aria-label="លុបមតិ"
+                        className="rounded-lg p-1 text-[#620116] hover:bg-[#ffe9e8] hover:text-[#db073d] transition-colors"
+                      >
+                        <Trash2 className="h-3.5 w-3.5" />
+                      </button>
+                    )}
                   </div>
                 </div>
 
-                <div className="flex items-center gap-1.5 shrink-0">
-                  <button
-                    type="button"
-                    onClick={() => handleToggleLike(c.id)}
-                    className={`inline-flex items-center gap-1 rounded-lg px-2 py-1 text-[11px] font-bold transition-all duration-150 active:scale-90 ${
-                      c.liked
-                        ? "bg-[#ffe9e8] text-[#db073d]"
-                        : "text-[#620116] hover:bg-[#ffe9e8]/70"
-                    }`}
-                  >
-                    <ThumbsUp className="h-3.5 w-3.5" />
-                    <span>{c.likes || 0}</span>
-                  </button>
-
-                  {(c.authorId === "guest" || (user && c.authorId === user.id)) && (
-                    <button
-                      type="button"
-                      onClick={() => handleDelete(c.id)}
-                      aria-label="លុបមតិ"
-                      className="rounded-lg p-1 text-[#620116] hover:bg-[#ffe9e8] hover:text-[#db073d] transition-colors"
-                    >
-                      <Trash2 className="h-3.5 w-3.5" />
-                    </button>
-                  )}
-                </div>
+                <p className="mt-2.5 text-xs sm:text-sm text-[#2d0006] leading-relaxed whitespace-pre-line">
+                  {c.text}
+                </p>
               </div>
-
-              <p className="mt-2.5 text-xs sm:text-sm text-[#2d0006] leading-relaxed whitespace-pre-line">
-                {c.text}
-              </p>
-            </div>
-          ))
+            );
+          })
         )}
       </div>
     </section>
