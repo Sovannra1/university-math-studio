@@ -6,7 +6,6 @@ import {
   Presentation,
   Video,
   BookOpen,
-  Layers,
   ClipboardCheck,
   LayoutGrid,
 } from "lucide-react";
@@ -150,37 +149,8 @@ export default function LessonWorkspace({
           onOpenMobileMenu={() => setIsMobileSidebarOpen(true)}
         />
 
-        {/* Clean Combined Navigation Bar: Sub-topics + 4 Tabs */}
+        {/* Clean 4-Tab Navigation Bar with Sliding Active Pill */}
         <div className="border-b border-[#ffd3d2] bg-white/95 px-4 sm:px-6 lg:px-8">
-          {subTopics.length > 0 && (
-            <div className="border-b border-[#ffe9e8] py-2.5">
-              <div className="flex items-center gap-1.5 mb-1.5 text-[11px] font-bold tracking-wide text-[#7e021f]">
-                <Layers className="h-3.5 w-3.5 text-[#db073d]" />
-                <span>ចំណុចរងនៃមេរៀន</span>
-              </div>
-              <div className="flex flex-wrap items-center gap-1.5">
-                {subTopics.map((sub) => {
-                  const isSelected = sub.id === activeSubTopic?.id;
-                  return (
-                    <button
-                      key={sub.id}
-                      type="button"
-                      onClick={() => handleSelectSubTopic(sub.id)}
-                      className={`rounded-xl border px-3 py-1.5 text-xs font-bold transition-all duration-150 active:scale-95 text-left ${
-                        isSelected
-                          ? "border-[#db073d] bg-[#db073d] text-white shadow-xs"
-                          : "border-[#ffd3d2] bg-[#fffafa] text-[#160002] hover:border-[#fdbcbc] hover:bg-[#ffe9e8] hover:text-[#7e021f]"
-                      }`}
-                    >
-                      {sub.titleKh}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* 4-Tab Navigation Bar with Sliding Active Pill */}
           <div className="relative flex items-center gap-1.5 overflow-x-auto py-2.5 no-scrollbar">
             {pillStyle.ready && (
               <div
