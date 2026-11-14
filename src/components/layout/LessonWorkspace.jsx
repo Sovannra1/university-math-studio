@@ -17,7 +17,7 @@ import VideoTutorial from "@/components/lesson-tabs/VideoTutorial";
 import DetailedReading from "@/components/lesson-tabs/DetailedReading";
 import PracticeQuiz from "@/components/lesson-tabs/PracticeQuiz";
 import CommentSection from "@/components/common/CommentSection";
-import { APP_VERSION } from "@/lib/appConfig";
+import Footer from "@/components/layout/Footer";
 
 const TABS = [
   {
@@ -307,21 +307,7 @@ export default function LessonWorkspace({
         </main>
 
         {/* Clean Workspace Footer */}
-        <footer className="border-t border-[#ffd3d2] bg-white/80 px-4 sm:px-6 lg:px-8 py-3.5 text-xs text-[#620116]">
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-            <div className="font-medium">
-              គណិតវិទ្យាសាកលវិទ្យាល័យ • University Math Studio
-            </div>
-            <div className="flex items-center gap-2.5">
-              <span className="font-bold text-[#160002]">
-                អ្នកអភិវឌ្ឍន៍៖ លឿ សុវណ្ណរ៉ា
-              </span>
-              <span className="rounded-full border border-[#fdbcbc] bg-[#ffe9e8] px-2.5 py-0.5 text-[11px] font-bold text-[#9c0329]">
-                ជំនាន់ {APP_VERSION}
-              </span>
-            </div>
-          </div>
-        </footer>
+        <Footer maxWidthClass="max-w-7xl" />
       </div>
     </div>
   );

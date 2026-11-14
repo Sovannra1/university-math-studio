@@ -23,7 +23,7 @@ import {
   Waves,
   Layers,
 } from "lucide-react";
-import { APP_VERSION } from "@/lib/appConfig";
+import { APP_VERSION, BRAND_NAME } from "@/lib/appConfig";
 
 const SUBJECT_ICONS = {
   "logic-proofs": Binary,
@@ -389,14 +389,20 @@ export default function Sidebar({
         <div className="border-t border-[#ffd3d2] bg-[#fffafa] px-4 py-3 text-[11px] text-[#47010d]">
           <div className="flex items-center justify-between gap-2">
             <span className="font-bold text-[#160002]">
-              អ្នកអភិវឌ្ឍន៍៖ លឿ សុវណ្ណរ៉ា
+              អភិវឌ្ឍន៍ដោយ៖ {BRAND_NAME}
             </span>
             <span className="rounded-full border border-[#fdbcbc] bg-[#ffe9e8] px-2 py-0.5 text-[10px] font-bold text-[#9c0329]">
               {APP_VERSION}
             </span>
           </div>
-          <div className="mt-0.5 text-[10px] text-[#620116]">
-            សម្រាប់សាស្ត្រាចារ្យ និងនិស្សិត • ស្វ័យសិក្សាអន្តរកម្ម
+          <div className="mt-1 flex items-center gap-2 text-[10px] font-bold text-[#7e021f]">
+            <Link href="/about" onClick={onCloseMobile} className="hover:underline">
+              អំពីយើង
+            </Link>
+            <span className="text-[#fdbcbc]">•</span>
+            <Link href="/privacy" onClick={onCloseMobile} className="hover:underline">
+              គោលការណ៍ឯកជនភាព
+            </Link>
           </div>
         </div>
       </aside>
