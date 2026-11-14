@@ -158,14 +158,16 @@ export default function DetailedReading({
       {/* Main Reading Content */}
       <article className="lg:col-span-8 xl:col-span-9 space-y-6">
         {sections.map((section, idx) => {
-          const heading = section.subHeading || `ផ្នែកទី ${idx + 1}`;
+          const heading =
+            section.subHeading || section.headingKh || `ផ្នែកទី ${idx + 1}`;
           const isTheoremOrDef =
             heading.includes("និយមន័យ") ||
             heading.includes("ទ្រឹស្តីបទ") ||
             heading.includes("Definition") ||
             heading.includes("Theorem");
 
-          const paragraphs = (section.content || "").split(/\n\n+/);
+          const rawContent = section.content || section.body || "";
+          const paragraphs = rawContent.split(/\n\n+/);
           const sectionExamples = section.examples || [];
           const sectionGraphs = section.visualGraphs
             ? section.visualGraphs
