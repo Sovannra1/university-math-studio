@@ -1,0 +1,467 @@
+{
+  "subjects": [
+    {
+      "id": "logic-proofs",
+      "levelKh": "កម្រិតទី ១៖ មូលដ្ឋានគ្រឹះ និងការគណនា (ឆ្នាំទី ១)",
+      "nameKh": "តក្កវិទ្យា សំណុំ និងវិធីសាស្ត្របញ្ជាក់",
+      "nameEn": "Logic, Set Theory & Proofs",
+      "descriptionKh": "គ្រឹះនៃតក្កវិទ្យាគណិតវិទ្យា សំណុំ ទំនាក់ទំនង អនុគមន៍ និងវិធីសាស្ត្រសម្រាយបញ្ជាក់ផ្លូវការ",
+      "lessons": []
+    },
+    {
+      "id": "calculus",
+      "levelKh": "កម្រិតទី ១៖ មូលដ្ឋានគ្រឹះ និងការគណនា (ឆ្នាំទី ១)",
+      "nameKh": "កាល់គុល (Calculus)",
+      "nameEn": "Calculus I, II, III",
+      "descriptionKh": "អនុគមន៍ លីមីត ដេរីវេ អាំងតេក្រាល ស៊េរី និងអនុគមន៍ច្រើនអថេរ",
+      "lessons": [
+        {
+          "id": "calc1-01",
+          "partKh": "ផ្នែកទី ១៖ Calculus I (អនុគមន៍មួយអថេរ)",
+          "titleKh": "មេរៀនទី ១៖ អនុគមន៍ និងគំរូគណិតវិទ្យា",
+          "titleEn": "Functions and Models",
+          "file": "calculus/calc1-01-functions.json",
+          "subTopics": [
+            {
+              "id": "1.1",
+              "titleKh": "១.១ និយមន័យ និងការតាងអនុគមន៍",
+              "descriptionKh": "ដែនកំណត់ (Domain) សំណុំរូបភាព (Range) តេស្តបន្ទាត់ឈរ (Vertical Line Test) និងអនុគមន៍កំណត់ដោយផ្នែក (Piecewise Functions)។"
+            },
+            {
+              "id": "1.2",
+              "titleKh": "១.២ ប្រភេទអនុគមន៍គ្រឹះ",
+              "descriptionKh": "អនុគមន៍លីនេអ៊ែរ ពហុធា សនិទាន ត្រីកោណមាត្រ អិចស្ប៉ូណង់ស្យែល និងលោការីត។"
+            },
+            {
+              "id": "1.3",
+              "titleKh": "១.៣ ប្រមាណវិធី និងបំប្លែងក្រាប",
+              "descriptionKh": "ការរំកិលក្រាប (Shifting) ការពង្រីក/បង្រួម (Stretching) អនុគមន៍បណ្តាក់ (Composition) និងអនុគមន៍ច្រាស (Inverse Functions)។"
+            }
+          ]
+        },
+        {
+          "id": "calc1-02",
+          "partKh": "ផ្នែកទី ១៖ Calculus I (អនុគមន៍មួយអថេរ)",
+          "titleKh": "មេរៀនទី ២៖ លីមីត និងភាពជាប់នៃអនុគមន៍",
+          "titleEn": "Limits and Continuity",
+          "file": "calculus/calc1-02-limits.json",
+          "subTopics": [
+            {
+              "id": "2.1",
+              "titleKh": "២.១ គោលគំនិត និងនិយមន័យផ្លូវការ (Epsilon-Delta)",
+              "descriptionKh": "លីមីតឆ្វេង-ស្តាំ (One-Sided Limits) និងនិយមន័យផ្លូវការនៃលីមីត (ε-δ Definition)។"
+            },
+            {
+              "id": "2.2",
+              "titleKh": "២.២ ច្បាប់គណនាលីមីត និងទ្រឹស្តីបទគាប (Squeeze Theorem)",
+              "descriptionKh": "លក្ខណៈគ្រឹះនៃលីមីត ទ្រឹស្តីបទគាប (Squeeze Theorem) និងការបំបាត់រាងមិនកំណត់។"
+            },
+            {
+              "id": "2.3",
+              "titleKh": "២.៣ លីមីតនៅអនន្ត និងអាស៊ីមតូត",
+              "descriptionKh": "អាស៊ីមតូតឈរ (Vertical Asymptotes) និងអាស៊ីមតូតដេក (Horizontal Asymptotes)។"
+            },
+            {
+              "id": "2.4",
+              "titleKh": "២.៤ ភាពជាប់នៃអនុគមន៍ និងទ្រឹស្តីបទតម្លៃកណ្តាល (IVT)",
+              "descriptionKh": "លក្ខខណ្ឌជាប់ត្រង់មួយចំណុច ប្រភេទនៃភាពដាច់ (Discontinuities) និងទ្រឹស្តីបទតម្លៃកណ្តាល (Intermediate Value Theorem)។"
+            }
+          ]
+        },
+        {
+          "id": "calc1-03",
+          "partKh": "ផ្នែកទី ១៖ Calculus I (អនុគមន៍មួយអថេរ)",
+          "titleKh": "មេរៀនទី ៣៖ ដេរីវេ និងរូបមន្តដេរីវេ",
+          "titleEn": "Derivatives and Differentiation Rules",
+          "file": "calculus/calc1-03-derivatives.json",
+          "subTopics": [
+            {
+              "id": "3.1",
+              "titleKh": "៣.១ និយមន័យដេរីវេ",
+              "descriptionKh": "អត្រាបម្រែបម្រួលខណៈ (Instantaneous Rate of Change) បន្ទាត់ប៉ះ និងទំនាក់ទំនងរវាងភាពមានដេរីវេ និងភាពជាប់។"
+            },
+            {
+              "id": "3.2",
+              "titleKh": "៣.២ រូបមន្តដេរីវេគ្រឹះ",
+              "descriptionKh": "ដេរីវេនៃផលបូក ផលគុណ (Product Rule) ផលចែក (Quotient Rule) និងអនុគមន៍ត្រីកោណមាត្រ។"
+            },
+            {
+              "id": "3.3",
+              "titleKh": "៣.៣ ដេរីវេនៃអនុគមន៍បណ្តាក់ និងអនុគមន៍មិនច្បាស់",
+              "descriptionKh": "ច្បាប់ច្រវាក់ (Chain Rule) ដេរីវេនៃអនុគមន៍មិនច្បាស់ (Implicit Differentiation) និងដេរីវេនៃអនុគមន៍ច្រាស។"
+            },
+            {
+              "id": "3.4",
+              "titleKh": "៣.៤ អត្រាបម្រែបម្រួលទាក់ទងគ្នា និងប៉ាន់ស្មានលីនេអ៊ែរ",
+              "descriptionKh": "Related Rates ឌីផេរ៉ង់ស្យែល (Differentials) និង Linear Approximation។"
+            }
+          ]
+        },
+        {
+          "id": "calc1-04",
+          "partKh": "ផ្នែកទី ១៖ Calculus I (អនុគមន៍មួយអថេរ)",
+          "titleKh": "មេរៀនទី ៤៖ អនុវត្តន៍នៃដេរីវេ",
+          "titleEn": "Applications of Differentiation",
+          "file": "calculus/calc1-04-applications-derivatives.json",
+          "subTopics": [
+            {
+              "id": "4.1",
+              "titleKh": "៤.១ តម្លៃអតិបរមា និងអប្បបរមា",
+              "descriptionKh": "តម្លៃបរមាធៀប និងដាច់ខាត ចំណុចគ្រិះ (Critical Numbers) និងទ្រឹស្តីបទតម្លៃបរមា (Extreme Value Theorem)។"
+            },
+            {
+              "id": "4.2",
+              "titleKh": "៤.២ ទ្រឹស្តីបទតម្លៃមធ្យម",
+              "descriptionKh": "ទ្រឹស្តីបទ Rolle និងទ្រឹស្តីបទ Mean Value Theorem (MVT)។"
+            },
+            {
+              "id": "4.3",
+              "titleKh": "៤.៣ ការសិក្សាអថេរភាព និងសង់ក្រាប",
+              "descriptionKh": "តេស្តដេរីវេទី ១ (ភាពកើន/ចុះ) តេស្តដេរីវេទី ២ (ភាពផត/ប៉ោង និងចំណុចរបត់)។"
+            },
+            {
+              "id": "4.4",
+              "titleKh": "៤.៤ រាងមិនកំណត់ និងបញ្ហាបរមាកម្ម",
+              "descriptionKh": "ច្បាប់ L'Hôpital និងការដោះស្រាយចំណោទបរមាកម្ម (Optimization Problems)។"
+            }
+          ]
+        },
+        {
+          "id": "calc1-05",
+          "partKh": "ផ្នែកទី ១៖ Calculus I (អនុគមន៍មួយអថេរ)",
+          "titleKh": "មេរៀនទី ៥៖ អាំងតេក្រាលមិនកំណត់ និងអាំងតេក្រាលកំណត់",
+          "titleEn": "Integrals",
+          "file": "calculus/calc1-05-integrals.json",
+          "subTopics": [
+            {
+              "id": "5.1",
+              "titleKh": "៥.១ ព្រីមីទីវ និងផលបូក Riemann",
+              "descriptionKh": "និយមន័យព្រីមីទីវ (Antiderivatives) និងការប៉ាន់ស្មានក្រឡាផ្ទៃក្រោមខ្សែកោងដោយផលបូក Riemann។"
+            },
+            {
+              "id": "5.2",
+              "titleKh": "៥.២ អាំងតេក្រាលកំណត់ និងទ្រឹស្តីបទគ្រឹះ",
+              "descriptionKh": "លក្ខណៈនៃអាំងតេក្រាលកំណត់ និងទ្រឹស្តីបទគ្រឹះនៃ Calculus (Fundamental Theorem of Calculus ផ្នែកទី ១ និងទី ២)។"
+            },
+            {
+              "id": "5.3",
+              "titleKh": "៥.៣ វិធីប្តូរអថេរ",
+              "descriptionKh": "ការគណនាអាំងតេក្រាលដោយវិធីជំនួស (Substitution Rule) សម្រាប់អាំងតេក្រាលកំណត់ និងមិនកំណត់។"
+            }
+          ]
+        },
+        {
+          "id": "calc2-06",
+          "partKh": "ផ្នែកទី ២៖ Calculus II (បច្ចេកទេសអាំងតេក្រាល និងស៊េរី)",
+          "titleKh": "មេរៀនទី ៦៖ អនុវត្តន៍នៃអាំងតេក្រាលកំណត់",
+          "titleEn": "Applications of Integration",
+          "file": "calculus/calc2-06-applications-integration.json",
+          "subTopics": [
+            {
+              "id": "6.1",
+              "titleKh": "៦.១ ក្រឡាផ្ទៃរវាងខ្សែកោង",
+              "descriptionKh": "ការគណនាក្រឡាផ្ទៃដោយបំបែកតាមអ័ក្ស x និងអ័ក្ស y។"
+            },
+            {
+              "id": "6.2",
+              "titleKh": "៦.២ មាឌសូលីតបរិវត្ត",
+              "descriptionKh": "វិធីបន្ទះថាស (Disk Method) វិធីចិញ្ចៀន (Washer Method) និងវិធីសំបកស៊ីឡាំង (Cylindrical Shells)។"
+            },
+            {
+              "id": "6.3",
+              "titleKh": "៦.៣ ប្រវែងធ្នូ និងផ្ទៃបរិវត្ត",
+              "descriptionKh": "រូបមន្តគណនាប្រវែងធ្នូនៃខ្សែកោង (Arc Length) និងក្រឡាផ្ទៃសូលីតបរិវត្ត (Surface Area of Revolution)។"
+            }
+          ]
+        },
+        {
+          "id": "calc2-07",
+          "partKh": "ផ្នែកទី ២៖ Calculus II (បច្ចេកទេសអាំងតេក្រាល និងស៊េរី)",
+          "titleKh": "មេរៀនទី ៧៖ បច្ចេកទេសគណនាអាំងតេក្រាល",
+          "titleEn": "Techniques of Integration",
+          "file": "calculus/calc2-07-techniques-integration.json",
+          "subTopics": [
+            {
+              "id": "7.1",
+              "titleKh": "៧.១ អាំងតេក្រាលដោយផ្នែក",
+              "descriptionKh": "រូបមន្ត Integration by Parts និងវិធីតារាង (Tabular Integration)។"
+            },
+            {
+              "id": "7.2",
+              "titleKh": "៧.២ អាំងតេក្រាលត្រីកោណមាត្រ និងជំនួសត្រីកោណមាត្រ",
+              "descriptionKh": "Trigonometric Integrals និង Trigonometric Substitution។"
+            },
+            {
+              "id": "7.3",
+              "titleKh": "៧.៣ អាំងតេក្រាលនៃអនុគមន៍សនិទាន",
+              "descriptionKh": "ការបំបែកជាប្រភាគងាយ (Partial Fractions)។"
+            },
+            {
+              "id": "7.4",
+              "titleKh": "៧.៤ អាំងតេក្រាលមិនកំណត់ព្រំដែន",
+              "descriptionKh": "Improper Integrals (ប្រភេទទី ១ ព្រំដែនអនន្ត និងប្រភេទទី ២ អនុគមន៍មិនជាប់)។"
+            }
+          ]
+        },
+        {
+          "id": "calc2-08",
+          "partKh": "ផ្នែកទី ២៖ Calculus II (បច្ចេកទេសអាំងតេក្រាល និងស៊េរី)",
+          "titleKh": "មេរៀនទី ៨៖ សមីការប៉ារ៉ាម៉ែត្រ និងកូអរដោនេប៉ូលែ",
+          "titleEn": "Parametric Equations & Polar Coordinates",
+          "file": "calculus/calc2-08-parametric-polar.json",
+          "subTopics": [
+            {
+              "id": "8.1",
+              "titleKh": "៨.១ ខ្សែកោងប៉ារ៉ាម៉ែត្រ",
+              "descriptionKh": "ការសង់ក្រាប ដេរីវេទី ១ ដេរីវេទី ២ ក្រឡាផ្ទៃ និងប្រវែងធ្នូក្នុងទម្រង់ប៉ារ៉ាម៉ែត្រ។"
+            },
+            {
+              "id": "8.2",
+              "titleKh": "៨.២ ប្រព័ន្ធកូអរដោនេប៉ូលែ",
+              "descriptionKh": "ការបម្លែងរវាងកូអរដោនេដេកាត និងប៉ូលែ និងការសង់ក្រាបប៉ូលែ (ឧ. Cardioid, Rose curves)។"
+            },
+            {
+              "id": "8.3",
+              "titleKh": "៨.៣ ក្រឡាផ្ទៃ និងប្រវែងធ្នូក្នុងកូអរដោនេប៉ូលែ",
+              "descriptionKh": "ការគណនាក្រឡាផ្ទៃចន្លោះខ្សែកោងប៉ូលែពីរ។"
+            }
+          ]
+        },
+        {
+          "id": "calc2-09",
+          "partKh": "ផ្នែកទី ២៖ Calculus II (បច្ចេកទេសអាំងតេក្រាល និងស៊េរី)",
+          "titleKh": "មេរៀនទី ៩៖ ស្វ៊ីត និងស៊េរីអនន្ត",
+          "titleEn": "Infinite Sequences and Series",
+          "file": "calculus/calc2-09-sequences-series.json",
+          "subTopics": [
+            {
+              "id": "9.1",
+              "titleKh": "៩.១ ស្វ៊ីតអនន្ត",
+              "descriptionKh": "លីមីតនៃស្វ៊ីត ស្វ៊ីតឯកដ្ឋាន (Monotonic) និងស្វ៊ីតទាល់ (Bounded)។"
+            },
+            {
+              "id": "9.2",
+              "titleKh": "៩.២ ស៊េរីអនន្ត និងតេស្តភាពរួម",
+              "descriptionKh": "ស៊េរីធរណីមាត្រ ស៊េរី p-series តេស្តអាំងតេក្រាល តេស្តប្រៀបធៀប តេស្តផលធៀប (Ratio Test) និងតេស្តឫស (Root Test)។"
+            },
+            {
+              "id": "9.3",
+              "titleKh": "៩.៣ ស៊េរីឆ្លាស់ និងភាពរួមដាច់ខាត",
+              "descriptionKh": "Alternating Series Test ភាពរួមដាច់ខាត (Absolute Convergence) និងភាពរួមមានលក្ខខណ្ឌ។"
+            },
+            {
+              "id": "9.4",
+              "titleKh": "៩.៤ ស៊េរីស្វ័យគុណ និងស៊េរី Taylor",
+              "descriptionKh": "កាំនៃភាពរួម (Radius of Convergence) ស៊េរី Taylor និងស៊េរី Maclaurin។"
+            }
+          ]
+        },
+        {
+          "id": "calc3-10",
+          "partKh": "ផ្នែកទី ៣៖ Calculus III (អនុគមន៍ច្រើនអថេរ)",
+          "titleKh": "មេរៀនទី ១០៖ វ៉ិចទ័រ និងធរណីមាត្រក្នុងលំហ",
+          "titleEn": "Vectors and Geometry of Space",
+          "file": "calculus/calc3-10-vectors-space.json",
+          "subTopics": [
+            {
+              "id": "10.1",
+              "titleKh": "១០.១ វ៉ិចទ័រក្នុងលំហ 3D",
+              "descriptionKh": "ផលគុណស្កាលែ (Dot Product) ផលគុណវ៉ិចទ័រ (Cross Product) និងចំណោលវ៉ិចទ័រ។"
+            },
+            {
+              "id": "10.2",
+              "titleKh": "១០.២ សមីការបន្ទាត់ និងប្លង់",
+              "descriptionKh": "ទម្រង់ប៉ារ៉ាម៉ែត្រនៃបន្ទាត់ សមីការទូទៅនៃប្លង់ និងចម្ងាយពីចំណុចទៅប្លង់។"
+            },
+            {
+              "id": "10.3",
+              "titleKh": "១០.៣ ស៊ីឡាំង និងផ្ទៃក្វាទ្រិច",
+              "descriptionKh": "Ellipsoid, Paraboloid, Hyperboloid និងកូអរដោនេស៊ីឡាំង/ស្វ៊ែរ (Cylindrical & Spherical Coordinates)។"
+            }
+          ]
+        },
+        {
+          "id": "calc3-11",
+          "partKh": "ផ្នែកទី ៣៖ Calculus III (អនុគមន៍ច្រើនអថេរ)",
+          "titleKh": "មេរៀនទី ១១៖ ដេរីវេដោយផ្នែក",
+          "titleEn": "Partial Derivatives",
+          "file": "calculus/calc3-11-partial-derivatives.json",
+          "subTopics": [
+            {
+              "id": "11.1",
+              "titleKh": "១១.១ អនុគមន៍ច្រើនអថេរ និងខ្សែកម្រិត",
+              "descriptionKh": "ដែនកំណត់ Level Curves និងលីមីត/ភាពជាប់នៃអនុគមន៍ពីរអថេរ។"
+            },
+            {
+              "id": "11.2",
+              "titleKh": "១១.២ ដេរីវេដោយផ្នែក និងប្លង់ប៉ះ",
+              "descriptionKh": "Partial Derivatives លំដាប់ខ្ពស់ ទ្រឹស្តីបទ Clairaut និងសមីការប្លង់ប៉ះ (Tangent Planes)។"
+            },
+            {
+              "id": "11.3",
+              "titleKh": "១១.៣ ច្បាប់ច្រវាក់ និងក្រាដ្យង់",
+              "descriptionKh": "Chain Rule សម្រាប់ច្រើនអថេរ ដេរីវេតាមទិស (Directional Derivatives) និងវ៉ិចទ័រក្រាដ្យង់ (∇f)។"
+            },
+            {
+              "id": "11.4",
+              "titleKh": "១១.៤ តម្លៃអតិបរមា និងអប្បបរមា",
+              "descriptionKh": "តេស្តដេរីវេទី ២ (D = f_xx·f_yy - [f_xy]²) និងវិធីមេគុណ Lagrange (Lagrange Multipliers)។"
+            }
+          ]
+        },
+        {
+          "id": "calc3-12",
+          "partKh": "ផ្នែកទី ៣៖ Calculus III (អនុគមន៍ច្រើនអថេរ)",
+          "titleKh": "មេរៀនទី ១២៖ អាំងតេក្រាលឌុប និងអាំងតេក្រាលត្រីគុណ",
+          "titleEn": "Multiple Integrals",
+          "file": "calculus/calc3-12-multiple-integrals.json",
+          "subTopics": [
+            {
+              "id": "12.1",
+              "titleKh": "១២.១ អាំងតេក្រាលឌុប (Double Integrals)",
+              "descriptionKh": "ទ្រឹស្តីបទ Fubini ការគណនាលើតំបន់ចតុកោណ និងតំបន់ទូទៅ (Type I & Type II)។"
+            },
+            {
+              "id": "12.2",
+              "titleKh": "១២.២ អាំងតេក្រាលឌុបក្នុងកូអរដោនេប៉ូលែ",
+              "descriptionKh": "ការប្តូរអថេរទៅជា (r, θ) និងការគណនាមាឌ/ក្រឡាផ្ទៃ។"
+            },
+            {
+              "id": "12.3",
+              "titleKh": "១២.៣ អាំងតេក្រាលត្រីគុណ (Triple Integrals)",
+              "descriptionKh": "ការគណនាក្នុងកូអរដោនេដេកាត ស៊ីឡាំង និងស្វ៊ែរ និងហ្សាកូប៊ីយ៉ង់ (Jacobian)។"
+            }
+          ]
+        },
+        {
+          "id": "calc3-13",
+          "partKh": "ផ្នែកទី ៣៖ Calculus III (អនុគមន៍ច្រើនអថេរ)",
+          "titleKh": "មេរៀនទី ១៣៖ វិភាគវ៉ិចទ័រ",
+          "titleEn": "Vector Calculus",
+          "file": "calculus/calc3-13-vector-calculus.json",
+          "subTopics": [
+            {
+              "id": "13.1",
+              "titleKh": "១៣.១ ដែនវ៉ិចទ័រ និងអាំងតេក្រាលខ្សែ",
+              "descriptionKh": "Vector Fields ដែនអភិរក្ស (Conservative Vector Fields) និង Line Integrals។"
+            },
+            {
+              "id": "13.2",
+              "titleKh": "១៣.២ ទ្រឹស្តីបទគ្រឹះនៃអាំងតេក្រាលខ្សែ និងទ្រឹស្តីបទ Green",
+              "descriptionKh": "ទំនាក់ទំនងរវាងអាំងតេក្រាលខ្សែបិទជិត និងអាំងតេក្រាលឌុប។"
+            },
+            {
+              "id": "13.3",
+              "titleKh": "១៣.៣ ទ្រឹស្តីបទ Stokes និងទ្រឹស្តីបទ Divergence",
+              "descriptionKh": "អាំងតេក្រាលផ្ទៃ (Surface Integrals) Curl, Divergence, ទ្រឹស្តីបទ Stokes និងទ្រឹស្តីបទ Gauss's Divergence។"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "linear-algebra",
+      "levelKh": "កម្រិតទី ១៖ មូលដ្ឋានគ្រឹះ និងការគណនា (ឆ្នាំទី ១)",
+      "nameKh": "ពិជគណិតលីនេអ៊ែរ",
+      "nameEn": "Linear Algebra",
+      "descriptionKh": "ប្រព័ន្ធសមីការលីនេអ៊ែរ ម៉ាទ្រីស ដេទែមីណង់ លំហវ៉ិចទ័រ និងតម្លៃផ្ទាល់ (Eigenvalues)",
+      "lessons": []
+    },
+    {
+      "id": "discrete-math",
+      "levelKh": "កម្រិតទី ១៖ មូលដ្ឋានគ្រឹះ និងការគណនា (ឆ្នាំទី ១)",
+      "nameKh": "គណិតវិទ្យាដាច់",
+      "nameEn": "Discrete Mathematics",
+      "descriptionKh": "បន្សំ-ចម្លាស់ (Combinatorics) ទ្រឹស្តីក្រាហ្វ (Graph Theory) និងទំនាក់ទំនងកំណើន",
+      "lessons": []
+    },
+    {
+      "id": "ode",
+      "levelKh": "កម្រិតទី ២៖ ការពង្រីកវិសាលភាព និងការអនុវត្ត (ឆ្នាំទី ២)",
+      "nameKh": "សមីការឌីផេរ៉ង់ស្យែលធម្មតា",
+      "nameEn": "Ordinary Differential Equations",
+      "descriptionKh": "សមីការលំដាប់ទី ១ លំដាប់ទី ២ បំប្លែង Laplace និងប្រព័ន្ធសមីការឌីផេរ៉ង់ស្យែល",
+      "lessons": []
+    },
+    {
+      "id": "probability-statistics",
+      "levelKh": "កម្រិតទី ២៖ ការពង្រីកវិសាលភាព និងការអនុវត្ត (ឆ្នាំទី ២)",
+      "nameKh": "ប្រូបាប៊ីលីតេ និងស្ថិតិគណិតវិទ្យា",
+      "nameEn": "Probability & Mathematical Statistics",
+      "descriptionKh": "អថេរចៃដន្យ ការបែងចែកប្រូបាប៊ីលីតេ ទ្រឹស្តីបទលីមីតកណ្តាល និងការប៉ាន់ស្មានស្ថិតិ",
+      "lessons": []
+    },
+    {
+      "id": "number-theory",
+      "levelKh": "កម្រិតទី ២៖ ការពង្រីកវិសាលភាព និងការអនុវត្ត (ឆ្នាំទី ២)",
+      "nameKh": "ទ្រឹស្តីចំនួន",
+      "nameEn": "Number Theory",
+      "descriptionKh": "ភាពចែកដាច់ ចំនួនបឋម សមភាពម៉ូឌុល និងអនុវត្តន៍ក្នុងគ្រីបតូក្រាហ្វី",
+      "lessons": []
+    },
+    {
+      "id": "real-analysis",
+      "levelKh": "កម្រិតទី ៣៖ គណិតវិទ្យាសុទ្ធ និងភាពតឹងរ៉ឹងផ្លូវការ (ឆ្នាំទី ៣)",
+      "nameKh": "វិភាគចំនួនពិត",
+      "nameEn": "Real Analysis",
+      "descriptionKh": "ស៊ូព្រីម៉ុម/អាំងហ្វីម៉ុម ស្វ៊ីត ស៊េរី ភាពជាប់ឯកសណ្ឋាន លំហម៉ែត្រិក និងអាំងតេក្រាល Riemann",
+      "lessons": []
+    },
+    {
+      "id": "abstract-algebra",
+      "levelKh": "កម្រិតទី ៣៖ គណិតវិទ្យាសុទ្ធ និងភាពតឹងរ៉ឹងផ្លូវការ (ឆ្នាំទី ៣)",
+      "nameKh": "ពីជគណិតអរូបី",
+      "nameEn": "Abstract Algebra",
+      "descriptionKh": "ក្រុម (Groups) កង (Rings) ដែន (Fields) និងទ្រឹស្តីបទ Galois",
+      "lessons": []
+    },
+    {
+      "id": "complex-analysis",
+      "levelKh": "កម្រិតទី ៣៖ គណិតវិទ្យាសុទ្ធ និងភាពតឹងរ៉ឹងផ្លូវការ (ឆ្នាំទី ៣)",
+      "nameKh": "វិភាគចំនួនកុំផ្លិច",
+      "nameEn": "Complex Analysis",
+      "descriptionKh": "អនុគមន៍វិភាគ (Holomorphic) អាំងតេក្រាល Cauchy ស៊េរី Laurent និងទ្រឹស្តីបទ Residue",
+      "lessons": []
+    },
+    {
+      "id": "numerical-analysis",
+      "levelKh": "កម្រិតទី ៣៖ គណិតវិទ្យាសុទ្ធ និងភាពតឹងរ៉ឹងផ្លូវការ (ឆ្នាំទី ៣)",
+      "nameKh": "វិធីសាស្ត្រលេខ",
+      "nameEn": "Numerical Analysis",
+      "descriptionKh": "ក្បួនដោះស្រាយប៉ាន់ស្មានឫស អាំងតេក្រាលលេខ និងដំណោះស្រាយសមីការដោយកុំព្យូទ័រ",
+      "lessons": []
+    },
+    {
+      "id": "topology",
+      "levelKh": "កម្រិតទី ៤៖ កម្រិតខ្ពស់ និងឯកទេស (ឆ្នាំទី ៤)",
+      "nameKh": "តូប៉ូវិទ្យា",
+      "nameEn": "General Topology",
+      "descriptionKh": "សំណុំបើក-បិទ ភាពបង្រួម (Compactness) ភាពជាប់គ្នា និងហូមេអូម័រហ្វីស",
+      "lessons": []
+    },
+    {
+      "id": "differential-geometry",
+      "levelKh": "កម្រិតទី ៤៖ កម្រិតខ្ពស់ និងឯកទេស (ឆ្នាំទី ៤)",
+      "nameKh": "ធរណីមាត្រឌីផេរ៉ង់ស្យែល",
+      "nameEn": "Differential Geometry",
+      "descriptionKh": "ខ្សែកោង និងផ្ទៃក្នុងលំហ R^3 កំណោង (Curvature) និង Manifolds",
+      "lessons": []
+    },
+    {
+      "id": "pde",
+      "levelKh": "កម្រិតទី ៤៖ កម្រិតខ្ពស់ និងឯកទេស (ឆ្នាំទី ៤)",
+      "nameKh": "សមីការឌីផេរ៉ង់ស្យែលដោយផ្នែក",
+      "nameEn": "Partial Differential Equations",
+      "descriptionKh": "សមីការកំដៅ សមីការរលក សមីការ Laplace និងវិភាគ Fourier",
+      "lessons": []
+    },
+    {
+      "id": "functional-analysis",
+      "levelKh": "កម្រិតទី ៤៖ កម្រិតខ្ពស់ និងឯកទេស (ឆ្នាំទី ៤)",
+      "nameKh": "ទ្រឹស្តីរង្វាស់ និងវិភាគអនុគមន៍",
+      "nameEn": "Measure Theory & Functional Analysis",
+      "descriptionKh": "រង្វាស់ Lebesgue លំហ Banach លំហ Hilbert និងប្រមាណករលីនេអ៊ែរ",
+      "lessons": []
+    }
+  ]
+}

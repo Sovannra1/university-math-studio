@@ -1,0 +1,291 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fffafa;
+  --foreground: #160002;
+  --brand-primary: #db073d;
+  --brand-hover: #bb0533;
+  --brand-dark: #9c0329;
+  --brand-tint-light: #ffe9e8;
+  --brand-tint-border: #ffd3d2;
+  --harmony-teal: #0097a8;
+  --harmony-green: #009b5e;
+  --harmony-blue: #0085dd;
+  --harmony-amber: #b95a00;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "Khmer OS Battambang", var(--font-battambang), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Khmer OS Battambang typography enhancements: crisp contrast & no vowel clipping */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.8;
+  text-rendering: optimizeLegibility;
+}
+
+.khmer-prose {
+  line-height: 1.95;
+  letter-spacing: 0.005em;
+}
+
+/* Ensure KaTeX formulas align harmoniously with Khmer OS Battambang */
+.katex {
+  font-size: 1.05em;
+  color: inherit;
+}
+
+.katex-display {
+  margin: 1rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0.25rem;
+}
+
+/* Mafs container styling */
+.MafsView {
+  border-radius: 0.75rem;
+  font-family: var(--font-sans);
+}
+
+/* Modern slide transition & staggered object assembly animations */
+@keyframes slideEnterNext {
+  from {
+    opacity: 0;
+    transform: translateX(32px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes slideEnterPrev {
+  from {
+    opacity: 0;
+    transform: translateX(-32px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes objFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes objScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes objSlideRight {
+  from {
+    opacity: 0;
+    transform: translateX(26px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes objStaggerLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-16px) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+.animate-slide-next {
+  animation: slideEnterNext 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-slide-prev {
+  animation: slideEnterPrev 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-obj-up {
+  animation: objFadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-obj-scale {
+  animation: objScaleIn 0.48s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-obj-right {
+  animation: objSlideRight 0.52s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-obj-bullet {
+  animation: objStaggerLeft 0.44s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes panelEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes tabEnterNext {
+  from {
+    opacity: 0;
+    transform: translateX(30px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes tabEnterPrev {
+  from {
+    opacity: 0;
+    transform: translateX(-30px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes iconPop {
+  0% {
+    transform: scale(0.8) rotate(-10deg);
+  }
+  60% {
+    transform: scale(1.18) rotate(4deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes fadeInFast {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-panel-enter {
+  animation: panelEnter 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+}
+
+.animate-tab-next {
+  animation: tabEnterNext 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+}
+
+.animate-tab-prev {
+  animation: tabEnterPrev 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+}
+
+.animate-icon-pop {
+  animation: iconPop 0.34s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-fast {
+  animation: fadeInFast 0.18s ease-out both;
+}
+
+@keyframes modalPopIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.86) translateY(18px);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.02) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes paperTearLeft {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    opacity: 1;
+    transform: translate(-10px, 4px) rotate(-3deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-72px, 46px) rotate(-14deg) scale(0.94);
+  }
+}
+
+@keyframes paperTearRight {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    opacity: 1;
+    transform: translate(10px, 4px) rotate(3deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(72px, 52px) rotate(14deg) scale(0.94);
+  }
+}
+
+.animate-modal-pop {
+  animation: modalPopIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-paper-tear-left {
+  animation: paperTearLeft 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform-origin: bottom right;
+}
+
+.animate-paper-tear-right {
+  animation: paperTearRight 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform-origin: bottom left;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
