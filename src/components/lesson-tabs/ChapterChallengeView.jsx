@@ -18,15 +18,15 @@ import MathText from "@/components/common/MathText";
 const LEVEL_META = {
   synthesis: {
     label: "កម្រិត ១៖ សំយោគគំនិត",
-    badge: "bg-[#0085dd]/12 text-[#005c9e] border-[#0085dd]/35",
+    badge: "bg-[#0085dd]/12 text-[#005c9e] dark:text-[#7cc4ff] border-[#0085dd]/35",
   },
   analytical: {
     label: "កម្រិត ២៖ វិភាគ និងសម្រាយ",
-    badge: "bg-[#b95a00]/12 text-[#8a4300] border-[#b95a00]/35",
+    badge: "bg-[#b95a00]/12 text-[#8a4300] dark:text-[#fbbf24] border-[#b95a00]/35",
   },
   challenge: {
     label: "កម្រិត ៣៖ គិតស៊ីជម្រៅ",
-    badge: "bg-[#db073d]/12 text-[#9c0329] border-[#db073d]/35",
+    badge: "bg-[#db073d]/12 text-[#9c0329] dark:text-[#ff8fa3] border-[#db073d]/35",
   },
 };
 
@@ -107,7 +107,7 @@ export default function ChapterChallengeView({ challenge }) {
   return (
     <div className="space-y-6">
       {/* Chapter Challenge Hero Header */}
-      <div className="rounded-2xl border border-[#fdbcbc] bg-gradient-to-br from-[#ffe9e8]/80 via-white to-[#fff5f5] p-5 sm:p-6 shadow-xs space-y-4">
+      <div className="rounded-2xl border border-[#fdbcbc] bg-gradient-to-br from-[#ffe9e8]/80 via-white to-[#fff5f5] dark:bg-none dark:bg-[#1e1015] p-5 sm:p-6 shadow-xs space-y-4">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="flex items-start gap-3.5">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#db073d] text-white shadow-sm">
