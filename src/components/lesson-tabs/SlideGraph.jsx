@@ -14,8 +14,8 @@ export default function SlideGraph({ visualGraph, height = 270 }) {
   const { preset, captionKh } = visualGraph;
 
   return (
-    <div className="rounded-2xl border border-[#fdbcbc] bg-[#fffafa] p-3 shadow-2xs space-y-2.5">
-      <div className="overflow-hidden rounded-xl border border-[#ffd3d2] bg-white">
+    <div className="rounded-2xl border border-[#fdbcbc] bg-[#fffafa]/80 p-3 shadow-2xs space-y-2.5">
+      <div className="overflow-hidden rounded-xl border border-[#ffd3d2] bg-white/55 dark:bg-white/[0.03]">
         {preset === "hole-limit" && (
           <Mafs height={height} viewBox={{ x: [-2, 4], y: [-1, 5] }} zoom={false} pan={false}>
             <Coordinates.Cartesian subdivisions={1} />

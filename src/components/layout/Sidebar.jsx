@@ -9,7 +9,6 @@ import {
   Orbit,
   ChevronRight,
   BookOpen,
-  GraduationCap,
   X,
   Binary,
   GitBranch,
@@ -220,38 +219,33 @@ export default function Sidebar({
         />
       )}
 
-      {/* Sidebar Panel */}
+      {/* Right Sidebar Panel (Table of Contents) */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex w-76 flex-col border-r border-[#ffd3d2] bg-white transition-transform duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] lg:static lg:translate-x-0 ${
-          isOpenMobile ? "translate-x-0" : "-translate-x-full"
+        className={`fixed inset-y-0 right-0 z-50 flex w-80 max-w-[88vw] flex-col border-l border-[#ffd3d2] bg-white transition-transform duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] lg:sticky lg:top-[5.75rem] lg:z-20 lg:h-[calc(100vh-6.75rem)] lg:w-80 lg:shrink-0 lg:translate-x-0 lg:rounded-2xl lg:border lg:border-[#ffd3d2] lg:shadow-[0_10px_28px_-12px_rgba(219,7,61,0.12)] lg:overflow-hidden ${
+          isOpenMobile ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* Brand Header */}
-        <div className="flex items-center justify-between border-b border-[#ffd3d2] px-5 py-4 bg-[#fffafa]">
-          <Link
-            href="/"
-            prefetch={true}
-            onClick={onCloseMobile}
-            className="flex items-center gap-3 group"
-          >
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#db073d] text-white shadow-xs transition-transform duration-150 group-hover:scale-105">
-              <GraduationCap className="h-5 w-5" />
+        {/* TOC Header */}
+        <div className="flex items-center justify-between border-b border-[#ffd3d2] px-4 py-3.5 bg-[#fffafa]">
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#ffe9e8] text-[#db073d] border border-[#fdbcbc]">
+              <BookOpen className="h-4 w-4" />
             </div>
             <div>
-              <div className="text-sm font-bold text-[#160002] leading-snug group-hover:text-[#db073d] transition-colors">
-                គណិតវិទ្យាសាកលវិទ្យាល័យ
+              <div className="text-sm font-bold text-[#160002] leading-snug">
+                មាតិកាសៀវភៅ
               </div>
               <div className="text-[11px] font-semibold text-[#7e021f]">
-                University Math Studio
+                Table of Contents
               </div>
             </div>
-          </Link>
+          </div>
 
           <button
             type="button"
             onClick={onCloseMobile}
             className="rounded-lg p-1.5 text-[#47010d] hover:bg-[#ffe9e8] transition-colors lg:hidden"
-            aria-label="បិទម៉ឺនុយ"
+            aria-label="បិទមាតិកា"
           >
             <X className="h-5 w-5" />
           </button>

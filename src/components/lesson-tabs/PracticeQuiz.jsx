@@ -268,7 +268,23 @@ export default function PracticeQuiz({ practiceExercises = [] }) {
                 )}
               </div>
 
-              {/* Explanation after checking */}
+              {/* Correct answer & explanation after checking */}
+              {isChecked && !isCorrect && (
+                <div className="rounded-xl border border-[#009b5e]/40 bg-[#009b5e]/10 p-3.5 text-sm md:text-base font-medium text-[#160002] khmer-prose">
+                  <strong className="text-[#007a49]">ចម្លើយត្រឹមត្រូវ៖ </strong>
+                  {ex.type === "short-answer" ? (
+                    <span className="font-mono font-bold">
+                      {ex.expectedAnswers?.[0] || ""}
+                    </span>
+                  ) : ex.correctIndex !== undefined && ex.options?.[ex.correctIndex] !== undefined ? (
+                    <span>
+                      <strong>{String.fromCharCode(65 + ex.correctIndex)}.</strong>{" "}
+                      <MathText text={ex.options[ex.correctIndex]} />
+                    </span>
+                  ) : null}
+                </div>
+              )}
+
               {isChecked && ex.explanation && (
                 <div className="rounded-xl border border-[#fdbcbc] bg-[#fffafa] p-4 text-sm md:text-base font-medium text-[#160002] khmer-prose">
                   <strong className="text-[#9c0329]">ការពន្យល់លម្អិត៖ </strong>

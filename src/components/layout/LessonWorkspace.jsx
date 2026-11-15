@@ -127,31 +127,23 @@ export default function LessonWorkspace({
     subjects.find((s) => s.id === resolvedSubjectId) || subjects[0] || {};
 
   return (
-    <div className="flex min-h-screen bg-[#fffafa]">
-      {/* Left Sidebar */}
-      <Sidebar
-        subjects={subjects}
-        activeLessonId={lesson?.id}
-        activeSubjectId={resolvedSubjectId}
-        activeSubTopicId={activeSubTopic?.id}
-        onSelectSubTopic={handleSelectSubTopic}
-        isOpenMobile={isMobileSidebarOpen}
-        onCloseMobile={() => setIsMobileSidebarOpen(false)}
+    <div className="flex min-h-screen flex-col bg-[#fffafa]">
+      {/* Floating Sticky Top Header (Logo + Web App Name + Lesson Title) */}
+      <Header
+        subjectNameKh={activeSubject.nameKh}
+        subjectNameEn={activeSubject.nameEn}
+        lessonTitleKh={lesson?.titleKh}
+        lessonTitleEn={lesson?.titleEn}
+        onOpenMobileMenu={() => setIsMobileSidebarOpen(true)}
       />
 
-      {/* Main Content Area */}
-      <div className="flex flex-1 flex-col min-w-0">
-        <Header
-          subjectNameKh={activeSubject.nameKh}
-          subjectNameEn={activeSubject.nameEn}
-          lessonTitleKh={lesson?.titleKh}
-          lessonTitleEn={lesson?.titleEn}
-          onOpenMobileMenu={() => setIsMobileSidebarOpen(true)}
-        />
-
-        {/* Clean 4-Tab Navigation Bar with Sliding Active Pill */}
-        <div className="border-b border-[#ffd3d2] bg-white/95 px-4 sm:px-6 lg:px-8">
-          <div className="relative flex items-center gap-1.5 overflow-x-auto py-2.5 no-scrollbar">
+      {/* Workspace Body: Main Content (Left) + Table of Contents (Right) */}
+      <div className="flex flex-1 items-start gap-0 lg:gap-5 lg:px-6 lg:pt-4">
+        {/* Main Content Area */}
+        <div className="flex flex-1 flex-col min-w-0">
+          {/* Clean 4-Tab Navigation Bar with Sliding Active Pill */}
+          <div className="mx-3 sm:mx-5 lg:mx-0 mt-3 lg:mt-0 rounded-2xl border border-[#ffd3d2] bg-white/95 px-3 sm:px-4 shadow-xs">
+            <div className="relative flex items-center gap-1.5 overflow-x-auto py-2 no-scrollbar">
             {pillStyle.ready && (
               <div
                 aria-hidden="true"
@@ -276,8 +268,20 @@ export default function LessonWorkspace({
           )}
         </main>
 
-        {/* Clean Workspace Footer */}
-        <Footer maxWidthClass="max-w-7xl" />
+          {/* Clean Workspace Footer */}
+          <Footer maxWidthClass="max-w-7xl" />
+        </div>
+
+        {/* Right Sidebar (Table of Contents) */}
+        <Sidebar
+          subjects={subjects}
+          activeLessonId={lesson?.id}
+          activeSubjectId={resolvedSubjectId}
+          activeSubTopicId={activeSubTopic?.id}
+          onSelectSubTopic={handleSelectSubTopic}
+          isOpenMobile={isMobileSidebarOpen}
+          onCloseMobile={() => setIsMobileSidebarOpen(false)}
+        />
       </div>
     </div>
   );

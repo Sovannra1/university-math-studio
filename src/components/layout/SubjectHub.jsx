@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import { APP_VERSION } from "@/lib/appConfig";
 import AuthButton from "@/components/auth/AuthButton";
+import ThemeToggle from "@/components/theme/ThemeToggle";
 import Footer from "@/components/layout/Footer";
 
 const SUBJECT_THEMES = {
@@ -238,6 +239,7 @@ export default function SubjectHub({ subjects = [] }) {
               <Sparkles className="h-3.5 w-3.5 text-[#db073d]" />
               បណ្ណាល័យសៀវភៅ ({subjects.length} មុខវិជ្ជា)
             </span>
+            <ThemeToggle />
             <AuthButton />
             <span className="rounded-full border border-[#ffd3d2] bg-white px-2.5 py-1 text-xs font-bold text-[#620116]">
               {APP_VERSION}
@@ -301,12 +303,12 @@ export default function SubjectHub({ subjects = [] }) {
                       />
                       <div
                         aria-hidden="true"
-                        className="absolute inset-0 translate-x-1 translate-y-1 rounded-r-2xl rounded-l-md border border-[#efe2e2] bg-white transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5 group-hover:translate-y-1.5"
+                        className="absolute inset-0 translate-x-1 translate-y-1 rounded-r-2xl rounded-l-md border border-[#efe2e2] dark:border-[#3d2129] bg-white dark:bg-[#2a171d] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5 group-hover:translate-y-1.5"
                       />
 
                       {/* Hardcover Book Surface */}
                       <div
-                        className={`relative flex min-h-[305px] w-full overflow-hidden rounded-r-2xl rounded-l-md border ${theme.accentBorder} bg-gradient-to-br ${theme.coverTint} shadow-md transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-2 group-hover:shadow-xl group-active:scale-[0.98]`}
+                        className={`relative flex min-h-[305px] w-full overflow-hidden rounded-r-2xl rounded-l-md border ${theme.accentBorder} dark:border-[#4b2731] bg-gradient-to-br ${theme.coverTint} dark:bg-none dark:bg-[#1e1015] shadow-md transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-2 group-hover:shadow-xl group-active:scale-[0.98]`}
                       >
                         {/* Hardcover Left Spine */}
                         <div
@@ -334,7 +336,7 @@ export default function SubjectHub({ subjects = [] }) {
 
                           <span
                             aria-hidden="true"
-                            className="pointer-events-none absolute right-3 bottom-14 select-none font-serif text-6xl font-bold text-[#160002]/[0.04] transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
+                            className="pointer-events-none absolute right-3 bottom-14 select-none font-serif text-6xl font-bold text-[#160002]/[0.04] dark:text-white/[0.06] transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
                           >
                             {theme.symbol}
                           </span>
@@ -351,7 +353,7 @@ export default function SubjectHub({ subjects = [] }) {
                                 <Icon className="h-5 w-5" />
                               </div>
                               <span
-                                className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-bold ${theme.badgeBg}`}
+                                className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-bold ${theme.badgeBg} dark:!bg-white/10 dark:!text-[#fbecee] dark:!border-white/20`}
                               >
                                 {lessons.length > 0
                                   ? `${lessons.length} មេរៀន`
@@ -360,7 +362,7 @@ export default function SubjectHub({ subjects = [] }) {
                             </div>
 
                             {/* Book Title Plate */}
-                            <div className="mt-4 border-t border-b border-[#160002]/10 py-3">
+                            <div className="mt-4 border-t border-b border-[#160002]/10 dark:border-white/10 py-3">
                               <h4 className="text-base font-bold text-[#160002] leading-snug group-hover:text-[#9c0329] transition-colors">
                                 {subject.nameKh}
                               </h4>
