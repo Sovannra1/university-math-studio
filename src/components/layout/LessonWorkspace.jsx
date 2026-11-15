@@ -15,6 +15,7 @@ import SlideViewer from "@/components/lesson-tabs/SlideViewer";
 import VideoTutorial from "@/components/lesson-tabs/VideoTutorial";
 import DetailedReading from "@/components/lesson-tabs/DetailedReading";
 import PracticeQuiz from "@/components/lesson-tabs/PracticeQuiz";
+import ChapterChallengeView from "@/components/lesson-tabs/ChapterChallengeView";
 import CommentSection from "@/components/common/CommentSection";
 import Footer from "@/components/layout/Footer";
 
@@ -86,7 +87,14 @@ export default function LessonWorkspace({
   }, [updatePillPosition]);
 
   const subTopics = lesson?.subTopics || [];
+  const hasChallenge = !!lesson?.chapterChallenge;
   const [activeSubTopicId, setActiveSubTopicId] = useState(() => {
+    if (
+      initialSubTopicId === "__chapter_challenge__" &&
+      hasChallenge
+    ) {
+      return "__chapter_challenge__";
+    }
     if (initialSubTopicId && subTopics.some((s) => s.id === initialSubTopicId)) {
       return initialSubTopicId;
     }
@@ -95,12 +103,17 @@ export default function LessonWorkspace({
 
   useEffect(() => {
     const list = lesson?.subTopics || [];
-    if (initialSubTopicId && list.some((s) => s.id === initialSubTopicId)) {
+    if (
+      initialSubTopicId === "__chapter_challenge__" &&
+      lesson?.chapterChallenge
+    ) {
+      setActiveSubTopicId("__chapter_challenge__");
+    } else if (initialSubTopicId && list.some((s) => s.id === initialSubTopicId)) {
       setActiveSubTopicId(initialSubTopicId);
     } else {
       setActiveSubTopicId(list[0]?.id || null);
     }
-  }, [lesson?.id, initialSubTopicId, lesson?.subTopics]);
+  }, [lesson?.id, initialSubTopicId, lesson?.subTopics, lesson?.chapterChallenge]);
 
   const handleSelectSubTopic = useCallback(
     (subId) => {
@@ -116,8 +129,11 @@ export default function LessonWorkspace({
     [lesson?.id]
   );
 
-  const activeSubTopic =
-    subTopics.find((s) => s.id === activeSubTopicId) || subTopics[0] || null;
+  const isChallengeMode =
+    activeSubTopicId === "__chapter_challenge__" && !!lesson?.chapterChallenge;
+  const activeSubTopic = isChallengeMode
+    ? null
+    : subTopics.find((s) => s.id === activeSubTopicId) || subTopics[0] || null;
 
   // Use sub-topic content when available, otherwise fall back to top-level lesson content
   const contentSource = activeSubTopic || lesson || {};
@@ -141,9 +157,10 @@ export default function LessonWorkspace({
       <div className="flex flex-1 items-start gap-0 lg:gap-5 lg:px-6 lg:pt-4">
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col min-w-0">
-          {/* Clean 4-Tab Navigation Bar with Sliding Active Pill */}
-          <div className="mx-3 sm:mx-5 lg:mx-0 mt-3 lg:mt-0 rounded-2xl border border-[#ffd3d2] bg-white/95 px-3 sm:px-4 shadow-xs">
-            <div className="relative flex items-center gap-1.5 overflow-x-auto py-2 no-scrollbar">
+          {/* Clean 4-Tab Navigation Bar with Sliding Active Pill (hidden in Chapter Challenge mode) */}
+          {!isChallengeMode && (
+            <div className="mx-3 sm:mx-5 lg:mx-0 mt-3 lg:mt-0 rounded-2xl border border-[#ffd3d2] bg-white/95 px-3 sm:px-4 shadow-xs">
+              <div className="relative flex items-center gap-1.5 overflow-x-auto py-2 no-scrollbar">
             {pillStyle.ready && (
               <div
                 aria-hidden="true"
@@ -188,8 +205,9 @@ export default function LessonWorkspace({
                 </button>
               );
             })}
-          </div>
-        </div>
+              </div>
+            </div>
+          )}
 
         {/* Tab Content */}
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto overflow-x-hidden">
@@ -217,6 +235,10 @@ export default function LessonWorkspace({
                   </Link>
                 </div>
               </div>
+            </div>
+          ) : isChallengeMode ? (
+            <div key={`${lesson.id}-challenge`} className="animate-panel-enter">
+              <ChapterChallengeView challenge={lesson.chapterChallenge} />
             </div>
           ) : (
             <div
@@ -258,9 +280,15 @@ export default function LessonWorkspace({
 
           {lesson && (
             <CommentSection
-              contextId={`${lesson.id}-${activeSubTopic?.id || "root"}`}
+              contextId={`${lesson.id}-${
+                isChallengeMode
+                  ? "challenge"
+                  : activeSubTopic?.id || "root"
+              }`}
               contextTitle={
-                activeSubTopic
+                isChallengeMode
+                  ? `${lesson.titleKh} — ${lesson.chapterChallenge.titleKh}`
+                  : activeSubTopic
                   ? `${lesson.titleKh} — ${activeSubTopic.titleKh}`
                   : lesson.titleKh
               }
@@ -276,8 +304,11 @@ export default function LessonWorkspace({
         <Sidebar
           subjects={subjects}
           activeLessonId={lesson?.id}
+          activeLessonHasChallenge={!!lesson?.chapterChallenge}
           activeSubjectId={resolvedSubjectId}
-          activeSubTopicId={activeSubTopic?.id}
+          activeSubTopicId={
+            isChallengeMode ? "__chapter_challenge__" : activeSubTopic?.id
+          }
           onSelectSubTopic={handleSelectSubTopic}
           isOpenMobile={isMobileSidebarOpen}
           onCloseMobile={() => setIsMobileSidebarOpen(false)}

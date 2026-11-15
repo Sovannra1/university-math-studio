@@ -9,6 +9,7 @@ import {
   Orbit,
   ChevronRight,
   BookOpen,
+  Trophy,
   X,
   Binary,
   GitBranch,
@@ -59,6 +60,7 @@ function groupLessonsByPart(lessons) {
 export default function Sidebar({
   subjects = [],
   activeLessonId,
+  activeLessonHasChallenge = false,
   activeSubjectId,
   activeSubTopicId,
   onSelectSubTopic,
@@ -201,6 +203,52 @@ export default function Sidebar({
                     </Link>
                   );
                 })}
+
+                {/* Chapter Mastery / Deep Thinking Challenge */}
+                {(lesson.chapterChallenge || (isActive && activeLessonHasChallenge)) && (
+                  (() => {
+                    const challengeId = "__chapter_challenge__";
+                    const isChallengeActive = activeSubTopicId === challengeId;
+                    if (isActive && onSelectSubTopic) {
+                      return (
+                        <button
+                          key={challengeId}
+                          type="button"
+                          onClick={() => {
+                            onSelectSubTopic(challengeId);
+                            onCloseMobile?.();
+                          }}
+                          className={`mt-1 flex w-full items-center gap-1.5 rounded-md px-2.5 py-1.5 text-left text-[11px] leading-relaxed transition-all duration-150 active:scale-[0.98] ${
+                            isChallengeActive
+                              ? "bg-[#db073d] font-bold text-white shadow-2xs"
+                              : "border border-dashed border-[#fdbcbc] bg-[#fff5f5] font-bold text-[#9c0329] hover:bg-[#ffe9e8]"
+                          }`}
+                        >
+                          <Trophy className="h-3.5 w-3.5 shrink-0" />
+                          <span>លំហាត់បញ្ចប់មេរៀន (ស៊ីជម្រៅ)</span>
+                        </button>
+                      );
+                    }
+                    return (
+                      <Link
+                        key={challengeId}
+                        href={`/?lesson=${encodeURIComponent(
+                          lesson.id
+                        )}&subtopic=${encodeURIComponent(challengeId)}`}
+                        prefetch={true}
+                        onClick={onCloseMobile}
+                        className={`mt-1 flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-[11px] leading-relaxed transition-all duration-150 active:scale-[0.98] ${
+                          isChallengeActive
+                            ? "bg-[#db073d] font-bold text-white shadow-2xs"
+                            : "border border-dashed border-[#fdbcbc] bg-[#fff5f5] font-bold text-[#9c0329] hover:bg-[#ffe9e8]"
+                        }`}
+                      >
+                        <Trophy className="h-3.5 w-3.5 shrink-0" />
+                        <span>លំហាត់បញ្ចប់មេរៀន (ស៊ីជម្រៅ)</span>
+                      </Link>
+                    );
+                  })()
+                )}
               </div>
             )}
           </div>

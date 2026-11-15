@@ -878,40 +878,137 @@ export default function SlideViewer({ slides = [], lessonTitle = "" }) {
             </div>
           )}
 
-          {/* Bullets + Optional Visual Graph (2-column when graph is present) */}
+          {/* Left Content (Bullets + Steps + Practice Answer) + Right Visual Graph */}
           <div
             className={
               activeSlide.visualGraph
-                ? "grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-10 items-center"
-                : ""
+                ? "grid grid-cols-1 lg:grid-cols-12 gap-5 md:gap-8 items-start"
+                : "space-y-4"
             }
           >
-            {(activeSlide.bullets || []).length > 0 && (
-              <ul
-                className={`${
-                  isFullscreen ? "space-y-5 md:space-y-6" : "space-y-3.5"
-                } ${activeSlide.visualGraph ? "lg:col-span-7" : ""}`}
-              >
-                {activeSlide.bullets.map((bullet, idx) => (
-                  <li
-                    key={`${currentIndex}-b-${idx}`}
-                    className={`animate-obj-bullet flex items-start gap-4 text-[#160002] khmer-prose ${
-                      isFullscreen ? "text-xl md:text-3xl leading-relaxed" : "text-base md:text-lg"
-                    }`}
-                    style={{ animationDelay: `${220 + idx * 90}ms` }}
-                  >
-                    <span
-                      className={`shrink-0 rounded-full bg-[#db073d] ${
-                        isFullscreen ? "mt-3.5 h-3.5 w-3.5" : "mt-2.5 h-2.5 w-2.5"
+            <div className={activeSlide.visualGraph ? "lg:col-span-7 space-y-4" : "space-y-4"}>
+              {(activeSlide.bullets || []).length > 0 && (
+                <ul
+                  className={
+                    isFullscreen ? "space-y-4 md:space-y-5" : "space-y-3"
+                  }
+                >
+                  {activeSlide.bullets.map((bullet, idx) => (
+                    <li
+                      key={`${currentIndex}-b-${idx}`}
+                      className={`animate-obj-bullet flex items-start gap-3.5 text-[#160002] khmer-prose ${
+                        isFullscreen ? "text-xl md:text-2xl leading-relaxed" : "text-base md:text-lg"
                       }`}
-                    />
-                    <div className="flex-1">
-                      <MathText text={bullet} />
+                      style={{ animationDelay: `${220 + idx * 90}ms` }}
+                    >
+                      <span
+                        className={`shrink-0 rounded-full bg-[#db073d] ${
+                          isFullscreen ? "mt-3 h-3 w-3" : "mt-2.5 h-2.5 w-2.5"
+                        }`}
+                      />
+                      <div className="flex-1">
+                        <MathText text={bullet} />
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {/* Optional Interactive Step-by-Step Worked Example on Slide */}
+              {exampleSteps.length > 0 && (
+                <div className="relative z-30 rounded-2xl border border-[#009b5e]/30 bg-[#009b5e]/5 p-3.5 md:p-4 space-y-2.5">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="text-xs font-bold text-[#009b5e]">
+                      ដំណោះស្រាយតាមជំហាន ({revealedStepsCount} / {exampleSteps.length})
+                    </span>
+                    <div className="flex items-center gap-2">
+                      {revealedStepsCount < exampleSteps.length ? (
+                        <>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setRevealedStepsCount((c) =>
+                                Math.min(c + 1, exampleSteps.length)
+                              )
+                            }
+                            className="inline-flex items-center gap-1.5 rounded-lg bg-[#009b5e] px-3 py-1.5 text-xs font-bold text-white hover:opacity-90 transition"
+                          >
+                            <Eye className="h-3.5 w-3.5" />
+                            បង្ហាញជំហានបន្ទាប់
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setRevealedStepsCount(exampleSteps.length)
+                            }
+                            className="inline-flex items-center gap-1.5 rounded-lg border border-[#009b5e]/40 bg-white px-3 py-1.5 text-xs font-bold text-[#160002] hover:bg-[#009b5e]/10 transition"
+                          >
+                            បង្ហាញទាំងអស់
+                          </button>
+                        </>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => setRevealedStepsCount(0)}
+                          className="inline-flex items-center gap-1.5 rounded-lg border border-[#009b5e]/40 bg-white px-3 py-1.5 text-xs font-bold text-[#160002] hover:bg-[#009b5e]/10 transition"
+                        >
+                          <EyeOff className="h-3.5 w-3.5" />
+                          លាក់ជំហាន
+                        </button>
+                      )}
                     </div>
-                  </li>
-                ))}
-              </ul>
-            )}
+                  </div>
+
+                  {revealedStepsCount > 0 && (
+                    <div className="space-y-2">
+                      {exampleSteps.slice(0, revealedStepsCount).map((step, sIdx) => (
+                        <div
+                          key={sIdx}
+                          className={`rounded-xl border border-[#009b5e]/25 bg-white font-medium text-[#160002] khmer-prose ${
+                            isFullscreen ? "p-3.5 md:p-4 text-base md:text-xl" : "p-2.5 text-sm"
+                          }`}
+                        >
+                          <MathText text={step} />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Optional Quick Practice Answer Toggle on Slide */}
+              {activeSlide.practiceAnswer && (
+                <div className="relative z-30 pt-1 space-y-2.5">
+                  <button
+                    type="button"
+                    onClick={() => setShowPracticeAnswer((v) => !v)}
+                    className="inline-flex items-center gap-1.5 rounded-xl bg-[#b95a00] px-4 py-2 text-xs md:text-sm font-bold text-white shadow-xs hover:opacity-90 transition"
+                  >
+                    {showPracticeAnswer ? (
+                      <>
+                        <EyeOff className="h-4 w-4" />
+                        លាក់ចម្លើយផ្ទៀងផ្ទាត់
+                      </>
+                    ) : (
+                      <>
+                        <Eye className="h-4 w-4" />
+                        បង្ហាញចម្លើយផ្ទៀងផ្ទាត់
+                      </>
+                    )}
+                  </button>
+
+                  {showPracticeAnswer && (
+                    <div
+                      className={`rounded-xl border border-[#b95a00]/40 bg-[#b95a00]/10 font-medium text-[#160002] khmer-prose ${
+                        isFullscreen ? "p-4 text-lg md:text-xl" : "p-3.5 text-sm md:text-base"
+                      }`}
+                    >
+                      <MathText text={activeSlide.practiceAnswer} />
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
 
             {activeSlide.visualGraph && (
               <div
@@ -920,106 +1017,11 @@ export default function SlideViewer({ slides = [], lessonTitle = "" }) {
               >
                 <SlideGraph
                   visualGraph={activeSlide.visualGraph}
-                  height={isFullscreen ? 400 : 250}
+                  height={isFullscreen ? 380 : 250}
                 />
               </div>
             )}
           </div>
-
-          {/* Optional Interactive Step-by-Step Worked Example on Slide */}
-          {exampleSteps.length > 0 && (
-            <div className="relative z-30 rounded-2xl border border-[#009b5e]/30 bg-[#009b5e]/5 p-4 md:p-5 space-y-3">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <span className="text-xs font-bold text-[#009b5e]">
-                  ដំណោះស្រាយតាមជំហាន ({revealedStepsCount} / {exampleSteps.length})
-                </span>
-                <div className="flex items-center gap-2">
-                  {revealedStepsCount < exampleSteps.length ? (
-                    <>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setRevealedStepsCount((c) =>
-                            Math.min(c + 1, exampleSteps.length)
-                          )
-                        }
-                        className="inline-flex items-center gap-1.5 rounded-lg bg-[#009b5e] px-3 py-1.5 text-xs font-bold text-white hover:opacity-90 transition"
-                      >
-                        <Eye className="h-3.5 w-3.5" />
-                        បង្ហាញជំហានបន្ទាប់
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setRevealedStepsCount(exampleSteps.length)
-                        }
-                        className="inline-flex items-center gap-1.5 rounded-lg border border-[#009b5e]/40 bg-white px-3 py-1.5 text-xs font-bold text-[#160002] hover:bg-[#009b5e]/10 transition"
-                      >
-                        បង្ហាញទាំងអស់
-                      </button>
-                    </>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => setRevealedStepsCount(0)}
-                      className="inline-flex items-center gap-1.5 rounded-lg border border-[#009b5e]/40 bg-white px-3 py-1.5 text-xs font-bold text-[#160002] hover:bg-[#009b5e]/10 transition"
-                    >
-                      <EyeOff className="h-3.5 w-3.5" />
-                      លាក់ជំហាន
-                    </button>
-                  )}
-                </div>
-              </div>
-
-              {revealedStepsCount > 0 && (
-                <div className="space-y-2.5">
-                  {exampleSteps.slice(0, revealedStepsCount).map((step, sIdx) => (
-                    <div
-                      key={sIdx}
-                      className={`rounded-xl border border-[#009b5e]/25 bg-white font-medium text-[#160002] khmer-prose ${
-                        isFullscreen ? "p-4 md:p-5 text-lg md:text-2xl" : "p-3.5 text-sm md:text-base"
-                      }`}
-                    >
-                      <MathText text={step} />
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Optional Quick Practice Answer Toggle on Slide */}
-          {activeSlide.practiceAnswer && (
-            <div className="relative z-30 pt-1 space-y-2.5">
-              <button
-                type="button"
-                onClick={() => setShowPracticeAnswer((v) => !v)}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-[#b95a00] px-4 py-2 text-xs md:text-sm font-bold text-white shadow-xs hover:opacity-90 transition"
-              >
-                {showPracticeAnswer ? (
-                  <>
-                    <EyeOff className="h-4 w-4" />
-                    លាក់ចម្លើយផ្ទៀងផ្ទាត់
-                  </>
-                ) : (
-                  <>
-                    <Eye className="h-4 w-4" />
-                    បង្ហាញចម្លើយផ្ទៀងផ្ទាត់
-                  </>
-                )}
-              </button>
-
-              {showPracticeAnswer && (
-                <div
-                  className={`rounded-xl border border-[#b95a00]/40 bg-[#b95a00]/10 font-medium text-[#160002] khmer-prose ${
-                    isFullscreen ? "p-5 text-lg md:text-2xl" : "p-4 text-sm md:text-base"
-                  }`}
-                >
-                  <MathText text={activeSlide.practiceAnswer} />
-                </div>
-              )}
-            </div>
-          )}
         </div>
 
         {/* Drawing Overlay Canvas */}

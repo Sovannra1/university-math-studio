@@ -3,18 +3,112 @@
 import React, { useState } from "react";
 import { Mafs, Coordinates, Plot, Point, Polygon, Line, Circle } from "mafs";
 
+const PRESET_LEGENDS = {
+  "hole-limit": [
+    { color: "#0085dd", label: "f(x) = (x² - 1)/(x - 1)" },
+    { color: "#db073d", label: "រន្ធ (1, 2)" },
+  ],
+  "one-sided-jump": [
+    { color: "#db073d", label: "y = -1 (x < 0)" },
+    { color: "#0097a8", label: "y = 1 (x > 0)" },
+  ],
+  "squeeze-theorem": [
+    { color: "#db073d", label: "f(x) = x²·sin(8/x)" },
+    { color: "#009b5e", label: "g(x) = x²" },
+    { color: "#0097a8", label: "h(x) = -x²" },
+  ],
+  "trig-limit": [
+    { color: "#db073d", label: "f(x) = sin(x)/x" },
+    { color: "#009b5e", label: "លីមីត (0, 1)" },
+  ],
+  "vertical-line-pass": [
+    { color: "#0085dd", label: "y = x² - 1" },
+    { color: "#009b5e", label: "បន្ទាត់ឈរ x = c" },
+  ],
+  "vertical-line-fail": [
+    { color: "#0085dd", label: "x² + y² = 4 (រង្វង់)" },
+    { color: "#db073d", label: "x = 1 (កាត់ ២ ចំណុច)" },
+  ],
+  "piecewise-function": [
+    { color: "#0085dd", label: "x² (x < 1)" },
+    { color: "#db073d", label: "3 - x (x ≥ 1)" },
+  ],
+  "linear-slope": [
+    { color: "#0085dd", label: "y = mx + 1" },
+  ],
+  "trig-sine-cosine": [
+    { color: "#db073d", label: "y = sin(x)" },
+    { color: "#0085dd", label: "y = cos(x)" },
+  ],
+  "exp-log-inverse": [
+    { color: "#db073d", label: "y = eˣ" },
+    { color: "#009b5e", label: "y = ln(x)" },
+    { color: "#64748b", label: "y = x" },
+  ],
+  "graph-shift-scale": [
+    { color: "#0085dd", label: "y = x² (ដើម)" },
+    { color: "#db073d", label: "y = (x - h)² + k" },
+  ],
+  "inverse-reflection": [
+    { color: "#db073d", label: "f(x) = x² (x ≥ 0)" },
+    { color: "#009b5e", label: "f⁻¹(x) = √x" },
+    { color: "#64748b", label: "y = x" },
+  ],
+  "graph-scaling": [
+    { color: "#0085dd", label: "y = sin(x)" },
+    { color: "#db073d", label: "y = c·sin(x)" },
+    { color: "#009b5e", label: "y = sin(cx)" },
+  ],
+  "graph-reflection": [
+    { color: "#0085dd", label: "f(x) = √x (ដើម)" },
+    { color: "#db073d", label: "y = -f(x) = -√x (ឆ្លុះ Ox)" },
+    { color: "#009b5e", label: "y = f(-x) = √(-x) (ឆ្លុះ Oy)" },
+  ],
+  "graph-abs-transform": [
+    { color: "#0085dd", label: "f(x) = x² - 2x (ដើម)" },
+    { color: "#db073d", label: "y = |f(x)| (បត់ក្រោម Ox ឡើងលើ)" },
+    { color: "#009b5e", label: "y = f(|x|) (ឆ្លុះស្តាំ Oy ទៅឆ្វេង)" },
+  ],
+  "example-parabola-steps": [
+    { color: "#0085dd", label: "ជំហានមុន (យោង)" },
+    { color: "#db073d", label: "ក្រាបជំហានបច្ចុប្បន្ន" },
+  ],
+};
+
 export default function SlideGraph({ visualGraph, height = 270 }) {
   const [epsilon, setEpsilon] = useState(visualGraph?.epsilon ?? 0.6);
   const [delta, setDelta] = useState(visualGraph?.delta ?? 0.35);
   const [lineX, setLineX] = useState(visualGraph?.lineX ?? 1);
   const [slope, setSlope] = useState(visualGraph?.slope ?? 1.5);
+  const [shiftH, setShiftH] = useState(visualGraph?.shiftH ?? 1.5);
+  const [shiftK, setShiftK] = useState(visualGraph?.shiftK ?? 1);
+  const [scaleC, setScaleC] = useState(visualGraph?.scaleC ?? 2);
+  const [absMode, setAbsMode] = useState(visualGraph?.absMode ?? "outer");
+  const [parabolaStep, setParabolaStep] = useState(visualGraph?.step ?? 4);
 
   if (!visualGraph) return null;
 
   const { preset, captionKh } = visualGraph;
+  const legendItems = PRESET_LEGENDS[preset] || [];
 
   return (
     <div className="rounded-2xl border border-[#fdbcbc] bg-[#fffafa]/80 p-3 shadow-2xs space-y-2.5">
+      {legendItems.length > 0 && (
+        <div className="flex flex-wrap items-center gap-1.5 px-1">
+          {legendItems.map((item, idx) => (
+            <span
+              key={idx}
+              className="inline-flex items-center gap-1.5 rounded-full border border-[#ffd3d2] bg-white px-2.5 py-0.5 text-[11px] font-bold text-[#160002]"
+            >
+              <span
+                className="h-2 w-2 rounded-full shrink-0"
+                style={{ backgroundColor: item.color }}
+              />
+              <span className="font-mono">{item.label}</span>
+            </span>
+          ))}
+        </div>
+      )}
       <div className="overflow-hidden rounded-xl border border-[#ffd3d2] bg-white/55 dark:bg-white/[0.03]">
         {preset === "hole-limit" && (
           <Mafs height={height} viewBox={{ x: [-2, 4], y: [-1, 5] }} zoom={false} pan={false}>
@@ -427,7 +521,210 @@ export default function SlideGraph({ visualGraph, height = 270 }) {
             <Point x={1} y={0} color="#009b5e" />
           </Mafs>
         )}
+
+        {preset === "graph-shift-scale" && (
+          <Mafs height={height} viewBox={{ x: [-4.5, 4.5], y: [-3, 6] }} zoom={false} pan={false}>
+            <Coordinates.Cartesian subdivisions={1} />
+            <Plot.OfX y={(x) => x * x} color="#0085dd" weight={2} style="dashed" />
+            <Plot.OfX y={(x) => (x - shiftH) * (x - shiftH) + shiftK} color="#db073d" weight={3} />
+            <Point x={0} y={0} color="#0085dd" />
+            <Point x={shiftH} y={shiftK} color="#db073d" />
+          </Mafs>
+        )}
+
+        {preset === "inverse-reflection" && (
+          <Mafs height={height} viewBox={{ x: [-3.5, 5], y: [-3.5, 5] }} zoom={false} pan={false}>
+            <Coordinates.Cartesian subdivisions={1} />
+            <Plot.OfX y={(x) => x} color="#64748b" weight={1.5} style="dashed" />
+            <Plot.OfX y={(x) => (x >= 0 ? x * x : NaN)} color="#db073d" weight={3} />
+            <Plot.OfX y={(x) => (x >= 0 ? Math.sqrt(x) : NaN)} color="#009b5e" weight={3} />
+            <Point x={2} y={4} color="#db073d" />
+            <Point x={4} y={2} color="#009b5e" />
+            <Line.Segment point1={[2, 4]} point2={[4, 2]} style="dashed" color="#0097a8" weight={1.5} />
+          </Mafs>
+        )}
+
+        {preset === "graph-scaling" && (
+          <Mafs height={height} viewBox={{ x: [-6.3, 6.3], y: [-3.2, 3.2] }} zoom={false} pan={false}>
+            <Coordinates.Cartesian subdivisions={1} />
+            <Plot.OfX y={(x) => Math.sin(x)} color="#0085dd" weight={2} style="dashed" />
+            <Plot.OfX y={(x) => scaleC * Math.sin(x)} color="#db073d" weight={3} />
+            <Plot.OfX y={(x) => Math.sin(scaleC * x)} color="#009b5e" weight={2.5} />
+          </Mafs>
+        )}
+
+        {preset === "graph-reflection" && (
+          <Mafs height={height} viewBox={{ x: [-4.5, 4.5], y: [-3, 3] }} zoom={false} pan={false}>
+            <Coordinates.Cartesian subdivisions={1} />
+            <Plot.OfX y={(x) => (x >= 0 ? Math.sqrt(x) : NaN)} color="#0085dd" weight={2.5} style="dashed" />
+            <Plot.OfX y={(x) => (x >= 0 ? -Math.sqrt(x) : NaN)} color="#db073d" weight={3} />
+            <Plot.OfX y={(x) => (x <= 0 ? Math.sqrt(-x) : NaN)} color="#009b5e" weight={3} />
+            <Point x={1} y={1} color="#0085dd" />
+            <Point x={1} y={-1} color="#db073d" />
+            <Point x={-1} y={1} color="#009b5e" />
+          </Mafs>
+        )}
+
+        {preset === "graph-abs-transform" && (
+          <Mafs height={height} viewBox={{ x: [-3.5, 3.5], y: [-2, 4] }} zoom={false} pan={false}>
+            <Coordinates.Cartesian subdivisions={1} />
+            <Plot.OfX y={(x) => x * x - 2 * x} color="#0085dd" weight={2} style="dashed" />
+            {absMode === "outer" ? (
+              <Plot.OfX y={(x) => Math.abs(x * x - 2 * x)} color="#db073d" weight={3} />
+            ) : (
+              <Plot.OfX y={(x) => Math.abs(x) * Math.abs(x) - 2 * Math.abs(x)} color="#009b5e" weight={3} />
+            )}
+          </Mafs>
+        )}
+
+        {preset === "example-parabola-steps" && (
+          <Mafs height={height} viewBox={{ x: [-3.5, 4.5], y: [-5, 5] }} zoom={false} pan={false}>
+            <Coordinates.Cartesian subdivisions={1} />
+            {parabolaStep === 1 && (
+              <>
+                <Plot.OfX y={(x) => x * x} color="#db073d" weight={3} />
+                <Point x={0} y={0} color="#db073d" />
+              </>
+            )}
+            {parabolaStep === 2 && (
+              <>
+                <Plot.OfX y={(x) => x * x} color="#0085dd" weight={2} style="dashed" />
+                <Plot.OfX y={(x) => (x - 1) * (x - 1)} color="#db073d" weight={3} />
+                <Point x={0} y={0} color="#0085dd" />
+                <Point x={1} y={0} color="#db073d" />
+              </>
+            )}
+            {parabolaStep === 3 && (
+              <>
+                <Plot.OfX y={(x) => (x - 1) * (x - 1)} color="#0085dd" weight={2} style="dashed" />
+                <Plot.OfX y={(x) => -2 * (x - 1) * (x - 1)} color="#db073d" weight={3} />
+                <Point x={1} y={0} color="#db073d" />
+              </>
+            )}
+            {parabolaStep === 4 && (
+              <>
+                <Plot.OfX y={(x) => -2 * (x - 1) * (x - 1)} color="#0085dd" weight={2} style="dashed" />
+                <Plot.OfX y={(x) => -2 * (x - 1) * (x - 1) + 3} color="#db073d" weight={3} />
+                <Point x={1} y={0} color="#0085dd" />
+                <Point x={1} y={3} color="#db073d" />
+              </>
+            )}
+          </Mafs>
+        )}
       </div>
+
+      {/* Step selector for Example Parabola Construction */}
+      {preset === "example-parabola-steps" && (
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 px-1 text-[11px]">
+          {[
+            { step: 1, label: "១. y = x²" },
+            { step: 2, label: "២. (x - 1)²" },
+            { step: 3, label: "៣. -2(x - 1)²" },
+            { step: 4, label: "៤. -2(x - 1)² + 3" },
+          ].map((item) => (
+            <button
+              key={item.step}
+              type="button"
+              onClick={() => setParabolaStep(item.step)}
+              className={`rounded-lg border px-2 py-1.5 font-mono font-bold transition ${
+                parabolaStep === item.step
+                  ? "border-[#db073d] bg-[#db073d] text-white shadow-2xs"
+                  : "border-[#ffd3d2] bg-white text-[#160002] hover:bg-[#ffe9e8]"
+              }`}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Toggle for Absolute Value Transformation */}
+      {preset === "graph-abs-transform" && (
+        <div className="flex items-center gap-2 px-1 text-xs">
+          <button
+            type="button"
+            onClick={() => setAbsMode("outer")}
+            className={`flex-1 rounded-lg border px-2.5 py-1.5 font-bold transition ${
+              absMode === "outer"
+                ? "border-[#db073d] bg-[#db073d] text-white"
+                : "border-[#ffd3d2] bg-white text-[#160002] hover:bg-[#ffe9e8]"
+            }`}
+          >
+            y = |f(x)|
+          </button>
+          <button
+            type="button"
+            onClick={() => setAbsMode("inner")}
+            className={`flex-1 rounded-lg border px-2.5 py-1.5 font-bold transition ${
+              absMode === "inner"
+                ? "border-[#009b5e] bg-[#009b5e] text-white"
+                : "border-[#ffd3d2] bg-white text-[#160002] hover:bg-[#ffe9e8]"
+            }`}
+          >
+            y = f(|x|)
+          </button>
+        </div>
+      )}
+
+      {/* Mini interactive slider for Graph Scaling */}
+      {preset === "graph-scaling" && (
+        <div className="space-y-1.5 px-1 text-xs">
+          <div className="flex justify-between font-bold text-[#7e021f]">
+            <span>កែតម្រូវមេគុណ c</span>
+            <span className="font-mono">c = {scaleC.toFixed(2)}</span>
+          </div>
+          <input
+            type="range"
+            min={0.5}
+            max={2.5}
+            step={0.25}
+            value={scaleC}
+            onChange={(e) => setScaleC(parseFloat(e.target.value))}
+            className="w-full accent-[#db073d] cursor-pointer"
+          />
+          <div className="flex flex-wrap gap-3 text-[11px] font-bold">
+            <span className="text-[#0085dd]">--- sin(x) ដើម</span>
+            <span className="text-[#db073d]">— c·sin(x) (ពង្រីក/បង្រួមឈរ)</span>
+            <span className="text-[#009b5e]">— sin(c·x) (បង្រួម/ពង្រួមដេក)</span>
+          </div>
+        </div>
+      )}
+
+      {/* Mini interactive sliders for Graph Shifting */}
+      {preset === "graph-shift-scale" && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 px-1 text-xs">
+          <div>
+            <div className="flex justify-between font-bold text-[#db073d]">
+              <span>រំកិលដេក h (ឆ្វេង/ស្តាំ)</span>
+              <span className="font-mono">h = {shiftH.toFixed(1)}</span>
+            </div>
+            <input
+              type="range"
+              min={-2.5}
+              max={2.5}
+              step={0.5}
+              value={shiftH}
+              onChange={(e) => setShiftH(parseFloat(e.target.value))}
+              className="w-full accent-[#db073d] cursor-pointer"
+            />
+          </div>
+          <div>
+            <div className="flex justify-between font-bold text-[#009b5e]">
+              <span>រំកិលឈរ k (ឡើង/ចុះ)</span>
+              <span className="font-mono">k = {shiftK.toFixed(1)}</span>
+            </div>
+            <input
+              type="range"
+              min={-2}
+              max={3}
+              step={0.5}
+              value={shiftK}
+              onChange={(e) => setShiftK(parseFloat(e.target.value))}
+              className="w-full accent-[#009b5e] cursor-pointer"
+            />
+          </div>
+        </div>
+      )}
 
       {/* Mini interactive slider for Linear Slope */}
       {preset === "linear-slope" && (

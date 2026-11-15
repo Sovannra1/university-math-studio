@@ -89,8 +89,11 @@ html.dark .bg-\[\#fff5f5\] {
 
 html.dark .bg-white,
 html.dark .bg-white\/95,
+html.dark .bg-white\/90,
 html.dark .bg-white\/88,
+html.dark .bg-white\/85,
 html.dark .bg-white\/80,
+html.dark .bg-white\/70,
 html.dark .bg-white\/55 {
   background-color: rgba(28, 16, 21, 0.94) !important;
 }

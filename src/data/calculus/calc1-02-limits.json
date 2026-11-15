@@ -294,11 +294,46 @@
         "type": "function-2d",
         "defaultEquation": "a * x^2 + b",
         "sliders": [
-          { "variable": "a", "min": -2, "max": 2, "step": 0.1, "default": 0.5, "label": "មេគុណកោង a" },
-          { "variable": "b", "min": -3, "max": 3, "step": 0.5, "default": 0.5, "label": "តម្លៃថេរ b" },
-          { "variable": "x0", "min": -3, "max": 3, "step": 0.25, "default": 1.5, "label": "ចំណុចគោលដៅ x₀" },
-          { "variable": "epsilon", "min": 0.1, "max": 2, "step": 0.05, "default": 0.6, "label": "គម្លាតអ័ក្ស Y (ε)" },
-          { "variable": "delta", "min": 0.05, "max": 1.5, "step": 0.05, "default": 0.35, "label": "គម្លាតអ័ក្ស X (δ)" }
+          {
+            "variable": "a",
+            "min": -2,
+            "max": 2,
+            "step": 0.1,
+            "default": 0.5,
+            "label": "មេគុណកោង a"
+          },
+          {
+            "variable": "b",
+            "min": -3,
+            "max": 3,
+            "step": 0.5,
+            "default": 0.5,
+            "label": "តម្លៃថេរ b"
+          },
+          {
+            "variable": "x0",
+            "min": -3,
+            "max": 3,
+            "step": 0.25,
+            "default": 1.5,
+            "label": "ចំណុចគោលដៅ x₀"
+          },
+          {
+            "variable": "epsilon",
+            "min": 0.1,
+            "max": 2,
+            "step": 0.05,
+            "default": 0.6,
+            "label": "គម្លាតអ័ក្ស Y (ε)"
+          },
+          {
+            "variable": "delta",
+            "min": 0.05,
+            "max": 1.5,
+            "step": 0.05,
+            "default": 0.35,
+            "label": "គម្លាតអ័ក្ស X (δ)"
+          }
         ],
         "instructionsKh": "សាកល្បងកំណត់ \\(\\epsilon\\) (ផ្ទៃបៃតង) រួចបន្ថយ \\(\\delta\\) (ផ្ទៃខៀវបៃតង) រហូតដល់សារបង្ហាញថា លក្ខខណ្ឌ \\(|f(x) - L| < \\epsilon\\) ត្រូវបានផ្ទៀងផ្ទាត់!"
       },
@@ -384,7 +419,10 @@
           "type": "short-answer",
           "question": "គេឱ្យ \\(\\lim_{x \\to 1} (5x + 2) = 7\\)។ ប្រសិនបើ \\(\\epsilon = 0.1\\) ចូរគណនាតម្លៃ \\(\\delta = \\frac{\\epsilon}{5}\\) (សរសេរជាលេខទសភាគ ឧ. 0.02)។",
           "placeholder": "បញ្ចូលតម្លៃ δ (ឧ. 0.02)",
-          "expectedAnswers": ["0.02", ".02"],
+          "expectedAnswers": [
+            "0.02",
+            ".02"
+          ],
           "hint": "យក 0.1 ចែកនឹង 5។",
           "explanation": "\\(|(5x + 2) - 7| = 5|x - 1| < 0.1 \\implies |x - 1| < \\frac{0.1}{5} = 0.02\\)។"
         },
@@ -408,9 +446,18 @@
           "title": "២.១ វីដេអូបង្រៀន៖ គោលគំនិត និងនិយមន័យ Epsilon-Delta",
           "youtubeId": "",
           "timestamps": [
-            { "time": "00:00", "label": "គោលគំនិតនៃលីមីត" },
-            { "time": "05:30", "label": "លីមីតឆ្វេង និងលីមីតស្តាំ" },
-            { "time": "12:00", "label": "ការស្រាយបញ្ជាក់តាម Epsilon-Delta" }
+            {
+              "time": "00:00",
+              "label": "គោលគំនិតនៃលីមីត"
+            },
+            {
+              "time": "05:30",
+              "label": "លីមីតឆ្វេង និងលីមីតស្តាំ"
+            },
+            {
+              "time": "12:00",
+              "label": "ការស្រាយបញ្ជាក់តាម Epsilon-Delta"
+            }
           ]
         }
       ],
@@ -765,8 +812,22 @@
         "type": "function-2d",
         "defaultEquation": "a * x^2 * sin(b / x)",
         "sliders": [
-          { "variable": "a", "min": 0.2, "max": 2, "step": 0.1, "default": 1, "label": "មេគុណកម្រិត a" },
-          { "variable": "b", "min": 1, "max": 10, "step": 1, "default": 4, "label": "ប្រេកង់រំញ័រ b" }
+          {
+            "variable": "a",
+            "min": 0.2,
+            "max": 2,
+            "step": 0.1,
+            "default": 1,
+            "label": "មេគុណកម្រិត a"
+          },
+          {
+            "variable": "b",
+            "min": 1,
+            "max": 10,
+            "step": 1,
+            "default": 4,
+            "label": "ប្រេកង់រំញ័រ b"
+          }
         ],
         "instructionsKh": "សង្កេតក្រាប \\(f(x) = a x^2 \\sin(b/x)\\) នៅជិត \\(x = 0\\)។ ទោះបី \\(\\sin(b/x)\\) រំញ័រឥតឈប់ឈរក៏ដោយ ក៏ \\(a x^2\\) គាបវាឱ្យខិតជិត \\(0\\) ដែរ។ អ្នកអាចសាកវាយ `sin(x)/x` ដើម្បីមើលលីមីតត្រង់ \\(x = 0\\) ស្មើ 1!"
       },
@@ -851,7 +912,9 @@
           "type": "short-answer",
           "question": "គណនាតម្លៃនៃ \\(\\lim_{x \\to 0} \\frac{\\sin(6x)}{2x}\\) (បញ្ចូលជាចំនួនគត់)។",
           "placeholder": "បញ្ចូលចម្លើយ (ឧ. 3)",
-          "expectedAnswers": ["3"],
+          "expectedAnswers": [
+            "3"
+          ],
           "hint": "សរសេរជា (6/2) * sin(6x)/(6x)។",
           "explanation": "\\(\\lim_{x \\to 0} \\frac{\\sin(6x)}{2x} = \\lim_{x \\to 0} 3 \\cdot \\frac{\\sin(6x)}{6x} = 3 \\cdot 1 = 3\\)។"
         },
@@ -875,9 +938,18 @@
           "title": "២.២ វីដេអូបង្រៀន៖ ច្បាប់គណនាលីមីត និងទ្រឹស្តីបទគាប",
           "youtubeId": "",
           "timestamps": [
-            { "time": "00:00", "label": "ច្បាប់គណនាលីមីតទាំង ៥" },
-            { "time": "07:20", "label": "ការដោះស្រាយទម្រង់ 0/0" },
-            { "time": "14:45", "label": "ទ្រឹស្តីបទគាប (Squeeze Theorem)" }
+            {
+              "time": "00:00",
+              "label": "ច្បាប់គណនាលីមីតទាំង ៥"
+            },
+            {
+              "time": "07:20",
+              "label": "ការដោះស្រាយទម្រង់ 0/0"
+            },
+            {
+              "time": "14:45",
+              "label": "ទ្រឹស្តីបទគាប (Squeeze Theorem)"
+            }
           ]
         }
       ],
@@ -1244,9 +1316,30 @@
         "type": "function-2d",
         "defaultEquation": "(a * x + b) / (x - c)",
         "sliders": [
-          { "variable": "a", "min": -4, "max": 4, "step": 0.5, "default": 2, "label": "អាស៊ីមតូតដេក y = a" },
-          { "variable": "b", "min": -5, "max": 5, "step": 0.5, "default": 1, "label": "ប៉ារ៉ាម៉ែត្រ b" },
-          { "variable": "c", "min": -3, "max": 3, "step": 0.5, "default": 1, "label": "អាស៊ីមតូតឈរ x = c" }
+          {
+            "variable": "a",
+            "min": -4,
+            "max": 4,
+            "step": 0.5,
+            "default": 2,
+            "label": "អាស៊ីមតូតដេក y = a"
+          },
+          {
+            "variable": "b",
+            "min": -5,
+            "max": 5,
+            "step": 0.5,
+            "default": 1,
+            "label": "ប៉ារ៉ាម៉ែត្រ b"
+          },
+          {
+            "variable": "c",
+            "min": -3,
+            "max": 3,
+            "step": 0.5,
+            "default": 1,
+            "label": "អាស៊ីមតូតឈរ x = c"
+          }
         ],
         "instructionsKh": "ផ្លាស់ប្តូរតម្លៃ `a` ដើម្បីមើលអាស៊ីមតូតដេក \\(y = a\\) នៅពេល \\(x \\to \\pm\\infty\\) និងផ្លាស់ប្តូរ `c` ដើម្បីមើលអាស៊ីមតូតឈរ \\(x = c\\)។"
       },
@@ -1331,7 +1424,10 @@
           "type": "short-answer",
           "question": "រកសមីការអាស៊ីមតូតដេក \\(y = L\\) នៃអនុគមន៍ \\(f(x) = \\frac{7x - 1}{2x + 5}\\) (បញ្ចូលតម្លៃ \\(L\\) ជាលេខទសភាគ ឧ. 3.5)។",
           "placeholder": "បញ្ចូលតម្លៃ L (ឧ. 3.5)",
-          "expectedAnswers": ["3.5", "7/2"],
+          "expectedAnswers": [
+            "3.5",
+            "7/2"
+          ],
           "hint": "គណនា lim(x -> +∞) នៃ (7x - 1)/(2x + 5)។",
           "explanation": "\\(\\lim_{x \\to \\pm\\infty} \\frac{7x - 1}{2x + 5} = \\frac{7}{2} = 3.5\\)។"
         },
@@ -1355,9 +1451,18 @@
           "title": "២.៣ វីដេអូបង្រៀន៖ លីមីតនៅអនន្ត និងអាស៊ីមតូត",
           "youtubeId": "",
           "timestamps": [
-            { "time": "00:00", "label": "លីមីតនៅ +∞ និង -∞" },
-            { "time": "08:15", "label": "អាស៊ីមតូតដេក និងករណីរ៉ាឌីកាល់" },
-            { "time": "16:30", "label": "អាស៊ីមតូតឈរ" }
+            {
+              "time": "00:00",
+              "label": "លីមីតនៅ +∞ និង -∞"
+            },
+            {
+              "time": "08:15",
+              "label": "អាស៊ីមតូតដេក និងករណីរ៉ាឌីកាល់"
+            },
+            {
+              "time": "16:30",
+              "label": "អាស៊ីមតូតឈរ"
+            }
           ]
         }
       ],
@@ -1707,9 +1812,30 @@
         "type": "function-2d",
         "defaultEquation": "a * x^3 + b * x + c",
         "sliders": [
-          { "variable": "a", "min": -2, "max": 2, "step": 0.25, "default": 1, "label": "មេគុណ a" },
-          { "variable": "b", "min": -5, "max": 2, "step": 0.5, "default": -3, "label": "មេគុណ b" },
-          { "variable": "c", "min": -3, "max": 3, "step": 0.25, "default": 1, "label": "តម្លៃថេរ c" }
+          {
+            "variable": "a",
+            "min": -2,
+            "max": 2,
+            "step": 0.25,
+            "default": 1,
+            "label": "មេគុណ a"
+          },
+          {
+            "variable": "b",
+            "min": -5,
+            "max": 2,
+            "step": 0.5,
+            "default": -3,
+            "label": "មេគុណ b"
+          },
+          {
+            "variable": "c",
+            "min": -3,
+            "max": 3,
+            "step": 0.25,
+            "default": 1,
+            "label": "តម្លៃថេរ c"
+          }
         ],
         "instructionsKh": "សង្កេតខ្សែកោងពហុធាជាប់ \\(f(x) = ax^3 + bx + c\\)។ នៅពេល \\(f(0)\\) និង \\(f(1)\\) មានសញ្ញាផ្ទុយគ្នា (មួយលើអ័ក្ស X មួយក្រោមអ័ក្ស X) ខ្សែកោងត្រូវតែកាត់អ័ក្ស X យ៉ាងតិចមួយដងតាមទ្រឹស្តីបទ IVT!"
       },
@@ -1780,7 +1906,9 @@
           "type": "short-answer",
           "question": "រកតម្លៃ \\(k\\) ដើម្បីឱ្យអនុគមន៍ \\(f(x) = \\begin{cases} 2x + k & \\text{បើ } x < 3 \\\\ x^2 - 1 & \\text{បើ } x \\ge 3 \\end{cases}\\) ជាប់ត្រង់ \\(x = 3\\)។",
           "placeholder": "បញ្ចូលតម្លៃ k (ឧ. 2)",
-          "expectedAnswers": ["2"],
+          "expectedAnswers": [
+            "2"
+          ],
           "hint": "ផ្ទឹមលីមីតឆ្វេង 2(3) + k ជាមួយលីមីតស្តាំ 3² - 1។",
           "explanation": "\\(\\lim_{x \\to 3^-} f(x) = 6 + k\\) និង \\(f(3) = \\lim_{x \\to 3^+} f(x) = 3^2 - 1 = 8\\)។ ដូច្នេះ \\(6 + k = 8 \\implies k = 2\\)។"
         },
@@ -1818,9 +1946,18 @@
           "title": "២.៤ វីដេអូបង្រៀន៖ ភាពជាប់ និងទ្រឹស្តីបទតម្លៃកណ្តាល (IVT)",
           "youtubeId": "",
           "timestamps": [
-            { "time": "00:00", "label": "លក្ខខណ្ឌទាំង ៣ នៃភាពជាប់" },
-            { "time": "06:45", "label": "ប្រភេទនៃភាពដាច់" },
-            { "time": "14:10", "label": "ទ្រឹស្តីបទតម្លៃកណ្តាល (IVT)" }
+            {
+              "time": "00:00",
+              "label": "លក្ខខណ្ឌទាំង ៣ នៃភាពជាប់"
+            },
+            {
+              "time": "06:45",
+              "label": "ប្រភេទនៃភាពដាច់"
+            },
+            {
+              "time": "14:10",
+              "label": "ទ្រឹស្តីបទតម្លៃកណ្តាល (IVT)"
+            }
           ]
         }
       ],
@@ -1902,5 +2039,242 @@
         ]
       }
     }
-  ]
+  ],
+  "chapterChallenge": {
+    "titleKh": "លំហាត់សំយោគបញ្ចប់មេរៀនទី ២៖ លីមីត និងភាពជាប់",
+    "titleEn": "Chapter 2 Mastery & Deep Thinking",
+    "descriptionKh": "លំហាត់ហ្វឹកហាត់ការគិតស៊ីជម្រៅលើនិយមន័យ ε-δ ទ្រឹស្តីបទគាប លីមីតនៅអនន្ត អាស៊ីមតូត ភាពជាប់ និងទ្រឹស្តីបទតម្លៃកណ្តាល (IVT)។",
+    "exercises": [
+      {
+        "id": "ch2-1",
+        "level": "synthesis",
+        "topicTag": "រាងមិនកំណត់ 0/0 & កន្សោមឆ្លាស់",
+        "type": "mcq",
+        "question": "គណនាលីមីត $\\lim_{x \\to 4} \\frac{\\sqrt{x + 5} - 3}{x - 4}$។",
+        "options": [
+          "$\\frac{1}{3}$",
+          "$\\frac{1}{6}$",
+          "$\\frac{1}{9}$",
+          "$0$"
+        ],
+        "correctIndex": 1,
+        "hint": "គុណភាគយក និងភាគបែងនឹងកន្សោមឆ្លាស់ $\\sqrt{x + 5} + 3$។",
+        "explanation": "$\\frac{(\\sqrt{x+5}-3)(\\sqrt{x+5}+3)}{(x-4)(\\sqrt{x+5}+3)} = \\frac{x-4}{(x-4)(\\sqrt{x+5}+3)} = \\frac{1}{\\sqrt{x+5}+3} \\xrightarrow{x \\to 4} \\frac{1}{3+3} = \\frac{1}{6}$។"
+      },
+      {
+        "id": "ch2-2",
+        "level": "synthesis",
+        "topicTag": "លីមីតត្រីកោណមាត្រ",
+        "type": "short-answer",
+        "question": "គណនាលីមីត $\\lim_{x \\to 0} \\frac{\\sin(5x)}{\\tan(2x)}$ (បំពេញជាលេខទសភាគ ឬប្រភាគ)។",
+        "placeholder": "ឧ. 2.5 ឬ 5/2",
+        "expectedAnswers": [
+          "2.5",
+          "5/2"
+        ],
+        "hint": "ប្រើ $\\tan(2x) = \\frac{\\sin(2x)}{\\cos(2x)}$ និងរូបមន្ត $\\lim_{u \\to 0} \\frac{\\sin u}{u} = 1$។",
+        "explanation": "$\\frac{\\sin(5x)}{\\tan(2x)} = \\frac{\\sin(5x)}{5x} \\cdot \\frac{2x}{\\sin(2x)} \\cdot \\cos(2x) \\cdot \\frac{5}{2} \\xrightarrow{x \\to 0} 1 \\cdot 1 \\cdot 1 \\cdot \\frac{5}{2} = \\frac{5}{2}$។"
+      },
+      {
+        "id": "ch2-3",
+        "level": "synthesis",
+        "topicTag": "លីមីតម្ខាង & តម្លៃដាច់ខាត",
+        "type": "mcq",
+        "question": "គណនាលីមីតឆ្វេង $\\lim_{x \\to 2^-} \\frac{|x - 2|}{x^2 - 4}$។",
+        "options": [
+          "$\\frac{1}{4}$",
+          "$-\\frac{1}{4}$",
+          "$0$",
+          "គ្មានលីមីត"
+        ],
+        "correctIndex": 1,
+        "hint": "នៅពេល $x \\to 2^-$ គឺ $x < 2$ ដូច្នេះ $|x - 2| = -(x - 2)$។",
+        "explanation": "ដោយ $x < 2$ នាំឱ្យ $\\frac{-(x - 2)}{(x - 2)(x + 2)} = \\frac{-1}{x + 2} \\xrightarrow{x \\to 2^-} -\\frac{1}{4}$។"
+      },
+      {
+        "id": "ch2-4",
+        "level": "synthesis",
+        "topicTag": "លីមីតនៅ -∞ & ឫសការេ",
+        "type": "short-answer",
+        "question": "គណនាលីមីត $\\lim_{x \\to -\\infty} \\frac{3x + 1}{\\sqrt{4x^2 + 5}}$ (បំពេញជាលេខទសភាគ ឬប្រភាគ)។",
+        "placeholder": "ឧ. -1.5 ឬ -3/2",
+        "expectedAnswers": [
+          "-1.5",
+          "-3/2"
+        ],
+        "hint": "ប្រយ័ត្ន៖ នៅពេល $x < 0$ នោះ $\\sqrt{x^2} = |x| = -x$!",
+        "explanation": "ទាញ $x^2$ ចេញពីឫស៖ $\\sqrt{4x^2 + 5} = |x|\\sqrt{4 + \\frac{5}{x^2}} = -x\\sqrt{4 + \\frac{5}{x^2}}$ (ព្រោះ $x \\to -\\infty$)។ ចែកភាគយក/បែងនឹង $x$ បាន $\\frac{3 + 1/x}{-\\sqrt{4 + 5/x^2}} \\to -\\frac{3}{2}$។"
+      },
+      {
+        "id": "ch2-5",
+        "level": "synthesis",
+        "topicTag": "ភាពជាប់ត្រង់មួយចំណុច",
+        "type": "mcq",
+        "question": "រកតម្លៃ $k$ ដើម្បីឱ្យ $f(x) = \\begin{cases} \\frac{x^2 - 9}{x - 3}, & x \\ne 3 \\\\ k, & x = 3 \\end{cases}$ ជាប់ត្រង់ $x = 3$។",
+        "options": [
+          "$0$",
+          "$3$",
+          "$6$",
+          "$9$"
+        ],
+        "correctIndex": 2,
+        "hint": "ភាពជាប់ត្រង់ $x = 3$ ទាមទារ $f(3) = \\lim_{x \\to 3} f(x)$។",
+        "explanation": "$\\lim_{x \\to 3} \\frac{(x - 3)(x + 3)}{x - 3} = \\lim_{x \\to 3} (x + 3) = 6$។ ដូច្នេះត្រូវ $k = 6$។"
+      },
+      {
+        "id": "ch2-6",
+        "level": "analytical",
+        "topicTag": "សម្រាយបញ្ជាក់ ε-δ",
+        "type": "proof",
+        "question": "ប្រើនិយមន័យផ្លូវការ $\\varepsilon$-$\\delta$ ដើម្បីស្រាយបញ្ជាក់ថា $\\lim_{x \\to 2} x^2 = 4$។",
+        "hint": "បំបែក $|x^2 - 4| = |x - 2|\\cdot |x + 2|$ រួចកម្រិត $\\delta \\le 1$ ដើម្បីទប់ស្កាត់កត្តា $|x + 2|$។",
+        "steps": [
+          "គេឱ្យ $\\varepsilon > 0$។ យើងត្រូវរក $\\delta > 0$ ដែលបើ $0 < |x - 2| < \\delta$ នោះ $|x^2 - 4| < \\varepsilon$។",
+          "ដំបូង កំណត់ $\\delta \\le 1$។ ពី $|x - 2| < 1$ យើងបាន $1 < x < 3 \\implies 3 < x + 2 < 5$ ដូច្នេះ $|x + 2| < 5$។",
+          "ហេតុនេះ $|x^2 - 4| = |x - 2||x + 2| < 5|x - 2|$។",
+          "ជ្រើសរើស $\\delta = \\min\\left(1, \\frac{\\varepsilon}{5}\\right)$។ នោះបើ $0 < |x - 2| < \\delta$ យើងបាន $|x^2 - 4| < 5 \\cdot \\frac{\\varepsilon}{5} = \\varepsilon$។"
+        ],
+        "finalAnswer": "ជ្រើស $\\delta = \\min\\left(1, \\frac{\\varepsilon}{5}\\right)$ ផ្ទៀងផ្ទាត់និយមន័យ $\\varepsilon$-$\\delta$ ដូច្នេះ $\\lim_{x \\to 2} x^2 = 4$។",
+        "keyTakeaway": "ចំពោះអនុគមន៍មិនមែនលីនេអ៊ែរ យើងតែងកម្រិត $\\delta \\le 1$ ជាមុន ដើម្បីទាញព្រំដែនថេរលើកត្តាដែលនៅសល់!"
+      },
+      {
+        "id": "ch2-7",
+        "level": "analytical",
+        "topicTag": "ទ្រឹស្តីបទគាប & អនុគមន៍ជាន់",
+        "type": "proof",
+        "question": "ប្រើទ្រឹស្តីបទគាប (Squeeze Theorem) ដើម្បីគណនា $\\lim_{x \\to 0^+} x \\left\\lfloor \\frac{1}{x} \\right\\rfloor$ ដែល $\\lfloor u \\rfloor$ ជាផ្នែកគត់ (Floor Function) នៃ $u$។",
+        "hint": "ប្រើលក្ខណៈគ្រឹះនៃផ្នែកគត់៖ $u - 1 < \\lfloor u \\rfloor \\le u$ សម្រាប់គ្រប់ $u \\in \\mathbb{R}$។",
+        "steps": [
+          "តាមនិយមន័យផ្នែកគត់ ចំពោះ $u = \\frac{1}{x}$ យើងមាន $\\frac{1}{x} - 1 < \\left\\lfloor \\frac{1}{x} \\right\\rfloor \\le \\frac{1}{x}$។",
+          "ដោយ $x > 0$ យើងគុណអង្គទាំងបីនឹង $x$ ដោយរក្សាទិសវិសមភាព៖ $1 - x < x \\left\\lfloor \\frac{1}{x} \\right\\rfloor \\le 1$។",
+          "គណនាលីមីតអមសងខាងនៅពេល $x \\to 0^+$៖ $\\lim_{x \\to 0^+} (1 - x) = 1$ និង $\\lim_{x \\to 0^+} 1 = 1$។"
+        ],
+        "finalAnswer": "តាមទ្រឹស្តីបទគាប យើងទទួលបាន $\\lim_{x \\to 0^+} x \\left\\lfloor \\frac{1}{x} \\right\\rfloor = 1$។",
+        "keyTakeaway": "វិសមភាព $u - 1 < \\lfloor u \\rfloor \\le u$ ជាអាវុធសំខាន់បំផុតសម្រាប់គណនាលីមីតដែលមាន Floor Function!"
+      },
+      {
+        "id": "ch2-8",
+        "level": "analytical",
+        "topicTag": "អាស៊ីមតូតទ្រេត",
+        "type": "mcq",
+        "question": "តើបន្ទាត់ណាមួយជា **អាស៊ីមតូតទ្រេត (Slant Asymptote)** នៃក្រាប $f(x) = \\frac{2x^2 - 3x + 5}{x - 2}$?",
+        "options": [
+          "$y = 2x - 3$",
+          "$y = 2x + 1$",
+          "$y = 2x - 1$",
+          "$y = 2x + 5$"
+        ],
+        "correctIndex": 1,
+        "hint": "ធ្វើប្រមាណវិធីចែកពហុធា $(2x^2 - 3x + 5) \\div (x - 2)$ ដើម្បីសរសេរជាទម្រង់ $ax + b + \\frac{r}{x - 2}$។",
+        "explanation": "$2x^2 - 3x + 5 = (x - 2)(2x + 1) + 7$ ដូច្នេះ $f(x) = 2x + 1 + \\frac{7}{x - 2}$។ នៅពេល $x \\to \\pm\\infty$ តួ $\\frac{7}{x - 2} \\to 0$ ដូច្នេះអាស៊ីមតូតទ្រេតគឺ $y = 2x + 1$។"
+      },
+      {
+        "id": "ch2-9",
+        "level": "analytical",
+        "topicTag": "ភាពជាប់ជាមួយប៉ារ៉ាម៉ែត្រ",
+        "type": "short-answer",
+        "question": "គេឱ្យ $f(x) = \\begin{cases} ax + b, & x < 1 \\\\ 3, & x = 1 \\\\ 2ax - b, & x > 1 \\end{cases}$ ជាប់ត្រង់ $x = 1$។ ចូររកតម្លៃ $a$ (បំពេញជាលេខ)។",
+        "placeholder": "បញ្ចូលតម្លៃ a...",
+        "expectedAnswers": [
+          "2"
+        ],
+        "hint": "សរសេរលក្ខខណ្ឌ $\\lim_{x \\to 1^-} f(x) = f(1) = \\lim_{x \\to 1^+} f(x)$ ដើម្បីបង្កើតប្រព័ន្ធសមីការ។",
+        "explanation": "ពីលីមីតឆ្វេង៖ $a + b = 3$។ ពីលីមីតស្តាំ៖ $2a - b = 3$។ បូកសមីការទាំងពីរ៖ $3a = 6 \\implies a = 2$ (និង $b = 1$)។"
+      },
+      {
+        "id": "ch2-10",
+        "level": "analytical",
+        "topicTag": "លីមីតអនន្តទម្រង់ ∞ - ∞",
+        "type": "proof",
+        "question": "គណនាលីមីត $\\lim_{x \\to +\\infty} \\left(\\sqrt{x^2 + 6x} - x\\right)$។",
+        "hint": "បំបាត់រាងមិនកំណត់ $\\infty - \\infty$ ដោយគុណនឹងកន្សោមឆ្លាស់ $\\frac{\\sqrt{x^2 + 6x} + x}{\\sqrt{x^2 + 6x} + x}$។",
+        "steps": [
+          "គុណ និងចែកនឹងកន្សោមឆ្លាស់៖ $\\frac{(\\sqrt{x^2 + 6x} - x)(\\sqrt{x^2 + 6x} + x)}{\\sqrt{x^2 + 6x} + x} = \\frac{6x}{\\sqrt{x^2 + 6x} + x}$។",
+          "ដោយ $x > 0$ ចែកភាគយក និងភាគបែងនឹង $x$ (ប្រើ $\\sqrt{x^2} = x$)៖ $\\frac{6}{\\sqrt{1 + 6/x} + 1}$។",
+          "នៅពេល $x \\to +\\infty$ តួ $\\frac{6}{x} \\to 0$ ដូច្នេះលីមីតស្មើ $\\frac{6}{\\sqrt{1 + 0} + 1} = 3$។"
+        ],
+        "finalAnswer": "$\\lim_{x \\to +\\infty} \\left(\\sqrt{x^2 + 6x} - x\\right) = 3$។",
+        "keyTakeaway": "កន្សោម $\\sqrt{x^2 + ax} - x$ មិនខិតជិត $0$ ទេនៅពេល $x \\to +\\infty$ — វាខិតជិត $\\frac{a}{2}$!"
+      },
+      {
+        "id": "ch2-11",
+        "level": "analytical",
+        "topicTag": "ទ្រឹស្តីបទតម្លៃកណ្តាល (IVT) & Fixed Point",
+        "type": "proof",
+        "question": "គេឱ្យ $f: [0, 1] \\to [0, 1]$ ជាអនុគមន៍ជាប់លើ $[0, 1]$។ ចូរស្រាយបញ្ជាក់ថា មានយ៉ាងហោចណាស់ចំណុច $c \\in [0, 1]$ មួយដែល $f(c) = c$ (Fixed Point)។",
+        "hint": "តាងអនុគមន៍ជំនួយ $g(x) = f(x) - x$ រួចពិនិត្យសញ្ញានៃ $g(0)$ និង $g(1)$ តាមទ្រឹស្តីបទ IVT។",
+        "steps": [
+          "បង្កើតអនុគមន៍ $g(x) = f(x) - x$។ ដោយ $f$ និង $x$ ជាប់លើ $[0, 1]$ នោះ $g$ ក៏ជាប់លើ $[0, 1]$ ដែរ។",
+          "ពិនិត្យចុងសងខាង៖ ដោយ $f(0) \\in [0, 1]$ នាំឱ្យ $g(0) = f(0) - 0 = f(0) \\ge 0$។ ដោយ $f(1) \\in [0, 1]$ នាំឱ្យ $g(1) = f(1) - 1 \\le 0$។",
+          "បើ $g(0) = 0$ ឬ $g(1) = 0$ នោះ $c = 0$ ឬ $c = 1$ ជាចម្លើយស្រាប់។",
+          "បើ $g(0) > 0$ និង $g(1) < 0$ តាមទ្រឹស្តីបទតម្លៃកណ្តាល (IVT) មាន $c \\in (0, 1)$ ដែល $g(c) = 0 \\iff f(c) = c$។"
+        ],
+        "finalAnswer": "មានយ៉ាងតិចមួយ $c \\in [0, 1]$ ដែល $f(c) = c$។",
+        "keyTakeaway": "ដើម្បីបង្ហាញអត្ថិភាពឫស $f(x) = h(x)$ តាម IVT តែងតាង $g(x) = f(x) - h(x)$ រួចបង្ហាញថា $g(a)$ និង $g(b)$ មានសញ្ញាផ្ទុយគ្នា!"
+      },
+      {
+        "id": "ch2-12",
+        "level": "challenge",
+        "topicTag": "សម្រាយបញ្ជាក់គ្មានលីមីត",
+        "type": "proof",
+        "question": "ចូរស្រាយបញ្ជាក់ថា លីមីត $\\lim_{x \\to 0} \\sin\\left(\\frac{1}{x}\\right)$ **មិនមាន** (Does Not Exist)។",
+        "hint": "ជ្រើសរើសស្វ៊ីតពីរ $x_n$ និង $y_n$ ដែលខិតជិត $0$ ទាំងពីរ ប៉ុន្តែ $f(x_n)$ និង $f(y_n)$ ខិតជិតតម្លៃខុសគ្នា។",
+        "steps": [
+          "ជ្រើសរើសស្វ៊ីតទី ១៖ $x_n = \\frac{1}{2n\\pi}$ ($n = 1, 2, 3, \\dots$)។ យើងឃើញ $\\lim_{n \\to \\infty} x_n = 0$ និង $f(x_n) = \\sin(2n\\pi) = 0$។",
+          "ជ្រើសរើសស្វ៊ីតទី ២៖ $y_n = \\frac{1}{2n\\pi + \\frac{\\pi}{2}}$។ យើងឃើញ $\\lim_{n \\to \\infty} y_n = 0$ និង $f(y_n) = \\sin\\left(2n\\pi + \\frac{\\pi}{2}\\right) = 1$។",
+          "ដោយស្វ៊ីតទាំងពីរខិតជិត $0$ ប៉ុន្តែ $\\lim f(x_n) = 0 \\ne 1 = \\lim f(y_n)$ នោះតាមភាពឯកតានៃលីមីត $\\lim_{x \\to 0} \\sin\\left(\\frac{1}{x}\\right)$ មិនអាចកើតមានទេ។"
+        ],
+        "finalAnswer": "$\\lim_{x \\to 0} \\sin\\left(\\frac{1}{x}\\right)$ មិនមាន (ដោយសារការរំញ័រមិនឈប់នៅជិត $0$)។",
+        "keyTakeaway": "លក្ខណៈវិនិច្ឆ័យស្វ៊ីត (Sequential Criterion) គឺជាវិធីសាស្ត្រខ្លាំងបំផុតដើម្បីបង្ហាញថាអនុគមន៍មួយគ្មានលីមីត!"
+      },
+      {
+        "id": "ch2-13",
+        "level": "challenge",
+        "topicTag": "ភាពជាប់ត្រង់តែ ១ ចំណុច",
+        "type": "proof",
+        "question": "គេឱ្យ $f(x) = \\begin{cases} x^2, & x \\in \\mathbb{Q} \\\\ 0, & x \\notin \\mathbb{Q} \\end{cases}$។ ចូរស្រាយបញ្ជាក់ថា $f$ ជាប់ **តែត្រង់ $x = 0$ ប៉ុណ្ណោះ** និងដាច់ត្រង់គ្រប់ $x \\ne 0$។",
+        "hint": "ត្រង់ $x = 0$ ប្រើ $0 \\le f(x) \\le x^2$ តាមទ្រឹស្តីបទគាប។ ត្រង់ $a \\ne 0$ ប្រើភាពណែននៃ $\\mathbb{Q}$ និង $\\mathbb{R} \\setminus \\mathbb{Q}$។",
+        "steps": [
+          "**ករណី $x = 0$៖** $f(0) = 0^2 = 0$។ ចំពោះគ្រប់ $x \\in \\mathbb{R}$ យើងមាន $0 \\le f(x) \\le x^2$។ ដោយ $\\lim_{x \\to 0} 0 = 0$ និង $\\lim_{x \\to 0} x^2 = 0$ តាមទ្រឹស្តីបទគាប $\\lim_{x \\to 0} f(x) = 0 = f(0)$ ដូច្នេះ $f$ ជាប់ត្រង់ $0$។",
+          "**ករណី $a \\ne 0$៖** នៅជិត $a$ មានទាំងស្វ៊ីតចំនួនសនិទាន $q_n \\to a$ និងស្វ៊ីតចំនួនអសនិទាន $r_n \\to a$។",
+          "យើងបាន $\\lim_{n \\to \\infty} f(q_n) = \\lim_{n \\to \\infty} q_n^2 = a^2 \\ne 0$ ចំណែក $\\lim_{n \\to \\infty} f(r_n) = 0$។",
+          "ដោយលីមីតទាំងពីរខុសគ្នា $\\lim_{x \\to a} f(x)$ មិនមាន ដូច្នេះ $f$ ដាច់ត្រង់គ្រប់ $a \\ne 0$។"
+        ],
+        "finalAnswer": "$f$ ជាប់ត្រង់ $x = 0$ តែមួយគត់ និងដាច់ត្រង់គ្រប់ $x \\ne 0$។",
+        "keyTakeaway": "អនុគមន៍អាចជាប់ត្រង់តែមួយចំណុចគត់លើ $\\mathbb{R}$ ទោះបីមើលទៅដាច់ស្ទើរគ្រប់ទីកន្លែងក៏ដោយ!"
+      },
+      {
+        "id": "ch2-14",
+        "level": "challenge",
+        "topicTag": "IVT & អត្ថិភាពឫសពហុធា",
+        "type": "proof",
+        "question": "ប្រើទ្រឹស្តីបទតម្លៃកណ្តាល (IVT) ដើម្បីស្រាយបញ្ជាក់ថាសមីការ $x^5 - 3x^2 + 1 = 0$ មានយ៉ាងហោចណាស់ឫសពិត ២ ក្នុងចន្លោះ $(0, 2)$។",
+        "hint": "តាង $P(x) = x^5 - 3x^2 + 1$ រួចគណនាតម្លៃ $P(0)$, $P(1)$ និង $P(2)$។",
+        "steps": [
+          "តាង $P(x) = x^5 - 3x^2 + 1$ ដែលជាពហុធា ដូច្នេះវាជាប់គ្រប់ទីកន្លែងលើ $\\mathbb{R}$។",
+          "គណនាតម្លៃ៖ $P(0) = 1 > 0$, $P(1) = 1 - 3 + 1 = -1 < 0$, និង $P(2) = 32 - 12 + 1 = 21 > 0$។",
+          "លើ $[0, 1]$៖ ដោយ $P(0) > 0 > P(1)$ តាម IVT មានឫស $c_1 \\in (0, 1)$ ដែល $P(c_1) = 0$។",
+          "លើ $[1, 2]$៖ ដោយ $P(1) < 0 < P(2)$ តាម IVT មានឫស $c_2 \\in (1, 2)$ ដែល $P(c_2) = 0$។"
+        ],
+        "finalAnswer": "មានឫសពិតយ៉ាងហោចណាស់ ២ ផ្សេងគ្នាគឺ $c_1 \\in (0, 1)$ និង $c_2 \\in (1, 2)$។",
+        "keyTakeaway": "ការបំបែកចន្លោះធំទៅជាចន្លោះតូចៗដែលមានសញ្ញាប្តូរគ្នា អាចបង្ហាញអត្ថិភាពឫសច្រើនតាម IVT!"
+      },
+      {
+        "id": "ch2-15",
+        "level": "challenge",
+        "topicTag": "សម្រាយបញ្ជាក់ ε-δ អនុគមន៍សនិទាន",
+        "type": "proof",
+        "question": "ប្រើនិយមន័យ $\\varepsilon$-$\\delta$ ដើម្បីស្រាយបញ្ជាក់ថា $\\lim_{x \\to 2} \\frac{1}{x} = \\frac{1}{2}$។",
+        "hint": "សរសេរ $\\left|\\frac{1}{x} - \\frac{1}{2}\\right| = \\frac{|x - 2|}{2|x|}$ រួចកម្រិត $\\delta \\le 1$ ដើម្បីធានាថា $x > 1$។",
+        "steps": [
+          "គេឱ្យ $\\varepsilon > 0$។ ពិនិត្យ $\\left|\\frac{1}{x} - \\frac{1}{2}\\right| = \\frac{|2 - x|}{2|x|} = \\frac{|x - 2|}{2|x|}$។",
+          "កំណត់ $\\delta \\le 1$ ជាមុន។ ពី $|x - 2| < 1$ យើងបាន $1 < x < 3 \\implies |x| > 1 \\implies \\frac{1}{2|x|} < \\frac{1}{2}$។",
+          "ដូច្នេះ $\\left|\\frac{1}{x} - \\frac{1}{2}\\right| < \\frac{1}{2}|x - 2|$។",
+          "ជ្រើសរើស $\\delta = \\min(1, 2\\varepsilon)$។ នោះបើ $0 < |x - 2| < \\delta$ យើងបាន $\\left|\\frac{1}{x} - \\frac{1}{2}\\right| < \\frac{1}{2}(2\\varepsilon) = \\varepsilon$។"
+        ],
+        "finalAnswer": "ជ្រើស $\\delta = \\min(1, 2\\varepsilon)$ ផ្ទៀងផ្ទាត់និយមន័យ $\\varepsilon$-$\\delta$ ដូច្នេះ $\\lim_{x \\to 2} \\frac{1}{x} = \\frac{1}{2}$។",
+        "keyTakeaway": "សម្រាប់អនុគមន៍សនិទាន $\\frac{1}{x}$ ការកម្រិត $\\delta \\le \\frac{|x_0|}{2}$ (ឬ $\\delta \\le 1$ ត្រង់ $x_0 = 2$) ធានាថា $x$ មិនអាចខិតទៅរក $0$ ដែលជាបង្គោលអាស៊ីមតូតបានឡើយ!"
+      }
+    ]
+  }
 }

@@ -168,11 +168,42 @@ Every sub-topic (`subTopics[]`) MUST provide complete data for all 5 tabs in thi
         ]
       }
     }
-  ]
+  ],
+  "chapterChallenge": {
+    "titleKh": "លំហាត់សំយោគបញ្ចប់មេរៀន...",
+    "titleEn": "Chapter Mastery & Deep Thinking",
+    "descriptionKh": "លំហាត់ហ្វឹកហាត់ការគិតស៊ីជម្រៅប្រចាំមេរៀន...",
+    "exercises": [
+      {
+        "id": "ch1-1",
+        "level": "synthesis",
+        "topicTag": "ដែនកំណត់ & លោការីត",
+        "type": "mcq",
+        "question": "...",
+        "options": ["...", "..."],
+        "correctIndex": 0,
+        "hint": "...",
+        "explanation": "..."
+      },
+      {
+        "id": "ch1-4",
+        "level": "analytical",
+        "topicTag": "អនុគមន៍ច្រាស",
+        "type": "proof",
+        "question": "...",
+        "hint": "...",
+        "steps": ["..."],
+        "finalAnswer": "...",
+        "keyTakeaway": "..."
+      }
+    ]
+  }
 }
 ```
 
 Supported `slideType` values in `SlideViewer.jsx`: `"objective"`, `"intuition"`, `"definition"`, `"example"`, `"practice"`, `"summary"`.
+Supported `chapterChallenge.exercises[].level` values in `ChapterChallengeView.jsx`: `"synthesis"`, `"analytical"`, `"challenge"`.
+Supported `chapterChallenge.exercises[].type` values: `"mcq"`, `"short-answer"`, `"proof"`. When `chapterChallenge` is present on a lesson JSON, `Sidebar.jsx` automatically renders a **🏆 លំហាត់បញ្ចប់មេរៀន (ស៊ីជម្រៅ)** entry at the bottom of that lesson's sub-topics (`__chapter_challenge__`).
 
 ---
 

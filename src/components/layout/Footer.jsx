@@ -6,7 +6,7 @@ import { APP_VERSION, BRAND_NAME } from "@/lib/appConfig";
 
 export default function Footer({ maxWidthClass = "max-w-7xl" }) {
   return (
-    <footer className="border-t border-[#ffd3d2] bg-white/85 px-4 py-4 text-xs text-[#620116] sm:px-6 lg:px-8">
+    <footer className="border-t border-[#ffd3d2] bg-white/85 dark:bg-[#1c1015]/95 px-4 py-4 text-xs text-[#620116] sm:px-6 lg:px-8">
       <div
         className={`mx-auto flex ${maxWidthClass} flex-col items-center justify-between gap-3 sm:flex-row`}
       >
