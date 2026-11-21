@@ -1,0 +1,524 @@
+{
+  "id": "calc2-07",
+  "subjectId": "calculus",
+  "titleKh": "មេរៀនទី ៧៖ បច្ចេកទេសគណនាអាំងតេក្រាល",
+  "titleEn": "Techniques of Integration",
+  "descriptionKh": "ប្រមូលផ្តុំវិធីសាស្ត្រស៊ីជម្រៅសម្រាប់គណនាអាំងតេក្រាល៖ អាំងតេក្រាលដោយផ្នែក ជំនួសត្រីកោណមាត្រ ការបំបែកប្រភាគងាយ ការប៉ាន់ស្មានតាមលេខ និងអាំងតេក្រាលមិនសមរម្យ។",
+  "subTopics": [
+    {
+      "id": "7.1",
+      "titleKh": "៧.១ អាំងតេក្រាលដោយផ្នែក",
+      "titleEn": "Integration by Parts",
+      "slides": [
+        {
+          "slideNumber": 1,
+          "slideType": "title",
+          "heading": "៧.១ អាំងតេក្រាលដោយផ្នែក (Integration by Parts)",
+          "subtitle": "ច្បាប់ច្រាសនៃច្បាប់ផលគុណ (Product Rule) និងវិធីតារាង (Tabular Integration)",
+          "bullets": [
+            "ទ្រឹស្តីបទអាំងតេក្រាលដោយផ្នែក $\\int u\\,dv = uv - \\int v\\,du$ និងសម្រាយបញ្ជាក់ធរណីមាត្រ",
+            "ក្បួន **LIATE** សម្រាប់ជ្រើស $u$ និង $dv$ ព្រមទាំងល្បិច $dv = 1\\,dx$ សម្រាប់ $\\ln x, \\arctan x$",
+            "វិធីតារាង (**Tabular Method**), អាំងតេក្រាលវិលជុំ (**Cyclic IBP**) និងរូបមន្តកាត់បន្ថយ"
+          ],
+          "teacherNotes": "ដូចវិធីប្តូរអថេរជាច្បាប់ច្រាសនៃ Chain Rule, អាំងតេក្រាលដោយផ្នែកជាច្បាប់ច្រាសនៃ Product Rule!"
+        },
+        {
+          "slideNumber": 2,
+          "slideType": "intuition",
+          "heading": "ប្រភពរូបមន្ត៖ ពីច្បាប់ផលគុណ (Product Rule)",
+          "formulaBox": "$$\\bigl[u(x)v(x)\\bigr]' = u'(x)v(x) + u(x)v'(x) \\implies \\int u\\,v'\\,dx = u\\,v - \\int v\\,u'\\,dx$$",
+          "bullets": [
+            "ចាំរូបមន្តដេរីវេនៃផលគុណ៖ $(uv)' = u'v + uv' \\iff uv' = (uv)' - vu'$",
+            "យកអាំងតេក្រាលអង្គទាំងពីរ ហើយប្រើនិមិត្តសញ្ញា $du = u'(x)\\,dx$ និង $dv = v'(x)\\,dx$",
+            "យើងទទួលបានរូបមន្តដ៏ល្បី៖ **$\\int u\\,dv = u\\,v - \\int v\\,du$** (ប្តូរអាំងតេក្រាលពិបាក $\\int u\\,dv$ ទៅជាអាំងតេក្រាលងាយ $\\int v\\,du$!)"
+          ],
+          "teacherNotes": "ឱ្យសិស្សឃើញថា IBP មិនមែនជារូបមន្តថ្មីអាថ៌កំបាំងទេ វាជា Product Rule អានត្រឡប់ក្រោយប៉ុណ្ណោះ!"
+        },
+        {
+          "slideNumber": 3,
+          "slideType": "definition",
+          "heading": "ទ្រឹស្តីបទអាំងតេក្រាលដោយផ្នែក (មិនកំណត់ និងកំណត់)",
+          "formulaBox": "$$\\int u\\,dv = u\\,v - \\int v\\,du \\qquad | \\qquad \\int_a^b u(x)v'(x)\\,dx = \\Big[u(x)v(x)\\Big]_a^b - \\int_a^b v(x)u'(x)\\,dx$$",
+          "bullets": [
+            "**សម្មតិកម្ម**៖ អនុគមន៍ $u$ និង $v$ មានដេរីវេជាប់លើចន្លោះ $I$ (ឬលើ $[a, b]$ ពោលគឺ $u, v \\in C^1([a, b])$)",
+            "**គោលដៅជ្រើសរើស**៖ ជ្រើស $u$ ឱ្យដេរីវេ $du$ កាន់តែ **សាមញ្ញ** និងជ្រើស $dv$ ឱ្យរកព្រីមីទីវ $v$ បាន **ងាយស្រួល**",
+            "**សម្គាល់**៖ ពេលរក $v = \\int dv$ យើងជ្រើសចំនួនថេរ $C = 0$ (ព្រោះ $+C$ រលាយបាត់ក្នុង $u(v+C) - \\int (v+C)\\,du$!)"
+          ],
+          "teacherNotes": "សម្រាយបញ្ជាក់ខ្លីថា +C ក្នុង v រលាយបាត់៖ u(v+C) - ∫(v+C)du = uv + Cu - ∫v du - Cu = uv - ∫v du ។"
+        },
+        {
+          "slideNumber": 4,
+          "slideType": "intuition",
+          "heading": "ក្រាបអន្តរកម្ម៖ សម្រាយបញ្ជាក់ធរណីមាត្រនៃ $\\int u\\,dv = [uv] - \\int v\\,du$",
+          "formulaBox": "$$\\underbrace{\\int_a^b u\\,dv}_{\\text{ផ្ទៃខៀវ}} + \\underbrace{\\int_a^b v\\,du}_{\\text{ផ្ទៃក្រហម}} = u(b)v(b) - u(a)v(a) = \\Big[u\\,v\\Big]_a^b$$",
+          "bullets": [
+            "ចតុកោណធំ $[0, u(b)] \\times [0, v(b)]$ ដកជ្រុងតូច $u(a)v(a)$ ចែកដាច់ជាពីរផ្នែក៖ **ផ្ទៃខៀវ ($\\int u\\,dv$)** និង **ផ្ទៃក្រហម ($\\int v\\,du$)**",
+            "រំកិល slider $b$ ខាងក្រោមដើម្បីមើលផលបូក **(ផ្ទៃខៀវ + ផ្ទៃក្រហម)** ស្មើ $[u\\,v]_a^b$ គ្រប់ទីតាំង!",
+            "ដូច្នេះ ពេលពិបាកគណនាផ្ទៃខៀវ $\\int u\\,dv$ យើងគ្រាន់តែយកចតុកោណ $[uv]_a^b$ ដកផ្ទៃក្រហម $\\int v\\,du$!"
+          ],
+          "visualGraph": {
+            "preset": "ibp-area-rectangle",
+            "b": 1.7,
+            "captionKh": "រំកិលចុងលើ b ដើម្បីមើលផ្ទៃខៀវ (∫ u dv) + ផ្ទៃក្រហម (∫ v du) = [u·v]ₐᵇ ជានិច្ច!"
+          },
+          "teacherNotes": "រូបភាពធរណីមាត្រនេះធ្វើឱ្យនិស្សិតចងចាំរូបមន្ត IBP ពេញមួយជីវិត!"
+        },
+        {
+          "slideNumber": 5,
+          "slideType": "intuition",
+          "heading": "ក្បួន LIATE សម្រាប់ជ្រើសរើស $u$ ឱ្យចំគោលដៅ",
+          "formulaBox": "$$\\mathbf{L}\\text{og} \\;\\succ\\; \\mathbf{I}\\text{nverse Trig} \\;\\succ\\; \\mathbf{A}\\text{lgebraic} \\;\\succ\\; \\mathbf{T}\\text{rig} \\;\\succ\\; \\mathbf{E}\\text{xponential}$$",
+          "bullets": [
+            "**L** (លោការីត $\\ln x$) → **I** (ត្រីកោណមាត្រច្រាស $\\arctan x, \\arcsin x$) → **A** (ពហុធា $x^n$) → **T** ($\\sin x, \\cos x$) → **E** ($e^x$)",
+            "**វិធីប្រើ**៖ អនុគមន៍ណាមក **មុនគេ** ក្នុង LIATE ជ្រើសជា **$u$** (ដើម្បីដេរីវេ) ហើយផ្នែកនៅសល់ជ្រើសជា **$dv$** (ដើម្បីអាំងតេក្រាល)",
+            "ឧទាហរណ៍៖ $\\int x e^x\\,dx$ មាន A មុន E $\\implies u = x, dv = e^x\\,dx$ ; $\\int x^2\\ln x\\,dx$ មាន L មុន A $\\implies u = \\ln x, dv = x^2\\,dx$"
+          ],
+          "teacherNotes": "រំលឹកថា LIATE ជាគោលការណ៍ណែនាំដ៏មានប្រសិទ្ធភាពខ្ពស់ (ដំណើរការជាង ៩៥% នៃករណី) តែមិនមែនច្បាប់ដាច់ខាតទេ។"
+        },
+        {
+          "slideNumber": 6,
+          "slideType": "example",
+          "heading": "ឧទាហរណ៍ ១៖ ផលគុណពហុធា និងអិចស្ប៉ូណង់ស្យែល $\\int x e^x\\,dx$",
+          "formulaBox": "$$\\int x e^x\\,dx = x e^x - \\int e^x\\,dx = (x - 1)e^x + C$$",
+          "bullets": [
+            "តាម LIATE (A មុន E)៖ តាង $u = x \\implies du = dx$ និង $dv = e^x\\,dx \\implies v = e^x$",
+            "អនុវត្តរូបមន្ត៖ $\\int x e^x\\,dx = x e^x - \\int e^x\\,dx = x e^x - e^x + C = (x - 1)e^x + C$",
+            "**ប្រៀបធៀបបើជ្រើសខុស** ($u = e^x, dv = x\\,dx$)៖ នឹងបាន $\\frac{x^2}{2}e^x - \\int \\frac{x^2}{2}e^x\\,dx$ ដែលដឺក្រេ $x$ កើនកាន់តែពិបាក!"
+          ],
+          "teacherNotes": "ការបង្ហាញថាជ្រើសខុសធ្វើឱ្យដឺក្រេកើន (x → x²) ជួយឱ្យសិស្សយល់ហេតុផលនៅពីក្រោយក្បួន LIATE ។"
+        },
+        {
+          "slideNumber": 7,
+          "slideType": "example",
+          "heading": "ឧទាហរណ៍ ២៖ ល្បិច $dv = 1\\,dx$ សម្រាប់ $\\int \\ln x\\,dx$ និង $\\int \\arctan x\\,dx$",
+          "formulaBox": "$$\\int \\ln x\\,dx = x\\ln x - x + C \\qquad | \\qquad \\int \\arctan x\\,dx = x\\arctan x - \\frac{1}{2}\\ln(1 + x^2) + C$$",
+          "bullets": [
+            "**ក)** សរសេរ $\\int 1 \\cdot \\ln x\\,dx$៖ តាង $u = \\ln x$ ($du = \\frac{dx}{x}$), $dv = dx$ ($v = x$) $\\implies x\\ln x - \\int 1\\,dx = x\\ln x - x + C$",
+            "**ខ)** សរសេរ $\\int 1 \\cdot \\arctan x\\,dx$៖ តាង $u = \\arctan x$ ($du = \\frac{dx}{1+x^2}$), $dv = dx$ ($v = x$)",
+            "នោះ $\\int \\arctan x\\,dx = x\\arctan x - \\int \\frac{x}{1 + x^2}\\,dx = x\\arctan x - \\frac{1}{2}\\ln(1 + x^2) + C$"
+          ],
+          "teacherNotes": "រូបមន្ត ∫ ln x dx = x ln x - x + C ប្រើញឹកញាប់ខ្លាំងណាស់ គួរចាំឱ្យច្បាស់!"
+        },
+        {
+          "slideNumber": 8,
+          "slideType": "example",
+          "heading": "ឧទាហរណ៍ ៣៖ អាំងតេក្រាលកំណត់ដោយផ្នែក $\\int_1^e x^2\\ln x\\,dx$",
+          "formulaBox": "$$\\int_1^e x^2\\ln x\\,dx = \\left[\\frac{x^3}{3}\\ln x\\right]_1^e - \\int_1^e \\frac{x^2}{3}\\,dx = \\frac{2e^3 + 1}{9}$$",
+          "bullets": [
+            "តាម LIATE (L មុន A)៖ តាង $u = \\ln x$ ($du = \\frac{dx}{x}$), $dv = x^2\\,dx$ ($v = \\frac{x^3}{3}$)",
+            "ដាក់គោល $[1, e]$ លើទាំងផ្នែក $[uv]_1^e$ និងអាំងតេក្រាលថ្មី៖ $\\frac{e^3}{3}(1) - 0 - \\left[\\frac{x^3}{9}\\right]_1^e$",
+            "គណនា៖ $\\frac{e^3}{3} - \\left(\\frac{e^3}{9} - \\frac{1}{9}\\right) = \\frac{2e^3 + 1}{9}$"
+          ],
+          "teacherNotes": "រំលឹកនិស្សិតឱ្យជំនួសគោលលើតួ [uv]_a^b ភ្លាម មិនបាច់ចាំដល់ចប់ទេ ដើម្បីកុំឱ្យច្រឡំសញ្ញា!"
+        },
+        {
+          "slideNumber": 9,
+          "slideType": "example",
+          "heading": "ឧទាហរណ៍ ៤៖ អាំងតេក្រាលដោយផ្នែកច្រើនដង ($\\int x^2\\sin x\\,dx$)",
+          "formulaBox": "$$\\int x^2\\sin x\\,dx = -x^2\\cos x + 2x\\sin x + 2\\cos x + C$$",
+          "bullets": [
+            "**លើកទី ១** ($u = x^2, dv = \\sin x\\,dx$)៖ $-x^2\\cos x + 2\\int x\\cos x\\,dx$",
+            "**លើកទី ២** ($u = x, dv = \\cos x\\,dx$)៖ $\\int x\\cos x\\,dx = x\\sin x - \\int \\sin x\\,dx = x\\sin x + \\cos x$",
+            "បូកបញ្ចូលគ្នា៖ $-x^2\\cos x + 2(x\\sin x + \\cos x) + C$ — តើមានវិធីលឿនជាងនេះទេ? **វិធីតារាង!**"
+          ],
+          "teacherNotes": "ឧទាហរណ៍នេះបង្កើតតម្រូវការសម្រាប់វិធីតារាង (Tabular Integration) នៅស្លាយបន្ទាប់!"
+        },
+        {
+          "slideNumber": 10,
+          "slideType": "definition",
+          "heading": "វិធីតារាង (Tabular / DI Method) សម្រាប់ $P(x) \\cdot g(x)$",
+          "formulaBox": "$$\\int P(x)g(x)\\,dx = (+P\\cdot G_1) - (P'\\cdot G_2) + (P''\\cdot G_3) - \\dots + C$$",
+          "bullets": [
+            "ប្រើពេលអាំងតេក្រាលមានទម្រង់ **ពហុធា $P(x)$** គុណនឹងអនុគមន៍ងាយរកព្រីមីទីវ ($e^{ax}, \\sin(ax), \\cos(ax)$)",
+            "បង្កើត ៣ ជួរ៖ **សញ្ញា** ($+, -, +, -, \\dots$) | **ដេរីវេ D** ($P, P', P'', \\dots, 0$) | **អាំងតេក្រាល I** ($g, G_1, G_2, G_3, \\dots$)",
+            "គុណ **ទ្រេតចុះក្រោម** តាមសញ្ញាឆ្លាស់ $+, -, +, -$ រហូតដល់ជួរ **D ស្មើ $0$** — លឿន និងមិនងាយច្រឡំសញ្ញា!"
+          ],
+          "teacherNotes": "វិធីតារាងកាត់បន្ថយពេលដោះ ∫ x³e^x dx ឬ ∫ x⁴sin(2x)dx ពី ៥ នាទី មកត្រឹម ២០ វិនាទី!"
+        },
+        {
+          "slideNumber": 11,
+          "slideType": "example",
+          "heading": "ឧទាហរណ៍ ៥៖ អនុវត្តវិធីតារាងលើ $\\int x^3 e^{2x}\\,dx$",
+          "formulaBox": "$$\\int x^3 e^{2x}\\,dx = e^{2x}\\left(\\frac{x^3}{2} - \\frac{3x^2}{4} + \\frac{3x}{4} - \\frac{3}{8}\\right) + C$$",
+          "bullets": [
+            "**ជួរ D (ដេរីវេដល់ 0)**៖ $x^3 \\to 3x^2 \\to 6x \\to 6 \\to 0$",
+            "**ជួរ I (អាំងតេក្រាលម្តងមួយៗ)**៖ $e^{2x} \\to \\frac{e^{2x}}{2} \\to \\frac{e^{2x}}{4} \\to \\frac{e^{2x}}{8} \\to \\frac{e^{2x}}{16}$",
+            "គុណទ្រេតតាមសញ្ញា $+, -, +, -$៖ $+\\frac{x^3 e^{2x}}{2} - \\frac{3x^2 e^{2x}}{4} + \\frac{6x e^{2x}}{8} - \\frac{6 e^{2x}}{16} + C$"
+          ],
+          "teacherNotes": "ផ្ទៀងផ្ទាត់សម្រួលប្រភាគ៖ 6/8 = 3/4 និង 6/16 = 3/8 ។"
+        },
+        {
+          "slideNumber": 12,
+          "slideType": "definition",
+          "heading": "អាំងតេក្រាលដោយផ្នែកវិលជុំ (Cyclic / Boomerang IBP)",
+          "formulaBox": "$$I = \\int e^{ax}\\sin(bx)\\,dx \\xrightarrow{\\text{IBP ២ ដង}} I = (\\dots) - \\frac{a^2}{b^2}I \\implies \\text{ដោះរក } I!$$",
+          "bullets": [
+            "ពេលគុណ **T** ($\\sin, \\cos$) ជាមួយ **E** ($e^{ax}$) ទាំងពីរ **មិនដែលដេរីវេស្មើ $0$ ឡើយ**!",
+            "**គន្លឹះ**៖ អនុវត្ត IBP **២ ដងជាប់គ្នា** ដោយរក្សាប្រភេទ $u$ ឱ្យ **ដូចគ្នា** (ឧ. យក $u = e^{ax}$ ទាំង ២ លើក)",
+            "អាំងតេក្រាលដើម $I$ នឹង **ត្រឡប់មកវិញ** នៅអង្គខាងស្តាំ — បោះ $I$ មកអង្គខាងឆ្វេង រួចចែករក $I$ (កុំភ្លេច $+C$!)"
+          ],
+          "teacherNotes": "ព្រមានសំខាន់៖ បើលើកទី ១ យក u = e^x ហើយលើកទី ២ ប្តូរយក u = cos x វានឹងលុបត្រឡប់ទៅ I = I (០ = ០)!"
+        },
+        {
+          "slideNumber": 13,
+          "slideType": "example",
+          "heading": "ឧទាហរណ៍ ៦៖ អាំងតេក្រាលវិលជុំ $I = \\int e^x\\sin x\\,dx$",
+          "formulaBox": "$$I = e^x\\sin x - \\bigl(-e^x\\cos x + I\\bigr) \\implies 2I = e^x(\\sin x - \\cos x) \\implies I = \\frac{e^x(\\sin x - \\cos x)}{2} + C$$",
+          "bullets": [
+            "**លើកទី ១** ($u = \\sin x, dv = e^x\\,dx$)៖ $I = e^x\\sin x - \\int e^x\\cos x\\,dx$",
+            "**លើកទី ២** ($u = \\cos x, dv = e^x\\,dx$)៖ $\\int e^x\\cos x\\,dx = e^x\\cos x + \\int e^x\\sin x\\,dx = e^x\\cos x + I$",
+            "ជំនួសចូល៖ $I = e^x\\sin x - e^x\\cos x - I \\iff 2I = e^x(\\sin x - \\cos x) \\implies I = \\frac{e^x(\\sin x - \\cos x)}{2} + C$"
+          ],
+          "teacherNotes": "ផ្ទៀងផ្ទាត់ដោយដេរីវេ៖ [(e^x(sin x - cos x))']/2 = [e^x(sin x - cos x + cos x + sin x)]/2 = e^x sin x ត្រឹមត្រូវ!"
+        },
+        {
+          "slideNumber": 14,
+          "slideType": "example",
+          "heading": "ឧទាហរណ៍ ៧៖ ផ្សំវិធីប្តូរអថេរ មុនអាំងតេក្រាលដោយផ្នែក",
+          "formulaBox": "$$\\int e^{\\sqrt{x}}\\,dx \\xrightarrow{t = \\sqrt{x}} 2\\int t e^t\\,dt = 2(\\sqrt{x} - 1)e^{\\sqrt{x}} + C$$",
+          "bullets": [
+            "ឃើញ $\\sqrt{x}$ ក្នុងស្វ័យគុណ៖ តាង $t = \\sqrt{x} \\iff x = t^2 \\implies dx = 2t\\,dt$",
+            "អាំងតេក្រាលក្លាយជា $2\\int t e^t\\,dt$ ដែលងាយគណនាដោយផ្នែកភ្លាម៖ $2(t - 1)e^t + C$",
+            "ជំនួសត្រឡប់ $t = \\sqrt{x}$៖ $2(\\sqrt{x} - 1)e^{\\sqrt{x}} + C$ លើ $[0, +\\infty)$"
+          ],
+          "teacherNotes": "បង្ហាញថា ក្នុងលំហាត់ពិត ការប្តូរអថេរ (៥.៣) និងដោយផ្នែក (៧.១) តែងតែធ្វើការជាមួយគ្នា!"
+        },
+        {
+          "slideNumber": 15,
+          "slideType": "definition",
+          "heading": "រូបមន្តកាត់បន្ថយដឺក្រេ (Reduction Formula)",
+          "formulaBox": "$$\\int \\sin^n x\\,dx = -\\frac{1}{n}\\sin^{n-1}x\\cos x + \\frac{n - 1}{n}\\int \\sin^{n-2}x\\,dx \\qquad (n \\ge 2)$$",
+          "bullets": [
+            "បំបែក $\\sin^n x = \\sin^{n-1}x \\cdot \\sin x$ រួចតាង $u = \\sin^{n-1}x$ និង $dv = \\sin x\\,dx$ ($v = -\\cos x$)",
+            "ប្រើ $\\cos^2 x = 1 - \\sin^2 x$ ដើម្បីទាញបានអាំងតេក្រាលដើម $I_n$ មកវិញ រួចដោះរក $I_n$ ជាអនុគមន៍នៃ $I_{n-2}$",
+            "**អនុវត្តលើ $[0, \\frac{\\pi}{2}]$ (Wallis)**៖ $W_n = \\int_0^{\\pi/2} \\sin^n x\\,dx = \\frac{n - 1}{n} W_{n-2}$ (តួព្រំដែនស្មើ $0$!)"
+          ],
+          "teacherNotes": "អាំងតេក្រាល Wallis (W_n) ជាលំហាត់ដ៏ពេញនិយមក្នុងការប្រឡងវិភាគគណិតវិទ្យាឆ្នាំទី ១!"
+        },
+        {
+          "slideNumber": 16,
+          "slideType": "example",
+          "heading": "ឧទាហរណ៍ ៨៖ គណនា $\\int_0^{\\pi/2} \\sin^4 x\\,dx$ ដោយរូបមន្ត Wallis",
+          "formulaBox": "$$W_4 = \\frac{3}{4}W_2 = \\frac{3}{4} \\cdot \\frac{1}{2}W_0 = \\frac{3}{8} \\cdot \\frac{\\pi}{2} = \\frac{3\\pi}{16}$$",
+          "bullets": [
+            "គណនាតម្លៃដើម៖ $W_0 = \\int_0^{\\pi/2} 1\\,dx = \\frac{\\pi}{2}$ និង $W_1 = \\int_0^{\\pi/2} \\sin x\\,dx = 1$",
+            "ប្រើ $W_n = \\frac{n - 1}{n}W_{n-2}$៖ $W_4 = \\frac{3}{4}W_2 = \\frac{3}{4}\\cdot\\frac{1}{2}W_0 = \\frac{3\\pi}{16}$",
+            "ដូចគ្នាដែរ៖ $W_5 = \\frac{4}{5}W_3 = \\frac{4}{5}\\cdot\\frac{2}{3}W_1 = \\frac{8}{15}$ (លឿនជាងពន្លាតត្រីកោណមាត្រច្រើន!)"
+          ],
+          "teacherNotes": "រូបមន្តកំណើននេះជួយគណនា ∫₀^(π/2) sinⁿx dx ឬ cosⁿx dx ក្នុងប៉ុន្មានវិនាទី!"
+        },
+        {
+          "slideNumber": 17,
+          "slideType": "intuition",
+          "heading": "ផែនទីសម្រេចចិត្ត៖ វិធីប្តូរអថេរ ឬ អាំងតេក្រាលដោយផ្នែក?",
+          "bullets": [
+            "**សាកប្តូរអថេរ (៥.៣) មុនជានិច្ច**៖ ឧ. $\\int x e^{x^2}\\,dx$ មាន $2x$ ជាដេរីវេនៃ $x^2 \\implies$ ប្រើ $u = x^2$ (មិនបាច់ IBP!)",
+            "**ប្រើ IBP (៧.១)** ពេលជាផលគុណអនុគមន៍ **២ គ្រួសារខុសគ្នា** គ្មានទំនាក់ទំនងដេរីវេ (ឧ. $x e^x, x^2\\sin x, e^x\\cos x$) ឬអនុគមន៍ទោល $\\ln x, \\arctan x, \\arcsin x$",
+            "ពេលឃើញ $P(x)e^{ax}$ ឬ $P(x)\\sin(ax)$ $\\implies$ ប្រើ **វិធីតារាង** ; ឃើញ $e^{ax}\\sin(bx)$ $\\implies$ ប្រើ **វិលជុំ (Cyclic)**"
+          ],
+          "teacherNotes": "ប្រៀបធៀប ∫ x e^(x²) dx (Substitution) ជាមួយ ∫ x e^x dx (IBP) ឱ្យសិស្សចេះបែងចែកភ្លាម!"
+        },
+        {
+          "slideNumber": 18,
+          "slideType": "definition",
+          "heading": "កំហុសញឹកញាប់ក្នុងចំណុច ៧.១",
+          "bullets": [
+            "ភ្លេច **សញ្ញាដក** នៅខាងមុខ $\\int v\\,du$ (ជាពិសេសពេលអនុវត្ត IBP ២ ដង ត្រូវប្រើវង់ក្រចកឱ្យច្បាស់!)",
+            "ប្តូរប្រភេទ $u$ នៅលើកទី ២ ក្នុងអាំងតេក្រាលវិលជុំ ធ្វើឱ្យបាន $I = I$ (មិនដោះចេញ)",
+            "ភ្លេចបូកចំនួនថេរ **$+C$** ក្រោយដោះរក $I$ ក្នុងអាំងតេក្រាលវិលជុំ"
+          ],
+          "teacherNotes": "ការដាក់វង់ក្រចកជុំវិញលទ្ធផល IBP លើកទី ២ ជួយការពារកំហុសសញ្ញាបាន ១០០%។"
+        },
+        {
+          "slideNumber": 19,
+          "slideType": "practice",
+          "heading": "លំហាត់អនុវត្តរហ័សក្នុងថ្នាក់",
+          "bullets": [
+            "១) គណនា $\\int x e^{2x}\\,dx$ លើ $\\mathbb{R}$",
+            "២) គណនាអាំងតេក្រាលកំណត់ $\\int_1^e \\ln x\\,dx$",
+            "៣) ប្រើវិធីតារាងគណនា $\\int x^2 e^x\\,dx$"
+          ],
+          "teacherNotes": "ចម្លើយ៖ (1) (½x - ¼)e^(2x) + C ; (2) [x ln x - x]₁^e = 0 - (-1) = 1 ; (3) (x² - 2x + 2)e^x + C ។"
+        },
+        {
+          "slideNumber": 20,
+          "slideType": "summary",
+          "heading": "សេចក្តីសង្ខេបខ្លឹមសារ ៧.១",
+          "formulaBox": "$$\\int u\\,dv = u\\,v - \\int v\\,du \\qquad | \\qquad \\mathbf{L} \\succ \\mathbf{I} \\succ \\mathbf{A} \\succ \\mathbf{T} \\succ \\mathbf{E}$$",
+          "bullets": [
+            "អាំងតេក្រាលដោយផ្នែកជាច្បាប់ច្រាសនៃ Product Rule ហើយក្បួន LIATE ជួយជ្រើស $u$ និង $dv$ យ៉ាងរហ័ស",
+            "ប្រើល្បិច $dv = 1\\,dx$ សម្រាប់ $\\ln x, \\arctan x$, វិធីតារាងសម្រាប់ $P(x)g(x)$ និងវិធីវិលជុំសម្រាប់ $e^{ax}\\sin(bx)$",
+            "ជំហានបន្ទាប់ (**៧.២**): **អាំងតេក្រាលត្រីកោណមាត្រ និងជំនួសត្រីកោណមាត្រ**!"
+          ],
+          "teacherNotes": "ត្រៀមចូល ៧.២ ដែលនឹងដោះស្រាយអាំងតេក្រាលមាន √(a² - x²), √(a² + x²), √(x² - a²)!"
+        }
+      ],
+      "detailedReading": {
+        "introduction": "មេរៀនទី ៧ បង្រៀន **បច្ចេកទេសគណនាអាំងតេក្រាល** កម្រិតសាកលវិទ្យាល័យ។ ចំណុច **៧.១ អាំងតេក្រាលដោយផ្នែក (Integration by Parts / Intégration par parties)** គឺជាច្បាប់ច្រាសនៃច្បាប់ដេរីវេផលគុណ ដែលអនុញ្ញាតឱ្យយើងគណនាអាំងតេក្រាលនៃផលគុណអនុគមន៍ខុសគ្រួសារ លោការីត និងត្រីកោណមាត្រច្រាស។",
+        "sections": [
+          {
+            "subHeading": "៧.១.១ ទ្រឹស្តីបទអាំងតេក្រាលដោយផ្នែក ធរណីមាត្រ និងក្បួន LIATE",
+            "content": "**១. ទ្រឹស្តីបទអាំងតេក្រាលដោយផ្នែក (IPP)**\n\nគេឱ្យ $u$ និង $v$ ជាអនុគមន៍មានដេរីវេជាប់លើចន្លោះ $I$ (ឬលើ $[a, b]$, ពោលគឺ $u, v \\in C^1([a, b])$)។ ពីច្បាប់ផលគុណ $(uv)' = u'v + uv'$ យើងទាញបាន៖\n$$\\int u(x)v'(x)\\,dx = u(x)v(x) - \\int v(x)u'(x)\\,dx \\qquad \\left(\\int u\\,dv = uv - \\int v\\,du\\right)$$\nនិងសម្រាប់អាំងតេក្រាលកំណត់លើ $[a, b]$៖\n$$\\int_a^b u(x)v'(x)\\,dx = \\Big[u(x)v(x)\\Big]_a^b - \\int_a^b v(x)u'(x)\\,dx$$\n\n**២. ក្បួន LIATE សម្រាប់ជ្រើស $u$**\n\nរៀបលំដាប់អាទិភាពសម្រាប់ជ្រើស $u$ (ផ្នែកដែលត្រូវដេរីវេ)៖\n• **L** — Logarithmic ($\\ln x$)\n• **I** — Inverse Trigonometric ($\\arctan x, \\arcsin x$)\n• **A** — Algebraic / Polynomial ($x^n, 3x + 1$)\n• **T** — Trigonometric ($\\sin x, \\cos x$)\n• **E** — Exponential ($e^x, a^x$)",
+            "visualGraph": {
+              "preset": "ibp-area-rectangle",
+              "b": 1.7,
+              "captionKh": "សម្រាយបញ្ជាក់ធរណីមាត្រនៃ IBP៖ ផ្ទៃខៀវ (∫ u dv) + ផ្ទៃក្រហម (∫ v du) = [u·v]ₐᵇ គ្រប់ចំណុច b"
+            },
+            "examples": [
+              {
+                "id": "ex-7-1-1-1",
+                "difficulty": "Easy",
+                "problem": "គណនាអាំងតេក្រាលមិនកំណត់ $\\int x\\sin(2x)\\,dx$ លើ $\\mathbb{R}$។",
+                "steps": [
+                  "**ជំហាន ១ (ជ្រើស $u$ និង $dv$ តាម LIATE)**៖ A មុន T ដូច្នេះតាង $u = x$ ($du = dx$) និង $dv = \\sin(2x)\\,dx$ ($v = -\\frac{1}{2}\\cos(2x)$)។",
+                  "**ជំហាន ២ (អនុវត្តរូបមន្ត IBP)**៖\n$$\\int x\\sin(2x)\\,dx = -\\frac{x}{2}\\cos(2x) + \\frac{1}{2}\\int \\cos(2x)\\,dx = -\\frac{x}{2}\\cos(2x) + \\frac{1}{4}\\sin(2x) + C$$"
+                ],
+                "finalAnswer": "$-\\frac{x}{2}\\cos(2x) + \\frac{1}{4}\\sin(2x) + C$"
+              }
+            ]
+          },
+          {
+            "subHeading": "៧.១.២ ល្បិច $dv = 1\\,dx$ សម្រាប់លោការីត និងត្រីកោណមាត្រច្រាស",
+            "content": "**១. ការរកព្រីមីទីវនៃអនុគមន៍ទោល**\n\nចំពោះអនុគមន៍ដែលដេរីវេរបស់វាក្លាយជាអនុគមន៍ពិជគណិតងាយស្រួល ដូច $\\ln x$, $\\arctan x$, $\\arcsin x$ យើងសរសេរជាផលគុណនឹង $1$ ហើយជ្រើស $u = f(x)$ និង $dv = 1\\,dx$ ($v = x$)។\n\n• $\\int \\ln x\\,dx = x\\ln x - x + C$ លើ $(0, +\\infty)$\n• $\\int \\arctan x\\,dx = x\\arctan x - \\frac{1}{2}\\ln(1 + x^2) + C$ លើ $\\mathbb{R}$\n• $\\int \\arcsin x\\,dx = x\\arcsin x + \\sqrt{1 - x^2} + C$ លើ $(-1, 1)$",
+            "examples": [
+              {
+                "id": "ex-7-1-2-1",
+                "difficulty": "Medium",
+                "problem": "គណនាអាំងតេក្រាលកំណត់ $\\int_0^1 \\arctan x\\,dx$។",
+                "steps": [
+                  "**ជំហាន ១ (តាង $u = \\arctan x$ និង $dv = dx$)**៖ $du = \\frac{1}{1 + x^2}\\,dx$ និង $v = x$៖\n$$\\int_0^1 \\arctan x\\,dx = \\Big[x\\arctan x\\Big]_0^1 - \\int_0^1 \\frac{x}{1 + x^2}\\,dx$$",
+                  "**ជំហាន ២ (គណនាដោយប្តូរអថេរ $w = 1 + x^2$)**៖\n$$= \\left(1\\cdot\\frac{\\pi}{4} - 0\\right) - \\left[\\frac{1}{2}\\ln(1 + x^2)\\right]_0^1 = \\frac{\\pi}{4} - \\frac{1}{2}\\ln 2$$"
+                ],
+                "finalAnswer": "$\\frac{\\pi}{4} - \\frac{1}{2}\\ln 2$"
+              }
+            ]
+          },
+          {
+            "subHeading": "៧.១.៣ វិធីតារាង (Tabular Integration / DI Method)",
+            "content": "**១. លក្ខខណ្ឌប្រើប្រាស់វិធីតារាង**\n\nនៅពេលគណនា $\\int P(x)g(x)\\,dx$ ដែល $P(x)$ ជាពហុធាដឺក្រេ $n$ (ដេរីវេ $n+1$ ដងស្មើ $0$) និង $g(x)$ ងាយរកព្រីមីទីវដដែលៗ ($e^{ax}, \\sin(ax), \\cos(ax)$) យើងរៀបជា ៣ ជួរឈរ៖\n• **ជួរសញ្ញា**៖ $+, -, +, -, \\dots$\n• **ជួរ D**៖ ដេរីវេ $P(x)$ ម្តងមួយៗរហូតដល់ $0$។\n• **ជួរ I**៖ រកព្រីមីទីវ $g(x)$ ម្តងមួយៗ។\nរួចគុណទ្រេតចុះក្រោមពីជួរ D ទៅជួរ I តាមសញ្ញាឆ្លាស់។",
+            "examples": [
+              {
+                "id": "ex-7-1-3-1",
+                "difficulty": "Medium",
+                "problem": "ប្រើវិធីតារាងគណនា $\\int x^2 \\cos(2x)\\,dx$ លើ $\\mathbb{R}$។",
+                "steps": [
+                  "**ជំហាន ១ (សរសេរជួរ D និងជួរ I)**៖\n• D៖ $x^2 \\to 2x \\to 2 \\to 0$\n• I៖ $\\cos(2x) \\to \\frac{1}{2}\\sin(2x) \\to -\\frac{1}{4}\\cos(2x) \\to -\\frac{1}{8}\\sin(2x)$",
+                  "**ជំហាន ២ (គុណទ្រេតតាមសញ្ញា $+, -, +$)**៖\n$$+x^2\\left(\\frac{1}{2}\\sin(2x)\\right) - 2x\\left(-\\frac{1}{4}\\cos(2x)\\right) + 2\\left(-\\frac{1}{8}\\sin(2x)\\right) + C$$\n$$= \\frac{x^2}{2}\\sin(2x) + \\frac{x}{2}\\cos(2x) - \\frac{1}{4}\\sin(2x) + C$$"
+                ],
+                "finalAnswer": "$\\frac{x^2}{2}\\sin(2x) + \\frac{x}{2}\\cos(2x) - \\frac{1}{4}\\sin(2x) + C$"
+              }
+            ]
+          },
+          {
+            "subHeading": "៧.១.៤ អាំងតេក្រាលវិលជុំ (Cyclic IBP) និងរូបមន្តកាត់បន្ថយ",
+            "content": "**១. អាំងតេក្រាលវិលជុំ (Cyclic / Boomerang IBP)**\n\nចំពោះ $\\int e^{ax}\\sin(bx)\\,dx$ ឬ $\\int e^{ax}\\cos(bx)\\,dx$ យើងតាង $I$ ហើយអនុវត្ត IBP ២ ដងជាប់គ្នាដោយរក្សាជម្រើស $u$ ក្នុងគ្រួសារដដែល។ អាំងតេក្រាលដើម $I$ នឹងលេចឡើងវិញនៅអង្គស្តាំ ដែលអនុញ្ញាតឱ្យដោះសមីការលីនេអ៊ែររក $I$។\n\n**២. រូបមន្តកាត់បន្ថយដឺក្រេ (Reduction Formula) និង Wallis**\n\nដោយប្រើ IBP លើ $\\sin^n x = \\sin^{n-1}x \\cdot \\sin x$ ($n \\ge 2$) យើងទទួលបាន៖\n$$\\int \\sin^n x\\,dx = -\\frac{1}{n}\\sin^{n-1}x\\cos x + \\frac{n - 1}{n}\\int \\sin^{n-2}x\\,dx$$\nលើ $[0, \\frac{\\pi}{2}]$ តួព្រំដែនស្មើ $0$ ដូច្នេះអាំងតេក្រាល Wallis $W_n = \\int_0^{\\pi/2} \\sin^n x\\,dx$ ផ្ទៀងផ្ទាត់ $W_n = \\frac{n - 1}{n}W_{n-2}$។",
+            "examples": [
+              {
+                "id": "ex-7-1-4-1",
+                "difficulty": "Hard",
+                "problem": "ប្រើវិធីវិលជុំគណនា $I = \\int e^{2x}\\cos x\\,dx$ លើ $\\mathbb{R}$។",
+                "steps": [
+                  "**ជំហាន ១ (IBP លើកទី ១៖ $u = \\cos x, dv = e^{2x}\\,dx$)**៖\n$$I = \\frac{1}{2}e^{2x}\\cos x + \\frac{1}{2}\\int e^{2x}\\sin x\\,dx$$",
+                  "**ជំហាន ២ (IBP លើកទី ២៖ $u = \\sin x, dv = e^{2x}\\,dx$)**៖\n$$\\int e^{2x}\\sin x\\,dx = \\frac{1}{2}e^{2x}\\sin x - \\frac{1}{2}\\int e^{2x}\\cos x\\,dx = \\frac{1}{2}e^{2x}\\sin x - \\frac{1}{2}I$$",
+                  "**ជំហាន ៣ (ជំនួស និងដោះរក $I$)**៖\n$$I = \\frac{1}{2}e^{2x}\\cos x + \\frac{1}{4}e^{2x}\\sin x - \\frac{1}{4}I \\iff \\frac{5}{4}I = \\frac{e^{2x}}{4}(2\\cos x + \\sin x)$$\n$$\\implies I = \\frac{e^{2x}}{5}(2\\cos x + \\sin x) + C$$"
+                ],
+                "finalAnswer": "$\\frac{e^{2x}}{5}(2\\cos x + \\sin x) + C$"
+              }
+            ]
+          }
+        ],
+        "summary": "អាំងតេក្រាលដោយផ្នែក $\\int u\\,dv = uv - \\int v\\,du$ ជួយបំប្លែងអាំងតេក្រាលផលគុណឱ្យសាមញ្ញតាមក្បួន LIATE។ បច្ចេកទេសសំខាន់ៗរួមមាន ល្បិច $dv = 1\\,dx$ (សម្រាប់ $\\ln x, \\arctan x$), វិធីតារាង (សម្រាប់ $P(x)g(x)$), អាំងតេក្រាលវិលជុំ (សម្រាប់ $e^{ax}\\sin(bx)$) និងរូបមន្តកាត់បន្ថយ Wallis។"
+      },
+      "workedExamples": [
+        {
+          "id": "we-7-1-1",
+          "difficulty": "Easy",
+          "problem": "គណនាអាំងតេក្រាលកំណត់ $\\int_1^e x\\ln x\\,dx$។",
+          "steps": [
+            "**ជំហាន ១ (តាង $u = \\ln x, dv = x\\,dx$)**៖ $du = \\frac{1}{x}\\,dx$ និង $v = \\frac{x^2}{2}$៖\n$$\\int_1^e x\\ln x\\,dx = \\left[\\frac{x^2}{2}\\ln x\\right]_1^e - \\int_1^e \\frac{x}{2}\\,dx$$",
+            "**ជំហាន ២ (គណនា)**៖\n$$= \\left(\\frac{e^2}{2} - 0\\right) - \\left[\\frac{x^2}{4}\\right]_1^e = \\frac{e^2}{2} - \\left(\\frac{e^2}{4} - \\frac{1}{4}\\right) = \\frac{e^2 + 1}{4}$$"
+          ],
+          "finalAnswer": "$\\frac{e^2 + 1}{4}$"
+        },
+        {
+          "id": "we-7-1-2",
+          "difficulty": "Medium",
+          "problem": "គណនាអាំងតេក្រាលមិនកំណត់ $\\int \\arcsin x\\,dx$ លើ $(-1, 1)$។",
+          "steps": [
+            "**ជំហាន ១ (តាង $u = \\arcsin x, dv = dx$)**៖ $du = \\frac{1}{\\sqrt{1 - x^2}}\\,dx$ និង $v = x$៖\n$$\\int \\arcsin x\\,dx = x\\arcsin x - \\int \\frac{x}{\\sqrt{1 - x^2}}\\,dx$$",
+            "**ជំហាន ២ (ប្តូរអថេរ $w = 1 - x^2$, $dw = -2x\\,dx$)**៖\n$$-\\int \\frac{x}{\\sqrt{1 - x^2}}\\,dx = \\frac{1}{2}\\int w^{-1/2}\\,dw = \\sqrt{w} = \\sqrt{1 - x^2}$$"
+          ],
+          "finalAnswer": "$x\\arcsin x + \\sqrt{1 - x^2} + C$"
+        },
+        {
+          "id": "we-7-1-3",
+          "difficulty": "Hard",
+          "problem": "គណនាអាំងតេក្រាល $\\int \\cos(\\ln x)\\,dx$ លើ $(0, +\\infty)$ ដោយផ្សំការប្តូរអថេរ និងវិធីវិលជុំ។",
+          "steps": [
+            "**ជំហាន ១ (ប្តូរអថេរ $t = \\ln x$)**៖ $x = e^t \\implies dx = e^t\\,dt$ ដូច្នេះ៖\n$$I = \\int e^t\\cos t\\,dt$$",
+            "**ជំហាន ២ (វិធីវិលជុំលើ $I = \\int e^t\\cos t\\,dt$)**៖ អនុវត្ត IBP ២ ដងបាន $2I = e^t(\\cos t + \\sin t) \\implies I = \\frac{e^t}{2}(\\cos t + \\sin t) + C$។",
+            "**ជំហាន ៣ (ជំនួសត្រឡប់ $t = \\ln x, e^t = x$)**៖\n$$\\int \\cos(\\ln x)\\,dx = \\frac{x}{2}\\Big(\\cos(\\ln x) + \\sin(\\ln x)\\Big) + C$$"
+          ],
+          "finalAnswer": "$\\frac{x}{2}\\bigl(\\cos(\\ln x) + \\sin(\\ln x)\\bigr) + C$"
+        }
+      ],
+      "practiceExercises": [
+        {
+          "id": "pe-7-1-1",
+          "difficulty": "Easy",
+          "type": "mcq",
+          "question": "តាមក្បួន LIATE ដើម្បីគណនា $\\int x^3\\ln x\\,dx$ ដោយផ្នែក តើគួរជ្រើស $u$ និង $dv$ យ៉ាងដូចម្តេច?",
+          "options": [
+            "$u = \\ln x$ និង $dv = x^3\\,dx$",
+            "$u = x^3$ និង $dv = \\ln x\\,dx$",
+            "$u = x^3\\ln x$ និង $dv = dx$",
+            "$u = \\frac{1}{x}$ និង $dv = x^4\\,dx$"
+          ],
+          "correctIndex": 0,
+          "hint": "ក្នុង LIATE អក្សរ L (Logarithmic) មកមុន A (Algebraic)!",
+          "explanation": "ជ្រើស $u = \\ln x$ ($du = \\frac{dx}{x}$) និង $dv = x^3\\,dx$ ($v = \\frac{x^4}{4}$) នាំទៅរកអាំងតេក្រាលពហុធាសាមញ្ញ $\\int \\frac{x^3}{4}\\,dx$។"
+        },
+        {
+          "id": "pe-7-1-2",
+          "difficulty": "Easy",
+          "type": "mcq",
+          "question": "គណនាអាំងតេក្រាលមិនកំណត់ $\\int x e^{3x}\\,dx$ លើ $\\mathbb{R}$៖",
+          "options": [
+            "$\\frac{x}{3}e^{3x} - \\frac{1}{9}e^{3x} + C$",
+            "$\\frac{x}{3}e^{3x} + \\frac{1}{9}e^{3x} + C$",
+            "$3x e^{3x} - 9e^{3x} + C$",
+            "$\\frac{x}{3}e^{3x} - \\frac{1}{3}e^{3x} + C$"
+          ],
+          "correctIndex": 0,
+          "hint": "តាង $u = x$ ($du = dx$) និង $dv = e^{3x}\\,dx$ ($v = \\frac{1}{3}e^{3x}$)។",
+          "explanation": "$\\frac{x}{3}e^{3x} - \\frac{1}{3}\\int e^{3x}\\,dx = \\frac{x}{3}e^{3x} - \\frac{1}{9}e^{3x} + C$។"
+        },
+        {
+          "id": "pe-7-1-3",
+          "difficulty": "Medium",
+          "type": "short-answer",
+          "question": "គណនាអាំងតេក្រាលកំណត់ $\\int_1^e 4\\ln x\\,dx$ (បំពេញជាលេខ)។",
+          "placeholder": "បញ្ចូលចម្លើយជាលេខ...",
+          "expectedAnswers": [
+            "4"
+          ],
+          "hint": "ប្រើ $\\int \\ln x\\,dx = x\\ln x - x + C$ ហើយគណនា $4\\Big[x\\ln x - x\\Big]_1^e$។",
+          "explanation": "$4\\Big[(e\\cdot 1 - e) - (1\\cdot 0 - 1)\\Big] = 4(0 - (-1)) = 4$។"
+        },
+        {
+          "id": "pe-7-1-4",
+          "difficulty": "Medium",
+          "type": "mcq",
+          "question": "ប្រើវិធីតារាង (Tabular IBP) គណនា $\\int x^2 e^x\\,dx$ លើ $\\mathbb{R}$៖",
+          "options": [
+            "$(x^2 - 2x + 2)e^x + C$",
+            "$(x^2 + 2x + 2)e^x + C$",
+            "$(x^2 - 2x - 2)e^x + C$",
+            "$(x^2 - x + 1)e^x + C$"
+          ],
+          "correctIndex": 0,
+          "hint": "ជួរ D៖ $x^2, 2x, 2, 0$ ; ជួរ I៖ $e^x, e^x, e^x, e^x$ ដោយសញ្ញាឆ្លាស់ $+, -, +$។",
+          "explanation": "$+x^2 e^x - 2x e^x + 2e^x + C = (x^2 - 2x + 2)e^x + C$។"
+        },
+        {
+          "id": "pe-7-1-5",
+          "difficulty": "Hard",
+          "type": "mcq",
+          "question": "ប្រើអាំងតេក្រាលវិលជុំ (Cyclic IBP) គណនា $\\int e^x\\cos x\\,dx$៖",
+          "options": [
+            "$\\frac{e^x(\\cos x + \\sin x)}{2} + C$",
+            "$\\frac{e^x(\\cos x - \\sin x)}{2} + C$",
+            "$e^x(\\cos x + \\sin x) + C$",
+            "$\\frac{e^x(\\sin x - \\cos x)}{2} + C$"
+          ],
+          "correctIndex": 0,
+          "hint": "អនុវត្ត IBP ២ ដងបាន $I = e^x\\cos x + e^x\\sin x - I \\implies 2I = e^x(\\cos x + \\sin x)$។",
+          "explanation": "$2I = e^x(\\cos x + \\sin x) \\implies I = \\frac{e^x(\\cos x + \\sin x)}{2} + C$។"
+        },
+        {
+          "id": "pe-7-1-6",
+          "difficulty": "Hard",
+          "type": "short-answer",
+          "question": "ប្រើអាំងតេក្រាលដោយផ្នែកគណនា $\\int_0^1 5x e^x\\,dx$ (បំពេញជាលេខ)។",
+          "placeholder": "បញ្ចូលចម្លើយជាលេខ...",
+          "expectedAnswers": [
+            "5"
+          ],
+          "hint": "ដោយ $\\int x e^x\\,dx = (x - 1)e^x + C$, គណនា $5\\Big[(x - 1)e^x\\Big]_0^1$។",
+          "explanation": "$5\\bigl[(0)e^1 - (-1)e^0\\bigr] = 5(1) = 5$។"
+        }
+      ],
+      "videos": [
+        {
+          "id": "vid-7-1-1",
+          "titleKh": "អាំងតេក្រាលដោយផ្នែក (Integration by Parts) ក្បួន LIATE និងវិធីតារាង",
+          "youtubeId": "",
+          "duration": "21:00",
+          "descriptionKh": "ពន្យល់ពីប្រភពរូបមន្ត IBP ពី Product Rule ក្បួន LIATE ល្បិច dv = dx វិធីតារាង និងអាំងតេក្រាលវិលជុំ",
+          "outline": [
+            "00:00 - ប្រភពរូបមន្ត IBP ពី Product Rule និងសម្រាយបញ្ជាក់ធរណីមាត្រ",
+            "05:00 - ក្បួន LIATE និងល្បិច dv = 1 dx សម្រាប់ ln x, arctan x",
+            "11:00 - វិធីតារាង (Tabular / DI Method) សម្រាប់ពហុធាដឺក្រេខ្ពស់",
+            "16:00 - អាំងតេក្រាលវិលជុំ (Cyclic IBP) និងរូបមន្តកាត់បន្ថយ Wallis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7.2",
+      "titleKh": "៧.២ អាំងតេក្រាលត្រីកោណមាត្រ និងជំនួសត្រីកោណមាត្រ",
+      "titleEn": "Trigonometric Integrals & Trigonometric Substitution",
+      "slides": [],
+      "detailedReading": {
+        "introduction": "ខ្លឹមសារចំណុច **៧.២ អាំងតេក្រាលត្រីកោណមាត្រ និងជំនួសត្រីកោណមាត្រ** កំពុងត្រូវបានរៀបចំ។",
+        "sections": [],
+        "summary": ""
+      },
+      "workedExamples": [],
+      "practiceExercises": [],
+      "videos": []
+    },
+    {
+      "id": "7.3",
+      "titleKh": "៧.៣ អាំងតេក្រាលនៃអនុគមន៍សនិទាន",
+      "titleEn": "Integration of Rational Functions (Partial Fractions)",
+      "slides": [],
+      "detailedReading": {
+        "introduction": "ខ្លឹមសារចំណុច **៧.៣ អាំងតេក្រាលនៃអនុគមន៍សនិទាន (ការបំបែកជាប្រភាគងាយ)** កំពុងត្រូវបានរៀបចំ។",
+        "sections": [],
+        "summary": ""
+      },
+      "workedExamples": [],
+      "practiceExercises": [],
+      "videos": []
+    },
+    {
+      "id": "7.4",
+      "titleKh": "៧.៤ ការប៉ាន់ស្មានអាំងតេក្រាលតាមលេខ",
+      "titleEn": "Numerical Integration",
+      "slides": [],
+      "detailedReading": {
+        "introduction": "ខ្លឹមសារចំណុច **៧.៤ ការប៉ាន់ស្មានអាំងតេក្រាលតាមលេខ (Trapezoidal & Simpson's Rule)** កំពុងត្រូវបានរៀបចំ។",
+        "sections": [],
+        "summary": ""
+      },
+      "workedExamples": [],
+      "practiceExercises": [],
+      "videos": []
+    },
+    {
+      "id": "7.5",
+      "titleKh": "៧.៥ អាំងតេក្រាលមិនសមរម្យ",
+      "titleEn": "Improper Integrals",
+      "slides": [],
+      "detailedReading": {
+        "introduction": "ខ្លឹមសារចំណុច **៧.៥ អាំងតេក្រាលមិនសមរម្យ (Improper Integrals)** កំពុងត្រូវបានរៀបចំ។",
+        "sections": [],
+        "summary": ""
+      },
+      "workedExamples": [],
+      "practiceExercises": [],
+      "videos": []
+    }
+  ]
+}

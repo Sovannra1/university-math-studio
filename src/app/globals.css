@@ -458,6 +458,69 @@ html.dark .hover\:text-\[\#7e021f\]:hover {
   animation: examOverlayIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+@keyframes cinemaPopIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.955);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-cinema-pop {
+  animation: cinemaPopIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.cinema-stage-glow {
+  box-shadow:
+    0 28px 80px -20px rgba(0, 0, 0, 0.85),
+    0 0 60px -18px rgba(219, 7, 61, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Lively floating card & ambient math glyph motion for About Studio */
+@keyframes floatGentle {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes floatGlyphSlow {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(5deg);
+  }
+}
+
+.animate-float-gentle {
+  animation: floatGentle 4.8s ease-in-out infinite;
+}
+
+.animate-float-glyph {
+  animation: floatGlyphSlow 7.5s ease-in-out infinite;
+}
+
+.floating-studio-card {
+  box-shadow:
+    0 18px 46px -18px rgba(156, 3, 41, 0.14),
+    0 4px 16px -6px rgba(22, 0, 2, 0.06);
+}
+
+html.dark .floating-studio-card {
+  box-shadow:
+    0 20px 50px -16px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(255, 190, 200, 0.12);
+}
+
 .animate-option-pop {
   animation: optionPop 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -499,6 +562,14 @@ html.dark .exam-glass-card {
   box-shadow:
     0 24px 60px -18px rgba(0, 0, 0, 0.55),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.book-theme-dark strong {
+  color: #ff8ca8 !important;
+}
+
+.book-theme-dark .katex {
+  color: #f8eff1;
 }
 
 .animate-paper-tear-left {

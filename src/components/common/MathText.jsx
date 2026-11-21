@@ -108,7 +108,9 @@ function renderMixedContent(text) {
   });
 }
 
-export default function MathText({ text, className = "" }) {
+const MathText = React.memo(function MathText({ text, className = "" }) {
   const content = useMemo(() => renderMixedContent(text), [text]);
   return <span className={className}>{content}</span>;
-}
+});
+
+export default MathText;

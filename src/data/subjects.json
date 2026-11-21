@@ -107,7 +107,7 @@
             {
               "id": "4.1",
               "titleKh": "៤.១ តម្លៃអតិបរមា និងអប្បបរមា",
-              "descriptionKh": "តម្លៃបរមាធៀប និងដាច់ខាត ចំណុចគ្រិះ (Critical Numbers) និងទ្រឹស្តីបទតម្លៃបរមា (Extreme Value Theorem)។"
+              "descriptionKh": "តម្លៃបរមាធៀប និងដាច់ខាត ចំណុចគ្រឹះ (Critical Numbers) និងទ្រឹស្តីបទតម្លៃបរមា (Extreme Value Theorem)។"
             },
             {
               "id": "4.2",
@@ -198,8 +198,13 @@
             },
             {
               "id": "7.4",
-              "titleKh": "៧.៤ អាំងតេក្រាលមិនកំណត់ព្រំដែន",
-              "descriptionKh": "Improper Integrals (ប្រភេទទី ១ ព្រំដែនអនន្ត និងប្រភេទទី ២ អនុគមន៍មិនជាប់)។"
+              "titleKh": "៧.៤ ការប៉ាន់ស្មានអាំងតេក្រាលតាមលេខ",
+              "descriptionKh": "វិធីចតុកោណព្នាយ (Trapezoidal Rule) វិធី Simpson (Simpson's Rule) និងកម្រិតកំហុស (Error Bounds)។"
+            },
+            {
+              "id": "7.5",
+              "titleKh": "៧.៥ អាំងតេក្រាលមិនសមរម្យ",
+              "descriptionKh": "Improper Integrals (ប្រភេទទី ១ ព្រំដែនអនន្ត ប្រភេទទី ២ អនុគមន៍មិនជាប់ និងតេស្តប្រៀបធៀប)។"
             }
           ]
         },
@@ -237,22 +242,27 @@
             {
               "id": "9.1",
               "titleKh": "៩.១ ស្វ៊ីតអនន្ត",
-              "descriptionKh": "លីមីតនៃស្វ៊ីត ស្វ៊ីតឯកដ្ឋាន (Monotonic) និងស្វ៊ីតទាល់ (Bounded)។"
+              "descriptionKh": "លីមីតនៃស្វ៊ីត ស្វ៊ីតឯកតាន (Monotonic) និងស្វ៊ីតទ័ល (Bounded)។"
             },
             {
               "id": "9.2",
-              "titleKh": "៩.២ ស៊េរីអនន្ត និងតេស្តភាពរួម",
-              "descriptionKh": "ស៊េរីធរណីមាត្រ ស៊េរី p-series តេស្តអាំងតេក្រាល តេស្តប្រៀបធៀប តេស្តផលធៀប (Ratio Test) និងតេស្តឫស (Root Test)។"
+              "titleKh": "៩.២ ស៊េរីអនន្ត តេស្តអាំងតេក្រាល និងតេស្តប្រៀបធៀប",
+              "descriptionKh": "ស៊េរីធរណីមាត្រ ស៊េរីតេឡេស្កុប ស៊េរី p-series តេស្តអាំងតេក្រាល និងតេស្តប្រៀបធៀប (Comparison & Limit Comparison)។"
             },
             {
               "id": "9.3",
-              "titleKh": "៩.៣ ស៊េរីឆ្លាស់ និងភាពរួមដាច់ខាត",
-              "descriptionKh": "Alternating Series Test ភាពរួមដាច់ខាត (Absolute Convergence) និងភាពរួមមានលក្ខខណ្ឌ។"
+              "titleKh": "៩.៣ ស៊េរីឆ្លាស់ ភាពរួមដាច់ខាត តេស្តផលធៀប និងតេស្តឫស",
+              "descriptionKh": "Alternating Series Test ភាពរួមដាច់ខាត និងមានលក្ខខណ្ឌ តេស្តផលធៀប (Ratio Test) និងតេស្តឫស (Root Test)។"
             },
             {
               "id": "9.4",
-              "titleKh": "៩.៤ ស៊េរីស្វ័យគុណ និងស៊េរី Taylor",
-              "descriptionKh": "កាំនៃភាពរួម (Radius of Convergence) ស៊េរី Taylor និងស៊េរី Maclaurin។"
+              "titleKh": "៩.៤ ស៊េរីស្វ័យគុណ និងកាំនៃភាពរួម",
+              "descriptionKh": "Power Series កាំនិងចន្លោះភាពរួម (Radius & Interval of Convergence) ដេរីវេ និងអាំងតេក្រាលតាមតួ។"
+            },
+            {
+              "id": "9.5",
+              "titleKh": "៩.៥ ស៊េរី Taylor, Maclaurin និងសំណល់ Taylor",
+              "descriptionKh": "ការពន្លាតស៊េរី Taylor និង Maclaurin វិសមភាពសំណល់ Taylor និងការអនុវត្តក្នុងលីមីត/ប៉ាន់ស្មាន។"
             }
           ]
         },
@@ -277,6 +287,11 @@
               "id": "10.3",
               "titleKh": "១០.៣ ស៊ីឡាំង និងផ្ទៃក្វាទ្រិច",
               "descriptionKh": "Ellipsoid, Paraboloid, Hyperboloid និងកូអរដោនេស៊ីឡាំង/ស្វ៊ែរ (Cylindrical & Spherical Coordinates)។"
+            },
+            {
+              "id": "10.4",
+              "titleKh": "១០.៤ អនុគមន៍វ៉ិចទ័រ ខ្សែកោងក្នុងលំហ និងភាពកោង",
+              "descriptionKh": "អនុគមន៍វ៉ិចទ័រ r(t) ដេរីវេ/អាំងតេក្រាលវ៉ិចទ័រ ល្បឿន និងសំទុះ 3D ប្រវែងធ្នូ 3D និងភាពកោង (Curvature)។"
             }
           ]
         },
@@ -299,7 +314,7 @@
             },
             {
               "id": "11.3",
-              "titleKh": "១១.៣ ច្បាប់ច្រវាក់ និងក្រាដ្យង់",
+              "titleKh": "១១.៣ ច្បាប់បណ្តាក់ និងក្រាដ្យង់",
               "descriptionKh": "Chain Rule សម្រាប់ច្រើនអថេរ ដេរីវេតាមទិស (Directional Derivatives) និងវ៉ិចទ័រក្រាដ្យង់ (∇f)។"
             },
             {
@@ -328,8 +343,13 @@
             },
             {
               "id": "12.3",
-              "titleKh": "១២.៣ អាំងតេក្រាលត្រីគុណ (Triple Integrals)",
-              "descriptionKh": "ការគណនាក្នុងកូអរដោនេដេកាត ស៊ីឡាំង និងស្វ៊ែរ និងហ្សាកូប៊ីយ៉ង់ (Jacobian)។"
+              "titleKh": "១២.៣ អាំងតេក្រាលត្រីគុណ (ដេកាត ស៊ីឡាំង និងស្វ៊ែរ)",
+              "descriptionKh": "ការគណនា Triple Integrals ក្នុងប្រព័ន្ធកូអរដោនេដេកាត ស៊ីឡាំង និងស្វ៊ែរ។"
+            },
+            {
+              "id": "12.4",
+              "titleKh": "១២.៤ ការប្តូរអថេរក្នុងអាំងតេក្រាលច្រើនជាន់ និងហ្សាកូប៊ីយ៉ង់",
+              "descriptionKh": "ការបំប្លែងតំបន់អាំងតេក្រាល ដេទែមីណង់ហ្សាកូប៊ីយ៉ង់ (Jacobian) និងការអនុវត្ត។"
             }
           ]
         },
@@ -352,8 +372,13 @@
             },
             {
               "id": "13.3",
-              "titleKh": "១៣.៣ ទ្រឹស្តីបទ Stokes និងទ្រឹស្តីបទ Divergence",
-              "descriptionKh": "អាំងតេក្រាលផ្ទៃ (Surface Integrals) Curl, Divergence, ទ្រឹស្តីបទ Stokes និងទ្រឹស្តីបទ Gauss's Divergence។"
+              "titleKh": "១៣.៣ ឌីវែហ្សង់ កឺល និងអាំងតេក្រាលផ្ទៃ",
+              "descriptionKh": "Curl, Divergence ផ្ទៃប៉ារ៉ាម៉ែត្រ និងអាំងតេក្រាលផ្ទៃ (Surface Integrals & Flux)។"
+            },
+            {
+              "id": "13.4",
+              "titleKh": "១៣.៤ ទ្រឹស្តីបទ Stokes និងទ្រឹស្តីបទ Gauss's Divergence",
+              "descriptionKh": "ទំនាក់ទំនងរវាងអាំងតេក្រាលខ្សែ ផ្ទៃ និងមាឌតាមទ្រឹស្តីបទ Stokes និង Gauss's Divergence។"
             }
           ]
         }

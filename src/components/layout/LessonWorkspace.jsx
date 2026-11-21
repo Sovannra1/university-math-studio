@@ -350,6 +350,8 @@ export default function LessonWorkspace({
                 <DetailedReading
                   detailedReading={contentSource.detailedReading}
                   workedExamples={contentSource.workedExamples || []}
+                  lessonTitle={lesson.titleKh}
+                  subTopicTitle={activeSubTopic?.titleKh || ""}
                 />
               )}
               {activeTab === "practice" && (
@@ -359,7 +361,11 @@ export default function LessonWorkspace({
                 />
               )}
               {activeTab === "video" && (
-                <VideoTutorial videos={contentSource.videos || []} />
+                <VideoTutorial
+                  videos={contentSource.videos || []}
+                  lessonTitle={lesson.titleKh}
+                  subTopicTitle={activeSubTopic?.titleKh || ""}
+                />
               )}
             </div>
           )}
