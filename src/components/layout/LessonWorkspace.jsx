@@ -8,6 +8,10 @@ import {
   BookOpen,
   ClipboardCheck,
   LayoutGrid,
+  Crown,
+  CreditCard,
+  Clock,
+  Send,
 } from "lucide-react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
@@ -17,7 +21,9 @@ import DetailedReading from "@/components/lesson-tabs/DetailedReading";
 import PracticeQuiz from "@/components/lesson-tabs/PracticeQuiz";
 import ChapterChallengeView from "@/components/lesson-tabs/ChapterChallengeView";
 import CommentSection from "@/components/common/CommentSection";
+import MathSymbolsModal from "@/components/common/MathSymbolsModal";
 import Footer from "@/components/layout/Footer";
+import { useAuth } from "@/components/auth/AuthContext";
 
 const TABS = [
   {
@@ -55,6 +61,7 @@ export default function LessonWorkspace({
   const [activeTab, setActiveTab] = useState("slides");
   const [tabDirection, setTabDirection] = useState("fade");
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const [isSymbolsOpen, setIsSymbolsOpen] = useState(false);
   const tabButtonRefs = useRef({});
   const [pillStyle, setPillStyle] = useState({ left: 0, width: 0, ready: false });
 
@@ -142,6 +149,18 @@ export default function LessonWorkspace({
   const activeSubject =
     subjects.find((s) => s.id === resolvedSubjectId) || subjects[0] || {};
 
+  const { checkAccess, openUpgradeModal, pendingPayments } = useAuth();
+  const activeFeatureKey = isChallengeMode ? "challenge" : activeTab;
+  const accessResult = checkAccess({
+    subjectId: resolvedSubjectId,
+    featureKey: activeFeatureKey,
+  });
+  const matchingPending = (pendingPayments || []).find(
+    (p) =>
+      p.purchaseType === "all-pro" ||
+      (p.purchaseType === "subject" && p.subjectId === resolvedSubjectId)
+  );
+
   return (
     <div className="flex min-h-screen flex-col bg-[#fffafa]">
       {/* Floating Sticky Top Header (Logo + Web App Name + Lesson Title) */}
@@ -151,16 +170,17 @@ export default function LessonWorkspace({
         lessonTitleKh={lesson?.titleKh}
         lessonTitleEn={lesson?.titleEn}
         onOpenMobileMenu={() => setIsMobileSidebarOpen(true)}
+        onOpenSymbols={() => setIsSymbolsOpen(true)}
       />
 
       {/* Workspace Body: Main Content (Left) + Table of Contents (Right) */}
-      <div className="flex flex-1 items-start gap-0 lg:gap-5 lg:px-6 lg:pt-4">
+      <div className="flex flex-1 items-start gap-0 lg:gap-5 lg:px-6 pt-[4.5rem] sm:pt-[5.5rem]">
         {/* Main Content Area */}
         <div className="flex flex-1 flex-col min-w-0">
           {/* Clean 4-Tab Navigation Bar with Sliding Active Pill (hidden in Chapter Challenge mode) */}
           {!isChallengeMode && (
-            <div className="mx-3 sm:mx-5 lg:mx-0 mt-3 lg:mt-0 rounded-2xl border border-[#ffd3d2] bg-white/95 px-3 sm:px-4 shadow-xs">
-              <div className="relative flex items-center gap-1.5 overflow-x-auto py-2 no-scrollbar">
+            <div className="mx-2 sm:mx-5 lg:mx-0 mt-2 sm:mt-3 lg:mt-0 rounded-2xl border border-[#ffd3d2] bg-white/95 px-2 sm:px-4 shadow-xs">
+              <div className="relative flex items-center gap-1 sm:gap-1.5 overflow-x-auto py-2 no-scrollbar snap-x">
             {pillStyle.ready && (
               <div
                 aria-hidden="true"
@@ -210,7 +230,7 @@ export default function LessonWorkspace({
           )}
 
         {/* Tab Content */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto overflow-x-hidden">
+        <main className="flex-1 p-2.5 sm:p-5 lg:p-6 max-w-5xl w-full mx-auto overflow-x-hidden">
           {!lesson ? (
             <div className="rounded-2xl border border-[#ffd3d2] bg-white p-10 sm:p-12 text-center animate-panel-enter shadow-xs">
               <div className="mx-auto max-w-md space-y-3">
@@ -236,9 +256,74 @@ export default function LessonWorkspace({
                 </div>
               </div>
             </div>
+          ) : !accessResult.allowed ? (
+            matchingPending ? (
+              <div className="rounded-2xl border border-[#b3e6d1] bg-[#e7f7f0]/80 p-6 sm:p-10 text-center animate-panel-enter shadow-xs space-y-4">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#009b5e] text-white shadow-xs">
+                  <Clock className="h-7 w-7" />
+                </div>
+                <div className="mx-auto max-w-lg space-y-2.5">
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-[#007a49] border border-[#b3e6d1]">
+                    កំពុងដំណើរការស្នើសុំទិញ (Pending Verification)
+                  </div>
+                  <h2 className="text-lg sm:text-xl font-bold text-[#160002]">
+                    ប្រព័ន្ធកំពុងផ្ទៀងផ្ទាត់ការបង់ប្រាក់ ABA របស់អ្នក
+                  </h2>
+                  <p className="text-xs sm:text-sm text-[#005936] leading-relaxed">
+                    លេខយោងប្រតិបត្តិការ៖{" "}
+                    <strong className="font-mono">{matchingPending.abaReference}</strong>{" "}
+                    (${matchingPending.amountUsd} USD)។ ការបើកសិទ្ធិអាចចំណាយពេល{" "}
+                    <strong>យ៉ាងយូរ ២៤ ម៉ោង</strong>។
+                  </p>
+                  <div className="pt-2 flex flex-wrap items-center justify-center gap-2.5">
+                    <a
+                      href="https://t.me/sovannra1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-xl bg-[#0085dd] px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-xs hover:opacity-95 transition"
+                    >
+                      <Send className="h-4 w-4" />
+                      <span>ចង់បានឆាប់រហ័ស? ទាក់ទង Telegram @sovannra1</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="rounded-2xl border border-[#fdbcbc] bg-white p-8 sm:p-12 text-center animate-panel-enter shadow-xs space-y-4">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#ffe9e8] text-[#db073d]">
+                  <Crown className="h-7 w-7" />
+                </div>
+                <div className="mx-auto max-w-md space-y-2">
+                  <h2 className="text-xl font-bold text-[#160002]">
+                    មាតិកានេះតម្រូវឱ្យមានគណនី Pro
+                  </h2>
+                  <p className="text-xs sm:text-sm text-[#47010d] leading-relaxed">
+                    Admin បានកំណត់ផ្នែក ឬមុខវិជ្ជានេះសម្រាប់សមាជិក Pro។ អ្នកអាចដំឡើងគណនីដោយបង់ប្រាក់តាម ABA PayWay ដើម្បីដោះសោរ។
+                  </p>
+                  <div className="pt-2">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        openUpgradeModal({
+                          subjectId: resolvedSubjectId,
+                          subjectNameKh: activeSubject.nameKh,
+                        })
+                      }
+                      className="inline-flex items-center gap-2 rounded-xl bg-[#db073d] px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-xs hover:bg-[#bb0533] transition"
+                    >
+                      <CreditCard className="h-4 w-4" />
+                      <span>ដោះសោរដោយបង់ប្រាក់ ABA</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )
           ) : isChallengeMode ? (
             <div key={`${lesson.id}-challenge`} className="animate-panel-enter">
-              <ChapterChallengeView challenge={lesson.chapterChallenge} />
+              <ChapterChallengeView
+                challenge={lesson.chapterChallenge}
+                progressKey={`${lesson.id}-challenge`}
+              />
             </div>
           ) : (
             <div
@@ -270,6 +355,7 @@ export default function LessonWorkspace({
               {activeTab === "practice" && (
                 <PracticeQuiz
                   practiceExercises={contentSource.practiceExercises || []}
+                  progressKey={`${lesson.id}-${activeSubTopic?.id || "root"}`}
                 />
               )}
               {activeTab === "video" && (
@@ -314,6 +400,14 @@ export default function LessonWorkspace({
           onCloseMobile={() => setIsMobileSidebarOpen(false)}
         />
       </div>
+
+      {/* Quick-Access Mathematical Symbols Modal */}
+      <MathSymbolsModal
+        isOpen={isSymbolsOpen}
+        onClose={() => setIsSymbolsOpen(false)}
+        subjectId={resolvedSubjectId}
+        subjectNameKh={activeSubject.nameKh}
+      />
     </div>
   );
 }

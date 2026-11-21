@@ -10,8 +10,8 @@ export default function AuthButton() {
   if (isLoggedIn && user) {
     const initial = (user.name || "U").charAt(0).toUpperCase();
     return (
-      <div className="flex items-center gap-2">
-        <div className="flex items-center gap-2 rounded-full border border-[#fdbcbc] bg-[#ffe9e8]/80 pl-1.5 pr-3 py-1">
+      <div className="flex items-center gap-1.5 sm:gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2 rounded-full border border-[#fdbcbc] bg-[#ffe9e8]/80 pl-1 pr-2 sm:pl-1.5 sm:pr-3 py-1">
           {user.picture ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -49,7 +49,7 @@ export default function AuthButton() {
     <button
       type="button"
       onClick={openLoginModal}
-      className="inline-flex items-center gap-2 rounded-xl border border-[#ffd3d2] bg-white px-3 py-1.5 text-xs font-bold text-[#160002] shadow-2xs transition-all duration-150 hover:border-[#fdbcbc] hover:bg-[#ffe9e8] active:scale-95"
+      className="inline-flex items-center gap-1.5 sm:gap-2 rounded-xl border border-[#ffd3d2] bg-white px-2.5 sm:px-3 py-1.5 text-xs font-bold text-[#160002] shadow-2xs transition-all duration-150 hover:border-[#fdbcbc] hover:bg-[#ffe9e8] active:scale-95"
     >
       <svg className="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
         <path

@@ -269,7 +269,7 @@ export default function Sidebar({
 
       {/* Right Sidebar Panel (Table of Contents) */}
       <aside
-        className={`fixed inset-y-0 right-0 z-50 flex w-80 max-w-[88vw] flex-col border-l border-[#ffd3d2] bg-white transition-transform duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] lg:sticky lg:top-[5.75rem] lg:z-20 lg:h-[calc(100vh-6.75rem)] lg:w-80 lg:shrink-0 lg:translate-x-0 lg:rounded-2xl lg:border lg:border-[#ffd3d2] lg:shadow-[0_10px_28px_-12px_rgba(219,7,61,0.12)] lg:overflow-hidden ${
+        className={`fixed inset-y-0 right-0 z-50 flex w-80 max-w-[88vw] flex-col border-l border-[#ffd3d2] bg-white transition-transform duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] lg:sticky lg:top-[5.75rem] lg:z-20 lg:h-[calc(100vh-6.75rem)] lg:w-72 xl:w-80 lg:shrink-0 lg:translate-x-0 lg:rounded-2xl lg:border lg:border-[#ffd3d2] lg:shadow-[0_10px_28px_-12px_rgba(219,7,61,0.12)] lg:overflow-hidden ${
           isOpenMobile ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -427,8 +427,8 @@ export default function Sidebar({
           })}
         </nav>
 
-        {/* Sidebar Footer Info */}
-        <div className="border-t border-[#ffd3d2] bg-[#fffafa] px-4 py-3 text-[11px] text-[#47010d]">
+        {/* Sidebar Footer Info (shown only in mobile drawer; desktop uses unified main Footer) */}
+        <div className="lg:hidden border-t border-[#ffd3d2] bg-[#fffafa] px-4 py-3 text-[11px] text-[#47010d]">
           <div className="flex items-center justify-between gap-2">
             <span className="font-bold text-[#160002]">
               អភិវឌ្ឍន៍ដោយ៖ {BRAND_NAME}

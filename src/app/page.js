@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import LessonWorkspace from "@/components/layout/LessonWorkspace";
 import SubjectHub from "@/components/layout/SubjectHub";
+import WelcomeAuthGate from "@/components/auth/WelcomeAuthGate";
 import { getLessonById, getSubjectsData } from "@/lib/lessons";
 
 async function LessonLoader({ searchParams }) {
@@ -43,7 +44,9 @@ export default function HomePage({ searchParams }) {
         </div>
       }
     >
-      <LessonLoader searchParams={searchParams} />
+      <WelcomeAuthGate>
+        <LessonLoader searchParams={searchParams} />
+      </WelcomeAuthGate>
     </Suspense>
   );
 }

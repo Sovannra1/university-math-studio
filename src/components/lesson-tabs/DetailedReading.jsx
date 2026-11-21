@@ -120,7 +120,8 @@ function InlineWorkedExampleCard({ example, index }) {
               {steps.slice(0, shownCount).map((step, sIdx) => (
                 <div
                   key={sIdx}
-                  className="flex items-start gap-2.5 rounded-lg border border-[#ffd3d2] bg-[#fffafa] p-3"
+                  style={{ animationDelay: `${Math.min(sIdx * 65, 260)}ms` }}
+                  className="animate-step-reveal flex items-start gap-2.5 rounded-lg border border-[#ffd3d2] bg-[#fffafa] p-3"
                 >
                   <CheckCircle2 className="h-4 w-4 text-[#009b5e] shrink-0 mt-1" />
                   <div className="text-sm md:text-base font-medium text-[#160002] khmer-prose flex-1">
@@ -156,7 +157,42 @@ export default function DetailedReading({
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
       {/* Main Reading Content */}
-      <article className="lg:col-span-8 xl:col-span-9 space-y-6">
+      <article className="lg:col-span-8 xl:col-span-9 space-y-5 sm:space-y-6">
+        {/* Mobile Quick Jump Table of Contents */}
+        {sections.length > 0 && (
+          <div className="lg:hidden rounded-2xl border border-[#ffd3d2] bg-white p-3.5 shadow-xs space-y-2">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#7e021f]">
+              <List className="h-3.5 w-3.5 text-[#db073d]" />
+              រំលងទៅផ្នែក (Quick Jump)
+            </div>
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
+              {sections.map((section, idx) => (
+                <a
+                  key={idx}
+                  href={`#reading-section-${idx}`}
+                  className="shrink-0 rounded-xl border border-[#ffd3d2] bg-[#fffafa] px-3 py-1.5 text-xs font-bold text-[#160002] hover:bg-[#ffe9e8] hover:text-[#db073d] transition"
+                >
+                  <MathText
+                    text={
+                      section.subHeading ||
+                      section.headingKh ||
+                      `ផ្នែកទី ${idx + 1}`
+                    }
+                  />
+                </a>
+              ))}
+              {workedExamples.length > 0 && (
+                <a
+                  href="#reading-section-examples"
+                  className="shrink-0 rounded-xl border border-[#fdbcbc] bg-[#ffe9e8] px-3 py-1.5 text-xs font-bold text-[#9c0329]"
+                >
+                  លំហាត់គំរូរួម
+                </a>
+              )}
+            </div>
+          </div>
+        )}
+
         {sections.map((section, idx) => {
           const heading =
             section.subHeading || section.headingKh || `ផ្នែកទី ${idx + 1}`;
@@ -179,7 +215,7 @@ export default function DetailedReading({
             <section
               key={idx}
               id={`reading-section-${idx}`}
-              className={`rounded-2xl border p-6 md:p-8 shadow-xs scroll-mt-24 space-y-5 ${
+              className={`rounded-2xl border p-4 sm:p-6 md:p-8 shadow-xs scroll-mt-24 space-y-4 sm:space-y-5 ${
                 isTheoremOrDef
                   ? "border-[#fdbcbc] bg-[#ffe9e8]/45"
                   : "border-[#ffd3d2] bg-white"

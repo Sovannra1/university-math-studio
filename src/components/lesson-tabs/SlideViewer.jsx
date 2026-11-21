@@ -164,6 +164,7 @@ export default function SlideViewer({ slides = [], lessonTitle = "" }) {
   const activeStrokeRef = useRef(null);
   const lastPointMetaRef = useRef(null);
   const exportMenuRef = useRef(null);
+  const touchSwipeRef = useRef(null);
 
   const redrawCurrentCanvas = useCallback(
     (slideIdx = currentIndex) => {
@@ -716,7 +717,7 @@ export default function SlideViewer({ slides = [], lessonTitle = "" }) {
             </button>
 
             {showExportMenu && (
-              <div className="absolute right-0 mt-2 w-68 rounded-2xl border border-[#ffd3d2] bg-white p-3 shadow-xl z-50 text-[#160002] space-y-2.5">
+              <div className="fixed sm:absolute left-4 right-4 sm:left-auto sm:right-0 mt-2 sm:w-68 rounded-2xl border border-[#ffd3d2] bg-white p-3 shadow-xl z-50 text-[#160002] space-y-2.5">
                 <div className="text-xs font-bold text-[#9c0329] px-1">
                   នាំចេញស្លាយបង្រៀនជា PDF
                 </div>
@@ -798,10 +799,29 @@ export default function SlideViewer({ slides = [], lessonTitle = "" }) {
         ref={stageRef}
         onPointerMove={handleStagePointerMove}
         onPointerLeave={() => setLaserPos(null)}
+        onTouchStart={(e) => {
+          if (tool !== "pointer" || e.touches.length !== 1) return;
+          touchSwipeRef.current = {
+            x: e.touches[0].clientX,
+            y: e.touches[0].clientY,
+          };
+        }}
+        onTouchEnd={(e) => {
+          if (tool !== "pointer" || !touchSwipeRef.current) return;
+          const t = e.changedTouches?.[0];
+          if (!t) return;
+          const dx = t.clientX - touchSwipeRef.current.x;
+          const dy = t.clientY - touchSwipeRef.current.y;
+          touchSwipeRef.current = null;
+          if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+            if (dx < 0) goNext();
+            else goPrev();
+          }
+        }}
         className={`relative overflow-hidden rounded-2xl border bg-white shadow-sm transition-all ${
           isFullscreen
-            ? "flex-1 min-h-0 overflow-y-auto border-[#47010d] p-8 md:p-14 flex flex-col justify-center"
-            : "min-h-[420px] md:min-h-[480px] border-[#ffd3d2] p-6 md:p-10 flex flex-col justify-center"
+            ? "flex-1 min-h-0 overflow-y-auto border-[#47010d] p-5 sm:p-8 md:p-14 flex flex-col justify-center"
+            : "min-h-[320px] sm:min-h-[420px] md:min-h-[480px] border-[#ffd3d2] p-4 sm:p-6 md:p-10 flex flex-col justify-center"
         } ${
           tool === "pen"
             ? "cursor-crosshair"
@@ -964,7 +984,8 @@ export default function SlideViewer({ slides = [], lessonTitle = "" }) {
                       {exampleSteps.slice(0, revealedStepsCount).map((step, sIdx) => (
                         <div
                           key={sIdx}
-                          className={`rounded-xl border border-[#009b5e]/25 bg-white font-medium text-[#160002] khmer-prose ${
+                          style={{ animationDelay: `${Math.min(sIdx * 65, 260)}ms` }}
+                          className={`animate-step-reveal rounded-xl border border-[#009b5e]/25 bg-white font-medium text-[#160002] khmer-prose ${
                             isFullscreen ? "p-3.5 md:p-4 text-base md:text-xl" : "p-2.5 text-sm"
                           }`}
                         >
@@ -999,7 +1020,7 @@ export default function SlideViewer({ slides = [], lessonTitle = "" }) {
 
                   {showPracticeAnswer && (
                     <div
-                      className={`rounded-xl border border-[#b95a00]/40 bg-[#b95a00]/10 font-medium text-[#160002] khmer-prose ${
+                      className={`animate-hint-pop rounded-xl border border-[#b95a00]/40 bg-[#b95a00]/10 font-medium text-[#160002] khmer-prose ${
                         isFullscreen ? "p-4 text-lg md:text-xl" : "p-3.5 text-sm md:text-base"
                       }`}
                     >

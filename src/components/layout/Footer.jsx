@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { Send } from "lucide-react";
 import { APP_VERSION, BRAND_NAME } from "@/lib/appConfig";
 
 export default function Footer({ maxWidthClass = "max-w-7xl" }) {
@@ -28,6 +29,16 @@ export default function Footer({ maxWidthClass = "max-w-7xl" }) {
             >
               គោលការណ៍ឯកជនភាព
             </Link>
+            <span className="text-[#fdbcbc]">•</span>
+            <a
+              href="https://t.me/sovannra1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-[#0085dd] hover:underline transition-colors"
+            >
+              <Send className="h-3 w-3" />
+              <span>ជំនួយបច្ចេកទេស (@sovannra1)</span>
+            </a>
           </div>
         </div>
 

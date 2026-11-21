@@ -14,6 +14,8 @@ import {
   Compass,
 } from "lucide-react";
 import MathText from "@/components/common/MathText";
+import { useAuth } from "@/components/auth/AuthContext";
+import { loadUserProgress, saveUserProgress } from "@/lib/userProgress";
 
 const LEVEL_META = {
   synthesis: {
@@ -30,7 +32,8 @@ const LEVEL_META = {
   },
 };
 
-export default function ChapterChallengeView({ challenge }) {
+export default function ChapterChallengeView({ challenge, progressKey = "" }) {
+  const { user } = useAuth();
   const exercises = challenge?.exercises || [];
   const [filterLevel, setFilterLevel] = useState("all");
   const [answers, setAnswers] = useState({});
@@ -40,13 +43,25 @@ export default function ChapterChallengeView({ challenge }) {
   const [masteredProofs, setMasteredProofs] = useState({});
 
   useEffect(() => {
+    let cancelled = false;
     setFilterLevel("all");
     setAnswers({});
     setChecked({});
     setShowHints({});
     setRevealedSteps({});
     setMasteredProofs({});
-  }, [challenge]);
+
+    if (!progressKey) return;
+    loadUserProgress(user?.id, progressKey).then((data) => {
+      if (cancelled || !data) return;
+      if (data.answers) setAnswers(data.answers);
+      if (data.checked) setChecked(data.checked);
+      if (data.masteredProofs) setMasteredProofs(data.masteredProofs);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [challenge, progressKey, user?.id]);
 
   if (!challenge || exercises.length === 0) {
     return (
@@ -80,20 +95,31 @@ export default function ChapterChallengeView({ challenge }) {
     } else {
       isCorrect = userAns === ex.correctIndex;
     }
-    setChecked((prev) => ({ ...prev, [ex.id]: isCorrect }));
+    const nextChecked = { ...checked, [ex.id]: isCorrect };
+    setChecked(nextChecked);
+    if (progressKey) {
+      saveUserProgress(user?.id, progressKey, {
+        answers,
+        checked: nextChecked,
+        masteredProofs,
+      });
+    }
   };
 
   const handleResetOne = (exId) => {
-    setAnswers((prev) => {
-      const copy = { ...prev };
-      delete copy[exId];
-      return copy;
-    });
-    setChecked((prev) => {
-      const copy = { ...prev };
-      delete copy[exId];
-      return copy;
-    });
+    const nextAnswers = { ...answers };
+    delete nextAnswers[exId];
+    const nextChecked = { ...checked };
+    delete nextChecked[exId];
+    setAnswers(nextAnswers);
+    setChecked(nextChecked);
+    if (progressKey) {
+      saveUserProgress(user?.id, progressKey, {
+        answers: nextAnswers,
+        checked: nextChecked,
+        masteredProofs,
+      });
+    }
   };
 
   const handleResetAll = () => {
@@ -102,6 +128,13 @@ export default function ChapterChallengeView({ challenge }) {
     setShowHints({});
     setRevealedSteps({});
     setMasteredProofs({});
+    if (progressKey) {
+      saveUserProgress(user?.id, progressKey, {
+        answers: {},
+        checked: {},
+        masteredProofs: {},
+      });
+    }
   };
 
   return (
@@ -249,7 +282,7 @@ export default function ChapterChallengeView({ challenge }) {
 
               {/* Hint Box */}
               {hintVisible && ex.hint && (
-                <div className="rounded-xl border border-[#0097a8]/30 bg-[#0097a8]/10 p-3.5 text-sm font-medium text-[#160002] khmer-prose">
+                <div className="animate-hint-pop rounded-xl border border-[#0097a8]/30 bg-[#0097a8]/10 p-3.5 text-sm font-medium text-[#160002] khmer-prose">
                   <strong className="text-[#0097a8]">គន្លឹះគិត៖ </strong>
                   <MathText text={ex.hint} />
                 </div>
@@ -310,12 +343,20 @@ export default function ChapterChallengeView({ challenge }) {
 
                     <button
                       type="button"
-                      onClick={() =>
-                        setMasteredProofs((prev) => ({
-                          ...prev,
-                          [ex.id]: !prev[ex.id],
-                        }))
-                      }
+                      onClick={() => {
+                        const nextMastered = {
+                          ...masteredProofs,
+                          [ex.id]: !masteredProofs[ex.id],
+                        };
+                        setMasteredProofs(nextMastered);
+                        if (progressKey) {
+                          saveUserProgress(user?.id, progressKey, {
+                            answers,
+                            checked,
+                            masteredProofs: nextMastered,
+                          });
+                        }
+                      }}
                       className={`inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-bold transition ${
                         isMastered
                           ? "bg-[#009b5e] text-white"
@@ -332,7 +373,8 @@ export default function ChapterChallengeView({ challenge }) {
                       {steps.slice(0, shownSteps).map((step, sIdx) => (
                         <div
                           key={sIdx}
-                          className="rounded-xl border border-[#009b5e]/20 bg-white p-3.5 text-sm md:text-base font-medium text-[#160002] khmer-prose"
+                          style={{ animationDelay: `${Math.min(sIdx * 65, 260)}ms` }}
+                          className="animate-step-reveal rounded-xl border border-[#009b5e]/20 bg-white p-3.5 text-sm md:text-base font-medium text-[#160002] khmer-prose"
                         >
                           <span className="font-bold text-[#009b5e] mr-1.5">
                             ជំហានទី {sIdx + 1}៖
@@ -342,14 +384,14 @@ export default function ChapterChallengeView({ challenge }) {
                       ))}
 
                       {shownSteps === steps.length && ex.finalAnswer && (
-                        <div className="rounded-xl border border-[#009b5e] bg-[#009b5e]/12 p-3.5 text-sm md:text-base font-bold text-[#160002] khmer-prose">
+                        <div className="animate-step-reveal rounded-xl border border-[#009b5e] bg-[#009b5e]/12 p-3.5 text-sm md:text-base font-bold text-[#160002] khmer-prose">
                           <span className="text-[#007a49]">សន្និដ្ឋាន៖ </span>
                           <MathText text={ex.finalAnswer} />
                         </div>
                       )}
 
                       {shownSteps === steps.length && ex.keyTakeaway && (
-                        <div className="rounded-xl border border-[#fdbcbc] bg-[#ffe9e8]/60 p-3.5 text-xs sm:text-sm font-medium text-[#2d0006] khmer-prose">
+                        <div className="animate-hint-pop rounded-xl border border-[#fdbcbc] bg-[#ffe9e8]/60 p-3.5 text-xs sm:text-sm font-medium text-[#2d0006] khmer-prose">
                           <strong className="text-[#9c0329]">
                             គន្លឹះគិតស៊ីជម្រៅ៖{" "}
                           </strong>

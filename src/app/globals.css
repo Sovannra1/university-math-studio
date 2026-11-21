@@ -23,6 +23,29 @@
 }
 
 /* Khmer OS Battambang typography enhancements: crisp contrast & no vowel clipping */
+html,
+body {
+  overflow-x: clip;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* iOS-style frosted glass header */
+.ios-glass {
+  background-color: rgba(255, 255, 255, 0.58) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  border: 1px solid rgba(255, 211, 210, 0.7) !important;
+  box-shadow: 0 10px 30px -10px rgba(219, 7, 61, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+html.dark .ios-glass {
+  background-color: rgba(28, 16, 21, 0.52) !important;
+  border-color: rgba(253, 188, 188, 0.22) !important;
+  box-shadow: 0 12px 32px -10px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -370,6 +393,112 @@ html.dark .hover\:text-\[\#7e021f\]:hover {
 
 .animate-modal-pop {
   animation: modalPopIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes stepReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.005);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes hintPop {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+  65% {
+    opacity: 1;
+    transform: translateY(2px) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-step-reveal {
+  animation: stepReveal 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-hint-pop {
+  animation: hintPop 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes examOverlayIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes optionPop {
+  0% {
+    transform: scale(0.97);
+  }
+  55% {
+    transform: scale(1.018);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-exam-overlay {
+  animation: examOverlayIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-option-pop {
+  animation: optionPop 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.exam-glass-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 246, 248, 0.95) 0%,
+    rgba(255, 255, 255, 0.93) 50%,
+    rgba(255, 236, 237, 0.95) 100%
+  );
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+}
+
+html.dark .exam-glass-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(18, 7, 11, 0.95) 0%,
+    rgba(26, 11, 16, 0.94) 50%,
+    rgba(34, 12, 20, 0.95) 100%
+  );
+}
+
+.exam-glass-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 24px 60px -18px rgba(156, 3, 41, 0.14),
+    0 4px 16px -4px rgba(22, 0, 2, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+html.dark .exam-glass-card {
+  background: rgba(34, 16, 22, 0.88);
+  border: 1px solid rgba(255, 190, 200, 0.18);
+  box-shadow:
+    0 24px 60px -18px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .animate-paper-tear-left {

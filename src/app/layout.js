@@ -6,6 +6,7 @@ import ScrollToTopButton from "@/components/common/ScrollToTopButton";
 import { AuthProvider } from "@/components/auth/AuthContext";
 import { ThemeProvider } from "@/components/theme/ThemeContext";
 import LoginModal from "@/components/auth/LoginModal";
+import UpgradeModal from "@/components/auth/UpgradeModal";
 
 const battambang = Battambang({
   variable: "--font-battambang",
@@ -39,6 +40,7 @@ export default function RootLayout({ children }) {
           <AuthProvider>
             {children}
             <LoginModal />
+            <UpgradeModal />
             <ScrollToTopButton />
           </AuthProvider>
         </ThemeProvider>

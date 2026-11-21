@@ -25,10 +25,12 @@ import {
   Layers,
   X,
   Clock,
+  ShieldCheck,
 } from "lucide-react";
 import { APP_VERSION } from "@/lib/appConfig";
 import AuthButton from "@/components/auth/AuthButton";
 import ThemeToggle from "@/components/theme/ThemeToggle";
+import { useAuth } from "@/components/auth/AuthContext";
 import Footer from "@/components/layout/Footer";
 
 const SUBJECT_THEMES = {
@@ -202,7 +204,13 @@ function groupSubjectsByLevel(subjects) {
 }
 
 export default function SubjectHub({ subjects = [] }) {
-  const levelGroups = groupSubjectsByLevel(subjects);
+  const { isAdmin, accessConfig } = useAuth();
+  const visibleSubjects = isAdmin
+    ? subjects
+    : subjects.filter(
+        (s) => (accessConfig?.subjectAccess?.[s.id] || "free") !== "hidden"
+      );
+  const levelGroups = groupSubjectsByLevel(visibleSubjects);
   const [upcomingSubject, setUpcomingSubject] = useState(null);
   const [isTearing, setIsTearing] = useState(false);
 
@@ -218,30 +226,40 @@ export default function SubjectHub({ subjects = [] }) {
   return (
     <div className="flex min-h-screen flex-col bg-[#fffafa]">
       {/* Top App Bar */}
-      <header className="sticky top-0 z-30 border-b border-[#ffd3d2] bg-white/95 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#db073d] text-white shadow-sm">
-              <GraduationCap className="h-6 w-6" />
+      <header className="fixed top-2 sm:top-3 inset-x-2 sm:inset-x-5 lg:inset-x-6 z-40 rounded-2xl ios-glass transition-all">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 sm:gap-4 px-3 py-3 sm:px-6 sm:py-4 lg:px-8">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+            <div className="flex h-9 w-9 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl bg-[#db073d] text-white shadow-sm">
+              <GraduationCap className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
-            <div>
-              <h1 className="text-base sm:text-lg font-bold text-[#160002] leading-snug">
+            <div className="min-w-0">
+              <h1 className="text-sm sm:text-lg font-bold text-[#160002] leading-snug truncate">
                 គណិតវិទ្យាសាកលវិទ្យាល័យ
               </h1>
-              <p className="text-xs font-semibold text-[#7e021f]">
+              <p className="text-[11px] sm:text-xs font-semibold text-[#7e021f] truncate">
                 University Math Studio
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <span className="hidden md:inline-flex items-center gap-1.5 rounded-full border border-[#fdbcbc] bg-[#ffe9e8] px-3 py-1 text-xs font-bold text-[#9c0329]">
               <Sparkles className="h-3.5 w-3.5 text-[#db073d]" />
               បណ្ណាល័យសៀវភៅ ({subjects.length} មុខវិជ្ជា)
             </span>
             <ThemeToggle />
+            {isAdmin && (
+              <Link
+                href="/admin"
+                className="inline-flex items-center gap-1 rounded-xl border border-[#fdbcbc] bg-[#ffe9e8] px-2.5 py-1.5 text-xs font-bold text-[#9c0329] hover:bg-[#ffd3d2] transition"
+                title="ផ្ទាំងគ្រប់គ្រង Admin"
+              >
+                <ShieldCheck className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">Admin</span>
+              </Link>
+            )}
             <AuthButton />
-            <span className="rounded-full border border-[#ffd3d2] bg-white px-2.5 py-1 text-xs font-bold text-[#620116]">
+            <span className="hidden sm:inline-flex rounded-full border border-[#ffd3d2] bg-white px-2.5 py-1 text-xs font-bold text-[#620116]">
               {APP_VERSION}
             </span>
           </div>
@@ -249,7 +267,7 @@ export default function SubjectHub({ subjects = [] }) {
       </header>
 
       {/* Main Bookshelf Hub */}
-      <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
+      <main className="mx-auto w-full max-w-7xl flex-1 px-4 pt-20 pb-8 sm:px-6 sm:pt-24 lg:px-8 lg:pb-10">
         <div className="mb-8 max-w-3xl animate-obj-up">
           <h2 className="text-2xl sm:text-3xl font-bold text-[#160002] leading-snug khmer-prose">
             ធ្នើរសៀវភៅគណិតវិទ្យាតាមលំដាប់ចំណេះដឹង
@@ -308,7 +326,7 @@ export default function SubjectHub({ subjects = [] }) {
 
                       {/* Hardcover Book Surface */}
                       <div
-                        className={`relative flex min-h-[305px] w-full overflow-hidden rounded-r-2xl rounded-l-md border ${theme.accentBorder} dark:border-[#4b2731] bg-gradient-to-br ${theme.coverTint} dark:bg-none dark:bg-[#1e1015] shadow-md transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-2 group-hover:shadow-xl group-active:scale-[0.98]`}
+                        className={`relative flex min-h-[240px] sm:min-h-[305px] w-full overflow-hidden rounded-r-2xl rounded-l-md border ${theme.accentBorder} dark:border-[#4b2731] bg-gradient-to-br ${theme.coverTint} dark:bg-none dark:bg-[#1e1015] shadow-md transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-2 group-hover:shadow-xl group-active:scale-[0.98]`}
                       >
                         {/* Hardcover Left Spine */}
                         <div

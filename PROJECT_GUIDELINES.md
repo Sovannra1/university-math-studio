@@ -215,6 +215,8 @@ Supported `chapterChallenge.exercises[].type` values: `"mcq"`, `"short-answer"`,
    - **NEVER** place LaTeX commands (such as `\quad`, `\implies`, `\neq`) outside `\(...\)` or `$$...$$` delimiters, otherwise KaTeX will render literal text.
 4. **Khmer Terminology:**
    - Translate *Concept* as **«គោលគំនិត»** or **«បញ្ញត្តិ»** (NEVER use «គំនិតវិចារណញ្ញាណ»).
+   - Translate *candidate points* as **«ចំណុចត្រូវពិនិត្យ»** (NEVER use «បេក្ខជន»).
+   - Translate *Corollary* (*Corollaire*) as **«វិបាក»** (NEVER use «ផលវិបាក»).
    - Keep standard English mathematical terms in parentheses or in English if no standard Khmer translation exists.
 5. **Khmer Typography:** Ensure all UI text and reading sections use clean Khmer font styling (`leading-relaxed`, adequate padding) so Khmer vowels and subscripts do not get clipped.
 6. **Build Verification (Windows):** Run `npm.cmd run build` (not `npm run build` in PowerShell if execution policy blocks `.ps1`) and validate JSON syntax after data edits.
@@ -222,3 +224,9 @@ Supported `chapterChallenge.exercises[].type` values: `"mcq"`, `"short-answer"`,
    - Increment `version` in `package.json` and `APP_VERSION` in `src/lib/appConfig.js` (e.g., `v0.1.1` → `v0.1.2`) **whenever the Web App system, UI, or features are modified**.
    - **Do NOT** bump the Web App version while authoring or adding new lesson content for an unfinished book.
    - Only bump the version for content edits when a book has already been **completed** and its content is later **revised/updated**.
+8. **Lesson Authoring Standard (Permanent Default — applies whenever the user gives only a lesson/sub-topic title):**
+   - **Sets & Intervals Notation (English/International Standard as Primary):** Always use standard English interval and set notation: `(a, b)`, `[a, b]`, `[a, b)`, `(a, b]`, `(-\infty, a)`, `(a, +\infty)`, `\mathbb{R} \setminus \{a\}`, `\mathbb{N}, \mathbb{N}^*, \mathbb{Z}, \mathbb{Q}, \mathbb{R}, \mathbb{C}`.
+   - **Pedagogy, Proofs, Structure & Exercises (French Textbook Rigor):** Write Khmer explanations, proofs, and exercises with French mathematical textbook rigor — explicitly state hypotheses and domain of definition/differentiability on intervals $I, J$, structure as Theorem → Proof → Corollary → Method → Application, include counterexamples for common mistakes, and factor/simplify final derivatives for sign study.
+   - **No Explicit Style Labels:** Do **NOT** write labels like `"បែបគណិតវិទ្យាបារាំង"`, `"វិធីបារាំង"`, or `"បទដ្ឋានបារាំង"` inside the lesson content itself; present everything naturally as universal mathematics.
+   - **`MathText.jsx` Formatting Compatibility:** In `detailedReading`, `slides`, `workedExamples`, and `practiceExercises`, ONLY use KaTeX (`$...$`, `$$...$$`), `**bold**`, `` `code` ``, paragraphs separated by `\n\n`, and `• ` bullet points. **NEVER** use raw Markdown `####`/`###` headings, `>` blockquotes, `*italic*` single asterisks, `- ` dash lists, or `|---|` Markdown tables. Always set `difficulty` to `"Easy"`, `"Medium"`, or `"Hard"`.
+   - **Complete Sub-Topic Deliverables:** Unless requested otherwise, each authored sub-topic includes `20` concise projector-friendly `slides` (with existing `SlideGraph.jsx` presets where visually helpful), `4–5` thorough `detailedReading.sections[]` with per-concept `examples[]`, `3` synthesis `workedExamples[]`, `6` `practiceExercises[]` (`mcq` with 0-based `correctIndex` + `short-answer` with `expectedAnswers`), and `1` `videos[]` outline.
